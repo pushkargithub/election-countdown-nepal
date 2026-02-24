@@ -10,6 +10,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
+
+    <!-- Countdown Card -->
+      <section class="card">
+        <h2>Countdown to Election Day</h2>
+
+        <div class="countGrid" aria-label="countdown">
+          <div class="tile">
+            <div class="num" id="d">—</div>
+            <div class="lbl">Days</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="h">—</div>
+            <div class="lbl">Hours</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="m">—</div>
+            <div class="lbl">Minutes</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="s">—</div>
+            <div class="lbl">Seconds</div>
+          </div>
+        </div>
+
+        <div class="bigLine">
+          Target date: <span class="accent" id="targetLabel">—</span><br>
+          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
+        </div>
+
+        <div class="mini">
+          <div class="chip" id="localTime">Local time: —</div>
+          <div class="chip" id="lastUpdate">Updated: —</div>
+        </div>
+      </section>
   <style>
     :root{
       --bg: #0b1220;
@@ -335,39 +369,7 @@
         </div>
       </section>
 
-      <!-- Countdown Card -->
-      <section class="card">
-        <h2>Countdown to Election Day</h2>
-
-        <div class="countGrid" aria-label="countdown">
-          <div class="tile">
-            <div class="num" id="d">—</div>
-            <div class="lbl">Days</div>
-          </div>
-          <div class="tile">
-            <div class="num" id="h">—</div>
-            <div class="lbl">Hours</div>
-          </div>
-          <div class="tile">
-            <div class="num" id="m">—</div>
-            <div class="lbl">Minutes</div>
-          </div>
-          <div class="tile">
-            <div class="num" id="s">—</div>
-            <div class="lbl">Seconds</div>
-          </div>
-        </div>
-
-        <div class="bigLine">
-          Target date: <span class="accent" id="targetLabel">—</span><br>
-          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
-        </div>
-
-        <div class="mini">
-          <div class="chip" id="localTime">Local time: —</div>
-          <div class="chip" id="lastUpdate">Updated: —</div>
-        </div>
-      </section>
+    
 
       <!-- News Card -->
       <aside class="card">
