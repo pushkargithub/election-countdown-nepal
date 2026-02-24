@@ -242,17 +242,12 @@
       </section>
 
       <!-- Right Side: placeholder panel for future results -->
-      <aside class="card">
-        <h2>Live Results (Coming Next)</h2>
-        <div class="bigLine">
-          This area will show:
-          <ul style="margin:10px 0 0 18px; color: rgba(255,255,255,0.75); line-height:1.7;">
-            <li>Total seats / leading seats</li>
-            <li>Top parties + vote share</li>
-            <li>Province / district breakdown</li>
-            <li>Auto-refresh from JSON</li>
-          </ul>
-        </div>
+      <aside class="Live News">
+        <h2>Live News (Coming Next)</h2>
+        <div class="card" style="margin-top:16px;">
+  <h2>Latest Election News</h2>
+  <div id="newsList" style="display:grid; gap:10px; margin-top:10px;"></div>
+</div>
       </aside>
     </main>
 
@@ -327,6 +322,48 @@
 
   // Update every second
   setInterval(updateCountdown, 1000);
+
+    async function loadNews() {
+  const el = document.getElementById("newsList");
+  if (!el) return;
+
+  el.innerHTML = '<div style="color:rgba(255,255,255,0.65);">Loading news…</div>';
+
+  // Example query: Nepal election (you can change keywords)
+  const url =
+    "https://api.gdeltproject.org/api/v2/doc/doc?query=" +
+    encodeURIComponent("Nepal election OR निर्वाचन") +
+    "&mode=ArtList&format=json&maxrecords=8&sort=HybridRel";
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const articles = data.articles || [];
+    if (!articles.length) {
+      el.innerHTML = '<div style="color:rgba(255,255,255,0.65);">No recent articles found.</div>';
+      return;
+    }
+
+    el.innerHTML = articles.map(a => `
+      <a href="${a.url}" target="_blank" rel="noreferrer"
+         style="display:block; padding:12px; border-radius:14px;
+                border:1px solid rgba(255,255,255,0.12);
+                background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.88);">
+        <div style="font-weight:700; line-height:1.3;">${a.title || "Untitled"}</div>
+        <div style="margin-top:6px; font-size:12px; color:rgba(255,255,255,0.60);">
+          ${(a.sourceCountry || "").toUpperCase()} • ${a.seendate || ""}
+        </div>
+      </a>
+    `).join("");
+  } catch (err) {
+    el.innerHTML = '<div style="color:rgba(255,255,255,0.65);">Failed to load news.</div>';
+  }
+}
+
+// Load once, then refresh every 5 minutes
+loadNews();
+setInterval(loadNews, 5 * 60 * 1000);
 </script>
 </body>
 </html>
