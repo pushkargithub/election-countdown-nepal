@@ -2,55 +2,326 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nepal Election Countdown</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Optional: modern font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #ffffff;
-      text-align: center;
-      padding-top: 80px;
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.65);
+      --line: rgba(255,255,255,0.12);
+      --accent: #facc15; /* warm gold */
     }
-    h1 {
-      color: #facc15;
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(250,204,21,0.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 30%, rgba(59,130,246,0.10), transparent 55%),
+        radial-gradient(700px 420px at 50% 100%, rgba(16,185,129,0.08), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 28px 16px 60px;
     }
-    .countdown {
-      font-size: 2rem;
-      margin-top: 20px;
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
     }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      padding: 18px 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .badge{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(250,204,21,0.95), rgba(250,204,21,0.35));
+      display:grid;
+      place-items:center;
+      color: #0b1220;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 30px rgba(250,204,21,0.12);
+      flex: 0 0 auto;
+    }
+
+    h1{
+      margin:0;
+      font-size: clamp(18px, 3vw, 26px);
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sub{
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pill{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    main{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 860px){
+      main{ grid-template-columns: 1fr; }
+      header{ flex-direction: column; align-items:flex-start; }
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      padding: 18px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.88);
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .countGrid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 520px){
+      .countGrid{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .tile{
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align:center;
+    }
+
+    .num{
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .lbl{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bigLine{
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .accent{
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .mini{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .chip{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.78);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    footer{
+      margin-top: 18px;
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="badge">NE</div>
+        <div style="min-width:0;">
+          <h1>Nepal Election Countdown</h1>
+          <p class="sub">Countdown + live results dashboard (design-first)</p>
+        </div>
+      </div>
+      <div class="pill" id="statusPill">Status: Building…</div>
+    </header>
 
-  <h1>Nepal Election Countdown</h1>
-  <p>Countdown to election day</p>
+    <main>
+      <!-- Countdown Card -->
+      <section class="card">
+        <h2>Countdown to Election Day</h2>
 
-  <div class="countdown" id="countdown">
-    Loading...
+        <div class="countGrid" aria-label="countdown">
+          <div class="tile">
+            <div class="num" id="d">—</div>
+            <div class="lbl">Days</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="h">—</div>
+            <div class="lbl">Hours</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="m">—</div>
+            <div class="lbl">Minutes</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="s">—</div>
+            <div class="lbl">Seconds</div>
+          </div>
+        </div>
+
+        <div class="bigLine">
+          Target date: <span class="accent" id="targetLabel">—</span><br>
+          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
+        </div>
+
+        <div class="mini">
+          <div class="chip" id="localTime">Local time: —</div>
+          <div class="chip" id="lastUpdate">Updated: —</div>
+        </div>
+      </section>
+
+      <!-- Right Side: placeholder panel for future results -->
+      <aside class="card">
+        <h2>Live Results (Coming Next)</h2>
+        <div class="bigLine">
+          This area will show:
+          <ul style="margin:10px 0 0 18px; color: rgba(255,255,255,0.75); line-height:1.7;">
+            <li>Total seats / leading seats</li>
+            <li>Top parties + vote share</li>
+            <li>Province / district breakdown</li>
+            <li>Auto-refresh from JSON</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <div class="chip">Layout: responsive</div>
+          <div class="chip">Style: clean / modern</div>
+          <div class="chip">Theme: dark</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Built on GitHub Pages • Repo: <a href="https://github.com/pushkargithub/election-countdown-nepal" target="_blank" rel="noreferrer">election-countdown-nepal</a>
+    </footer>
   </div>
 
   <script>
-    const electionDate = new Date("2027-11-15T00:00:00").getTime();
+    // ✅ Change this date to the real election date/time when you know it.
+    // Example: "2027-11-15T00:00:00+05:45" (Nepal Time offset)
+    const electionISO = "2027-11-15T00:00:00+05:45";
+    const electionDate = new Date(electionISO);
 
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = electionDate - now;
+    const pad2 = (n) => String(n).padStart(2, "0");
 
-      if (diff <= 0) {
-        document.getElementById("countdown").innerText = "Election Day!";
+    function tick(){
+      const now = new Date();
+      const diff = electionDate.getTime() - now.getTime();
+
+      document.getElementById("localTime").textContent =
+        "Local time: " + now.toLocaleString();
+
+      document.getElementById("lastUpdate").textContent =
+        "Updated: " + new Date().toLocaleTimeString();
+
+      document.getElementById("targetLabel").textContent =
+        electionDate.toLocaleString();
+
+      const status = document.getElementById("statusPill");
+
+      if (isNaN(electionDate.getTime())){
+        status.textContent = "Status: Set election date";
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      if (diff <= 0){
+        document.getElementById("d").textContent = "0";
+        document.getElementById("h").textContent = "00";
+        document.getElementById("m").textContent = "00";
+        document.getElementById("s").textContent = "00";
+        status.textContent = "Status: Election Day";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const minutes = Math.floor((diff / (1000*60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("countdown").innerText =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-  </script>
+      document.getElementById("d").textContent = days;
+      document.getElementById("h").textContent = pad2(hours);
+      document.getElementById("m").textContent = pad2(minutes);
+      document.getElementById("s").textContent = pad2(seconds);
 
+      status.textContent = "Status: Live";
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
 </body>
 </html>
