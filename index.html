@@ -271,57 +271,71 @@
   </div>
 
   <script>
-    // ✅ Change this date to the real election date/time when you know it.
-    // Example: "2027-11-15T00:00:00+05:45" (Nepal Time offset)
-    const electionISO = "2027-11-15T00:00:00+05:45";
-    const electionDate = new Date(electionISO);
+  // ================================
+  // Nepal Election Countdown Script
+  // ================================
 
-    const pad2 = (n) => String(n).padStart(2, "0");
+  // Election date (Nepal Time)
+  const electionISO = "2026-03-05T07:00:00+05:45";
+  const electionDate = new Date(electionISO);
 
-    function tick(){
-      const now = new Date();
-      const diff = electionDate.getTime() - now.getTime();
+  // Helper: pad numbers to 2 digits
+  function pad(num) {
+    return String(num).padStart(2, "0");
+  }
 
-      document.getElementById("localTime").textContent =
-        "Local time: " + now.toLocaleString();
+  function updateCountdown() {
+    const now = new Date();
+    const diff = electionDate.getTime() - now.getTime();
 
-      document.getElementById("lastUpdate").textContent =
-        "Updated: " + new Date().toLocaleTimeString();
+    // Update local time & last updated
+    document.getElementById("localTime").textContent =
+      "Local time: " + now.toLocaleString();
 
-      document.getElementById("targetLabel").textContent =
-        electionDate.toLocaleString();
+    document.getElementById("lastUpdate").textContent =
+      "Updated: " + now.toLocaleTimeString();
 
-      const status = document.getElementById("statusPill");
+    document.getElementById("targetLabel").textContent =
+      electionDate.toLocaleString();
 
-      if (isNaN(electionDate.getTime())){
-        status.textContent = "Status: Set election date";
-        return;
-      }
+    const statusPill = document.getElementById("statusPill");
 
-      if (diff <= 0){
-        document.getElementById("d").textContent = "0";
-        document.getElementById("h").textContent = "00";
-        document.getElementById("m").textContent = "00";
-        document.getElementById("s").textContent = "00";
-        status.textContent = "Status: Election Day";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff / (1000*60*60)) % 24);
-      const minutes = Math.floor((diff / (1000*60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("d").textContent = days;
-      document.getElementById("h").textContent = pad2(hours);
-      document.getElementById("m").textContent = pad2(minutes);
-      document.getElementById("s").textContent = pad2(seconds);
-
-      status.textContent = "Status: Live";
+    // If date is invalid
+    if (isNaN(electionDate.getTime())) {
+      statusPill.textContent = "Status: Invalid date";
+      return;
     }
 
-    tick();
-    setInterval(tick, 1000);
-  </script>
+    // If election day reached
+    if (diff <= 0) {
+      document.getElementById("d").textContent = "0";
+      document.getElementById("h").textContent = "00";
+      document.getElementById("m").textContent = "00";
+      document.getElementById("s").textContent = "00";
+      statusPill.textContent = "Status: Election Day";
+      return;
+    }
+
+    // Time calculations
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    // Update UI
+    document.getElementById("d").textContent = days;
+    document.getElementById("h").textContent = pad(hours);
+    document.getElementById("m").textContent = pad(minutes);
+    document.getElementById("s").textContent = pad(seconds);
+
+    statusPill.textContent = "Status: Live";
+  }
+
+  // Initial run
+  updateCountdown();
+
+  // Update every second
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
