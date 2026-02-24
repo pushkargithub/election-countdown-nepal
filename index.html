@@ -460,52 +460,57 @@
     // ================================
     // Seats are placeholders for now. You can edit numbers anytime.
     const topParties = [
-      {
-        code: "NC",
-        name: "Nepali Congress",
-        nepali: "नेपाली कांग्रेस",
-        seats: 0,
-        note1: "Centrist",
-        note2: "Nationwide",
-        color: "rgba(59,130,246,0.95)"
-      },
-      {
-        code: "UML",
-        name: "CPN (UML)",
-        nepali: "नेकपा (एमाले)",
-        seats: 0,
-        note1: "Left",
-        note2: "Nationwide",
-        color: "rgba(34,197,94,0.95)"
-      },
-      {
-        code: "MC",
-        name: "Maoist Centre",
-        nepali: "नेकपा (माओवादी केन्द्र)",
-        seats: 0,
-        note1: "Left",
-        note2: "Coalition",
-        color: "rgba(239,68,68,0.90)"
-      },
-      {
-        code: "RSP",
-        name: "Rastriya Swatantra Party",
-        nepali: "राष्ट्रिय स्वतन्त्र पार्टी",
-        seats: 0,
-        note1: "Reform",
-        note2: "Urban",
-        color: "rgba(250,204,21,0.95)"
-      },
-      {
-        code: "JSP-N",
-        name: "JSP Nepal",
-        nepali: "जनता समाजवादी पार्टी, नेपाल",
-        seats: 0,
-        note1: "Madhesh",
-        note2: "Federalist",
-        color: "rgba(168,85,247,0.90)"
-      }
-    ];
+  {
+    code: "NC",
+    name: "Nepali Congress",
+    nepali: "नेपाली कांग्रेस",
+    seats: 0,
+    note1: "Liberal democracy",
+    note2: "Mainstream",
+    color: "rgba(59,130,246,0.95)",
+    desc: "One of Nepal’s oldest and largest democratic parties; advocates liberal democracy, civil liberties, and economic development."
+  },
+  {
+    code: "UML",
+    name: "CPN (UML)",
+    nepali: "नेकपा (एमाले)",
+    seats: 0,
+    note1: "Left",
+    note2: "Top contender",
+    color: "rgba(34,197,94,0.95)",
+    desc: "A major communist party led by K.P. Sharma Oli; consistently among the top vote-getters and strong in many constituencies."
+  },
+  {
+    code: "RSP",
+    name: "Rastriya Swatantra Party",
+    nepali: "राष्ट्रिय स्वतन्त्र पार्टी",
+    seats: 0,
+    note1: "Reform",
+    note2: "Youth/Urban",
+    color: "rgba(250,204,21,0.95)",
+    desc: "A newer, fast-rising party popular among youth and urban voters; known for anti-establishment and governance-reform appeal."
+  },
+  {
+    code: "MC",
+    name: "Maoist Centre",
+    nepali: "नेकपा (माओवादी केन्द्र)",
+    seats: 0,
+    note1: "Maoist roots",
+    note2: "Coalition",
+    color: "rgba(239,68,68,0.90)",
+    desc: "Rooted in the Maoist movement; remains influential across seats and often plays a key role as a coalition partner."
+  },
+  {
+    code: "RPP",
+    name: "Rastriya Prajatantra Party",
+    nepali: "राष्ट्रिय प्रजातन्त्र पार्टी",
+    seats: 0,
+    note1: "Conservative",
+    note2: "Monarchist",
+    color: "rgba(168,85,247,0.90)",
+    desc: "A right-leaning party known for monarchist/Hindu-state advocacy and conservative policy positions."
+  }
+];
 
     function renderParties() {
       const row = document.getElementById("partyRow");
@@ -528,9 +533,13 @@
           </div>
 
           <div class="partyMeta">
-            <span class="partyTag">${p.note1}</span>
-            <span class="partyTag">${p.note2}</span>
-          </div>
+  <span class="partyTag">${p.note1}</span>
+  <span class="partyTag">${p.note2}</span>
+</div>
+
+<div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
+  ${p.desc}
+</div>
         </div>
       `).join("");
     }
