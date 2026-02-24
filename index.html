@@ -243,15 +243,23 @@
 
       <!-- Right Side: placeholder panel for future results -->
       <aside class="Live News">
-        <div class="card" style="margin-top:18px;">
-  <h2>Live / Latest from News24 Nepal</h2>
-  <a href="https://www.youtube.com/@news24tvchannel/streams" target="_blank" rel="noopener noreferrer"
-     style="display:block; padding:12px; background:rgba(255,255,255,0.10); border-radius:8px; text-align:center; color:#fff; text-decoration:none; font-weight:600;">
-    Open News24 Nepal YouTube Channel
-  </a>
-  <p style="font-size:12px; color:rgba(255,255,255,0.65); margin-top:8px;">
-    If a live broadcast is available, it will be here.
-  </p>
+        <div style="margin-top:14px;">
+  <h2 style="margin-bottom:10px;">News24 Nepal • Live Headlines</h2>
+
+  <div id="tickerWrap" style="
+    border:1px solid rgba(255,255,255,0.12);
+    background:rgba(255,255,255,0.04);
+    border-radius:14px;
+    overflow:hidden;
+    padding:10px 0;">
+    <div id="ticker" style="white-space:nowrap; will-change:transform;">
+      Loading headlines…
+    </div>
+  </div>
+
+  <div style="margin-top:8px; font-size:12px; color:rgba(255,255,255,0.6);">
+    Source: News24 Nepal articles (via GDELT)
+  </div>
 </div>
       </aside>
     </main>
@@ -328,43 +336,74 @@
   // Update every second
   setInterval(updateCountdown, 1000);
 
-    async function loadNews() {
-  const el = document.getElementById("newsList");
-  if (!el) return;
+    async function loadNews24Ticker() {
+  const ticker = document.getElementById("ticker");
+  if (!ticker) return;
 
-  el.innerHTML = '<div style="color:rgba(255,255,255,0.65);">Loading news…</div>';
-
-  // Example query: Nepal election (you can change keywords)
+  // Pull latest from News24 Nepal domain via GDELT DOC API
+  // You can add election keywords too, but domain-only is simplest.
   const url =
-    "https://api.gdeltproject.org/api/v2/doc/doc?query=" +
-    encodeURIComponent("Nepal election OR निर्वाचन") +
-    "&mode=ArtList&format=json&maxrecords=8&sort=HybridRel";
+    "https://api.gdeltproject.org/api/v2/doc/doc" +
+    "?format=json&mode=ArtList&maxrecords=12&sort=HybridRel" +
+    "&domain=news24nepal.com";
 
   try {
     const res = await fetch(url);
     const data = await res.json();
-
     const articles = data.articles || [];
+
     if (!articles.length) {
-      el.innerHTML = '<div style="color:rgba(255,255,255,0.65);">No recent articles found.</div>';
+      ticker.textContent = "No headlines found right now.";
       return;
     }
 
-    el.innerHTML = articles.map(a => `
-      <a href="${a.url}" target="_blank" rel="noreferrer"
-         style="display:block; padding:12px; border-radius:14px;
-                border:1px solid rgba(255,255,255,0.12);
-                background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.88);">
-        <div style="font-weight:700; line-height:1.3;">${a.title || "Untitled"}</div>
-        <div style="margin-top:6px; font-size:12px; color:rgba(255,255,255,0.60);">
-          ${(a.sourceCountry || "").toUpperCase()} • ${a.seendate || ""}
-        </div>
-      </a>
-    `).join("");
-  } catch (err) {
-    el.innerHTML = '<div style="color:rgba(255,255,255,0.65);">Failed to load news.</div>';
+    // Build scrolling text (clickable)
+    const html = articles.map(a => {
+      const title = (a.title || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const link = a.url || "#";
+      return `<a href="${link}" target="_blank" rel="noreferrer"
+                 style="color:rgba(255,255,255,0.9); text-decoration:none; margin-right:28px;">
+                • ${title}
+              </a>`;
+    }).join("");
+
+    ticker.innerHTML = html;
+
+    // Start animation
+    startTickerAnimation();
+  } catch (e) {
+    ticker.textContent = "Failed to load News24 headlines.";
   }
 }
+
+function startTickerAnimation() {
+  const wrap = document.getElementById("tickerWrap");
+  const ticker = document.getElementById("ticker");
+  if (!wrap || !ticker) return;
+
+  // Reset any previous animation
+  ticker.style.transform = "translateX(100%)";
+
+  const wrapWidth = wrap.clientWidth;
+  const tickerWidth = ticker.scrollWidth;
+
+  // speed: pixels per second
+  const speed = 70;
+  const distance = wrapWidth + tickerWidth;
+  const duration = distance / speed;
+
+  ticker.animate(
+    [
+      { transform: `translateX(${wrapWidth}px)` },
+      { transform: `translateX(-${tickerWidth}px)` }
+    ],
+    { duration: duration * 1000, iterations: Infinity }
+  );
+}
+
+// Load now + refresh every 5 minutes
+loadNews24Ticker();
+setInterval(loadNews24Ticker, 5 * 60 * 1000);
 
 // Load once, then refresh every 5 minutes
 loadNews();
