@@ -34,17 +34,22 @@
 
     *{ box-sizing:border-box; }
     body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(900px 500px at 10% 10%, rgba(250,204,21,0.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 30%, rgba(59,130,246,0.10), transparent 55%),
-        radial-gradient(700px 420px at 50% 100%, rgba(16,185,129,0.08), transparent 60%),
-        var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 28px 16px 60px;
-    }
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  background:
+    linear-gradient(
+      rgba(11,18,32,0.85),
+      rgba(11,18,32,0.85)
+    ),
+    url("bg-election.jpg") center / cover no-repeat fixed;
+
+  color: var(--text);
+  min-height: 100vh;
+  padding: 28px 16px 60px;
+}
+
+    
 
     .wrap{
       max-width: 980px;
@@ -457,6 +462,43 @@
       font-size: 12px;
       text-align:center;
     }
+
+    /* ================================
+   QUICK ELECTION EXPLAINER
+   ================================ */
+.quickGrid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:14px;
+  margin-top:10px;
+}
+@media (max-width: 800px){
+  .quickGrid{ grid-template-columns: 1fr; }
+}
+.quickBox{
+  border:1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  border-radius:14px;
+  padding:14px;
+}
+.quickBox h3{
+  margin:0 0 6px;
+  font-size:15px;
+  font-weight:900;
+}
+.quickBox p{
+  margin:4px 0;
+  font-size:13px;
+  line-height:1.5;
+}
+.quickBox .muted{
+  opacity:.7;
+  font-size:12px;
+}
+.quickBox.full{
+  grid-column: 1 / -1;
+  text-align:center;
+}
   </style>
 </head>
 
@@ -565,6 +607,63 @@
           </div>
         </section>
       </section>
+      <!-- Election System Explainer (full width) -->
+<section class="card" style="grid-column: 1 / -1;">
+  <h2>
+    प्रत्यक्ष (FPTP) र समानुपातिक (PR) प्रणाली – सरल बुझाइ  
+    <span style="font-weight:400; opacity:.75;">| Election System Explained</span>
+  </h2>
+
+  <div class="bigLine">
+    नेपालको प्रतिनिधि सभा चुनाव <span class="accent">दुई फरक प्रणाली</span> बाट हुन्छ।  
+    <br>
+    <span style="opacity:.8;">
+      Nepal’s House of Representatives election is conducted using <b>two different systems</b>.
+    </span>
+  </div>
+
+  <div class="sysGrid">
+    <!-- FPTP -->
+    <div class="sysBox">
+      <h3>🗳️ प्रत्यक्ष प्रणाली (First Past The Post – FPTP)</h3>
+      <ul>
+        <li>देशलाई <b>१६५ निर्वाचन क्षेत्र</b> मा विभाजन गरिएको हुन्छ।</li>
+        <li>प्रत्येक क्षेत्रबाट <b>एक जना उम्मेदवार</b> विजेता हुन्छ।</li>
+        <li>सबैभन्दा धेरै मत पाउने उम्मेदवारले सिधै जित्छ।</li>
+      </ul>
+
+      <div class="example">
+        <b>उदाहरण / Example:</b><br>
+        A = 40% votes, B = 35%, C = 25%<br>
+        👉 A wins the seat
+      </div>
+    </div>
+
+    <!-- PR -->
+    <div class="sysBox">
+      <h3>📊 समानुपातिक प्रणाली (Proportional Representation – PR)</h3>
+      <ul>
+        <li>देशभर पार्टीले पाएको <b>कुल मत प्रतिशत</b> अनुसार सिट बाँडिन्छ।</li>
+        <li>कुल <b>११० सिट</b> समानुपातिक प्रणालीबाट आउँछ।</li>
+        <li>मतदाता पार्टीलाई मत हाल्छ, व्यक्ति होइन।</li>
+      </ul>
+
+      <div class="example">
+        <b>उदाहरण / Example:</b><br>
+        30% votes ≈ 33 seats<br>
+        20% votes ≈ 22 seats
+      </div>
+    </div>
+  </div>
+
+  <div class="bigLine" style="margin-top:12px;">
+    👉 सरकार बनाउन <b>१३८ सिट</b> आवश्यक पर्छ (कुल २७५)।  
+    <br>
+    <span style="opacity:.8;">
+      To form a government, a party or coalition must secure <b>138 out of 275 seats</b>.
+    </span>
+  </div>
+</section>
     </main>
 
     <footer>
