@@ -10,40 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-
-    <!-- Countdown Card -->
-      <section class="card">
-        <h2>Countdown to Election Day</h2>
-
-        <div class="countGrid" aria-label="countdown">
-          <div class="tile">
-            <div class="num" id="d">—</div>
-            <div class="lbl">Days</div>
-          </div>
-          <div class="tile">
-            <div class="num" id="h">—</div>
-            <div class="lbl">Hours</div>
-          </div>
-          <div class="tile">
-            <div class="num" id="m">—</div>
-            <div class="lbl">Minutes</div>
-          </div>
-          <div class="tile">
-            <div class="num" id="s">—</div>
-            <div class="lbl">Seconds</div>
-          </div>
-        </div>
-
-        <div class="bigLine">
-          Target date: <span class="accent" id="targetLabel">—</span><br>
-          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
-        </div>
-
-        <div class="mini">
-          <div class="chip" id="localTime">Local time: —</div>
-          <div class="chip" id="lastUpdate">Updated: —</div>
-        </div>
-      </section>
   <style>
     :root{
       --bg: #0b1220;
@@ -217,6 +183,7 @@
       padding: 8px 10px;
       border-radius: 999px;
       font-size: 12px;
+      text-decoration:none;
     }
 
     footer{
@@ -343,6 +310,142 @@
       font-size: 13px;
     }
     .tickerLink:hover{ text-decoration: underline; }
+
+    /* ================================
+       BREAKING NEWS
+       ================================ */
+    .section-title{
+      margin: 18px 0 10px;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .breaking{
+      margin: 0 0 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .breaking__bar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+
+    .breaking__badge{
+      font-weight:900;
+      letter-spacing:.08em;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,60,60,.20);
+      border: 1px solid rgba(255,60,60,.40);
+    }
+
+    .breaking__ticker{
+      flex:1;
+      white-space:nowrap;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .breaking__ticker > div{
+      display:inline-block;
+      padding-left: 100%;
+      animation: ticker 22s linear infinite;
+    }
+
+    @keyframes ticker{
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .breaking__refresh{
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: inherit;
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    .breaking__grid{
+      display:grid;
+      grid-template-columns: 1.7fr .9fr;
+      gap:14px;
+      padding:14px;
+    }
+
+    @media (max-width: 900px){
+      .breaking__grid{ grid-template-columns: 1fr; }
+    }
+
+    .breaking__list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .breaking__item{
+      padding:10px 12px;
+      border-radius:12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
+    .breaking__item a{
+      color: inherit;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .breaking__item a:hover{ text-decoration: underline; }
+
+    .breaking__source{
+      margin-top:6px;
+      font-size:12px;
+      opacity:.75;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .breaking__meta{
+      padding:10px 12px;
+      border-radius:12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      font-size:13px;
+      opacity:.9;
+    }
+
+    .breaking__time{
+      margin-top:10px;
+      font-size:12px;
+      opacity:.75;
+    }
+
+    .breaking__note{
+      margin-top:12px;
+      font-size:12px;
+      opacity:.8;
+      line-height:1.35;
+    }
+
+    .site-footer{
+      margin-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 14px;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      text-align:center;
+    }
   </style>
 </head>
 
@@ -360,16 +463,39 @@
     </header>
 
     <main>
-      <!-- Top 5 Parties Row -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <h2>Top 5 Parties (Seats)</h2>
-        <div id="partyRow" class="partyRow"></div>
-        <div class="bigLine" style="margin-top:10px;">
-          Tip: later we can auto-update seats from <span class="accent">JSON</span>.
+      <!-- Countdown Card -->
+      <section class="card">
+        <h2>Countdown to Election Day</h2>
+
+        <div class="countGrid" aria-label="countdown">
+          <div class="tile">
+            <div class="num" id="d">—</div>
+            <div class="lbl">Days</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="h">—</div>
+            <div class="lbl">Hours</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="m">—</div>
+            <div class="lbl">Minutes</div>
+          </div>
+          <div class="tile">
+            <div class="num" id="s">—</div>
+            <div class="lbl">Seconds</div>
+          </div>
+        </div>
+
+        <div class="bigLine">
+          Target date: <span class="accent" id="targetLabel">—</span><br>
+          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
+        </div>
+
+        <div class="mini">
+          <div class="chip" id="localTime">Local time: —</div>
+          <div class="chip" id="lastUpdate">Updated: —</div>
         </div>
       </section>
-
-    
 
       <!-- News Card -->
       <aside class="card">
@@ -388,9 +514,46 @@
         </div>
 
         <div class="bigLine" style="margin-top:10px; font-size:12px;">
-          Source is aggregated via GDELT (domain filter) for static-site compatibility. 
+          Source is aggregated via GDELT (domain filter) for static-site compatibility.
         </div>
       </aside>
+
+      <!-- Top 5 Parties Row (full width) -->
+      <section class="card" style="grid-column: 1 / -1;">
+        <h2>Top 5 Parties (Seats)</h2>
+        <div id="partyRow" class="partyRow"></div>
+        <div class="bigLine" style="margin-top:10px;">
+          Tip: later we can auto-update seats from <span class="accent">JSON</span>.
+        </div>
+      </section>
+
+      <!-- Breaking News (full width) -->
+      <section style="grid-column: 1 / -1;">
+        <h2 class="section-title">Breaking News</h2>
+
+        <section class="breaking" aria-label="Breaking news">
+          <div class="breaking__bar">
+            <span class="breaking__badge">BREAKING</span>
+            <div class="breaking__ticker" id="breakingTicker">
+              <span class="breaking__loading">Loading headlines…</span>
+            </div>
+            <button class="breaking__refresh" id="breakingRefresh" type="button" title="Refresh">
+              Refresh
+            </button>
+          </div>
+
+          <div class="breaking__grid">
+            <div class="breaking__list" id="breakingList"></div>
+            <div class="breaking__meta">
+              <div class="breaking__hint">Source: GDELT (news monitoring)</div>
+              <div class="breaking__time" id="breakingUpdated"></div>
+              <div class="breaking__note">
+                Independent informational platform. For official election updates, visit the Election Commission of Nepal.
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
     </main>
 
     <footer>
@@ -398,6 +561,16 @@
       <a href="https://github.com/pushkargithub/election-countdown-nepal" target="_blank" rel="noreferrer">
         election-countdown-nepal
       </a>
+    </footer>
+
+    <footer class="site-footer">
+      <p>
+        This site is an independent informational platform.
+        For official results, visit the
+        <a href="https://www.election.gov.np" target="_blank" rel="noopener noreferrer">
+          Election Commission of Nepal
+        </a>.
+      </p>
     </footer>
   </div>
 
@@ -460,60 +633,58 @@
     // ================================
     // 2) TOP 5 PARTIES ROW
     // ================================
-    // Seats are placeholders for now. You can edit numbers anytime.
     const topParties = [
- {
-    code: "RSP",
-    name: "Rastriya Swatantra Party",
-    nepali: "राष्ट्रिय स्वतन्त्र पार्टी",
-    seats: 0,
-    note1: "Reform",
-    note2: "Youth/Urban",
-    color: "rgba(250,204,21,0.95)",
-    desc: "A newer, fast-rising party popular among youth and urban voters; known for anti-establishment and governance-reform appeal."
-  },
-       {
-    code: "NC",
-    name: "Nepali Congress",
-    nepali: "नेपाली कांग्रेस",
-    seats: 0,
-    note1: "Liberal democracy",
-    note2: "Mainstream",
-    color: "rgba(59,130,246,0.95)",
-    desc: "One of Nepal’s oldest and largest democratic parties; advocates liberal democracy, civil liberties, and economic development."
-  },
-  {
-    code: "UML",
-    name: "CPN (UML)",
-    nepali: "नेकपा (एमाले)",
-    seats: 0,
-    note1: "Left",
-    note2: "Top contender",
-    color: "rgba(34,197,94,0.95)",
-    desc: "A major communist party led by K.P. Sharma Oli; consistently among the top vote-getters and strong in many constituencies."
-  },
-  
-  {
-    code: "MC",
-    name: "NCP",
-    nepali: "नेकपा",
-    seats: 0,
-    note1: "Maoist roots",
-    note2: "Coalition",
-    color: "rgba(239,68,68,0.90)",
-    desc: "Rooted in the Maoist movement; remains influential across seats and often plays a key role as a coalition partner."
-  },
-  {
-    code: "RPP",
-    name: "Rastriya Prajatantra Party",
-    nepali: "राष्ट्रिय प्रजातन्त्र पार्टी",
-    seats: 0,
-    note1: "Conservative",
-    note2: "Monarchist",
-    color: "rgba(168,85,247,0.90)",
-    desc: "A right-leaning party known for monarchist/Hindu-state advocacy and conservative policy positions."
-  }
-];
+      {
+        code: "RSP",
+        name: "Rastriya Swatantra Party",
+        nepali: "राष्ट्रिय स्वतन्त्र पार्टी",
+        seats: 0,
+        note1: "Reform",
+        note2: "Youth/Urban",
+        color: "rgba(250,204,21,0.95)",
+        desc: "A newer, fast-rising party popular among youth and urban voters; known for anti-establishment and governance-reform appeal."
+      },
+      {
+        code: "NC",
+        name: "Nepali Congress",
+        nepali: "नेपाली कांग्रेस",
+        seats: 0,
+        note1: "Liberal democracy",
+        note2: "Mainstream",
+        color: "rgba(59,130,246,0.95)",
+        desc: "One of Nepal’s oldest and largest democratic parties; advocates liberal democracy, civil liberties, and economic development."
+      },
+      {
+        code: "UML",
+        name: "CPN (UML)",
+        nepali: "नेकपा (एमाले)",
+        seats: 0,
+        note1: "Left",
+        note2: "Top contender",
+        color: "rgba(34,197,94,0.95)",
+        desc: "A major communist party led by K.P. Sharma Oli; consistently among the top vote-getters and strong in many constituencies."
+      },
+      {
+        code: "MC",
+        name: "NCP",
+        nepali: "नेकपा",
+        seats: 0,
+        note1: "Maoist roots",
+        note2: "Coalition",
+        color: "rgba(239,68,68,0.90)",
+        desc: "Rooted in the Maoist movement; remains influential across seats and often plays a key role as a coalition partner."
+      },
+      {
+        code: "RPP",
+        name: "Rastriya Prajatantra Party",
+        nepali: "राष्ट्रिय प्रजातन्त्र पार्टी",
+        seats: 0,
+        note1: "Conservative",
+        note2: "Monarchist",
+        color: "rgba(168,85,247,0.90)",
+        desc: "A right-leaning party known for monarchist/Hindu-state advocacy and conservative policy positions."
+      }
+    ];
 
     function renderParties() {
       const row = document.getElementById("partyRow");
@@ -536,20 +707,20 @@
           </div>
 
           <div class="partyMeta">
-  <span class="partyTag">${p.note1}</span>
-  <span class="partyTag">${p.note2}</span>
-</div>
+            <span class="partyTag">${p.note1}</span>
+            <span class="partyTag">${p.note2}</span>
+          </div>
 
-<div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
-  ${p.desc}
-</div>
+          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
+            ${p.desc}
+          </div>
         </div>
       `).join("");
     }
     renderParties();
 
     // ================================
-    // 3) NEWS24 HEADLINE TICKER (via GDELT)
+    // 3) NEWS24 HEADLINE TICKER (via GDELT domain filter)
     // ================================
     async function loadNews24Ticker() {
       const ticker = document.getElementById("ticker");
@@ -558,14 +729,13 @@
 
       ticker.textContent = "Loading headlines…";
 
-      // Domain filter keeps it News24 Nepal
       const url =
         "https://api.gdeltproject.org/api/v2/doc/doc" +
         "?format=json&mode=ArtList&maxrecords=12&sort=HybridRel" +
         "&domain=news24nepal.com";
 
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, { cache: "no-store" });
         const data = await res.json();
         const articles = data.articles || [];
 
@@ -574,7 +744,6 @@
           return;
         }
 
-        // Build clickable scrolling links
         ticker.innerHTML = articles.map(a => {
           const title = (a.title || "").replace(/</g,"&lt;").replace(/>/g,"&gt;");
           const link = a.url || "#";
@@ -595,7 +764,6 @@
       const wrapWidth = wrap.clientWidth;
       const tickerWidth = ticker.scrollWidth;
 
-      // px/sec
       const speed = 70;
       const distance = wrapWidth + tickerWidth;
       const duration = distance / speed;
@@ -611,16 +779,78 @@
 
     loadNews24Ticker();
     setInterval(loadNews24Ticker, 5 * 60 * 1000);
+
+    // ================================
+    // 4) BREAKING NEWS (via GDELT query)
+    // ================================
+    (function(){
+      const tickerEl = document.getElementById('breakingTicker');
+      const listEl = document.getElementById('breakingList');
+      const updatedEl = document.getElementById('breakingUpdated');
+      const refreshBtn = document.getElementById('breakingRefresh');
+
+      // Tune keywords anytime
+      const QUERY = encodeURIComponent('(Nepal OR Kathmandu) AND (election OR parliament OR "Election Commission")');
+      const MAX = 8;
+
+      const endpoint = () =>
+        `https://api.gdeltproject.org/api/v2/doc/doc?query=${QUERY}&mode=ArtList&format=json&maxrecords=${MAX}&sort=HybridRel`;
+
+      function safeText(s){ return (s || '').toString(); }
+
+      function render(data){
+        const articles = (data && data.articles) ? data.articles : [];
+
+        if(!articles.length){
+          tickerEl.innerHTML = '<span class="breaking__loading">No headlines found. Try refresh.</span>';
+          listEl.innerHTML = '';
+          updatedEl.textContent = '';
+          return;
+        }
+
+        const tickerTitles = articles.slice(0, 6).map(a => safeText(a.title).trim()).filter(Boolean);
+        tickerEl.innerHTML = `<div>${tickerTitles.join(' • ')}</div>`;
+
+        listEl.innerHTML = articles.map(a => {
+          const title = safeText(a.title).trim() || 'Untitled';
+          const url = safeText(a.url) || '#';
+          const domain = safeText(a.domain) || 'News';
+          const when = safeText(a.seendate) || '';
+
+          return `
+            <div class="breaking__item">
+              <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>
+              <div class="breaking__source">
+                <span>${domain}</span>
+                ${when ? `<span>• ${when}</span>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        updatedEl.textContent = 'Updated: ' + new Date().toLocaleString();
+      }
+
+      async function load(){
+        tickerEl.innerHTML = '<span class="breaking__loading">Loading headlines…</span>';
+        try{
+          const res = await fetch(endpoint(), { cache: 'no-store' });
+          if(!res.ok) throw new Error('HTTP ' + res.status);
+          const json = await res.json();
+          render(json);
+        }catch(err){
+          tickerEl.innerHTML = '<span class="breaking__loading">Could not load headlines. Please refresh.</span>';
+          listEl.innerHTML = '';
+          updatedEl.textContent = '';
+          console.error(err);
+        }
+      }
+
+      refreshBtn?.addEventListener('click', load);
+
+      load();
+      setInterval(load, 5 * 60 * 1000);
+    })();
   </script>
 </body>
 </html>
-
-<footer class="site-footer">
-  <p>
-    This site is an independent informational platform. 
-    For official results, visit the 
-    <a href="https://www.election.gov.np" target="_blank" rel="noopener">
-      Election Commission of Nepal
-    </a>.
-  </p>
-</footer>
