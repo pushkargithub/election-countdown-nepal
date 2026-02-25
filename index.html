@@ -780,56 +780,111 @@
     // 2) TOP 5 PARTIES ROW
     // ================================
     const topParties = [
-      {
-        code: "RSP",
-        name: "Rastriya Swatantra Party",
-        nepali: "राष्ट्रिय स्वतन्त्र पार्टी",
-        seats: 0,
-        note1: "Reform",
-        note2: "Youth/Urban",
-        color: "rgba(250,204,21,0.95)",
-        desc: "A newer, fast-rising party popular among youth and urban voters; known for anti-establishment and governance-reform appeal."
-      },
-      {
-        code: "NC",
-        name: "Nepali Congress",
-        nepali: "नेपाली कांग्रेस",
-        seats: 0,
-        note1: "Liberal democracy",
-        note2: "Mainstream",
-        color: "rgba(59,130,246,0.95)",
-        desc: "One of Nepal’s oldest and largest democratic parties; advocates liberal democracy, civil liberties, and economic development."
-      },
-      {
-        code: "UML",
-        name: "CPN (UML)",
-        nepali: "नेकपा (एमाले)",
-        seats: 0,
-        note1: "Left",
-        note2: "Top contender",
-        color: "rgba(34,197,94,0.95)",
-        desc: "A major communist party led by K.P. Sharma Oli; consistently among the top vote-getters and strong in many constituencies."
-      },
-      {
-        code: "MC",
-        name: "NCP",
-        nepali: "नेकपा",
-        seats: 0,
-        note1: "Maoist roots",
-        note2: "Coalition",
-        color: "rgba(239,68,68,0.90)",
-        desc: "Rooted in the Maoist movement; remains influential across seats and often plays a key role as a coalition partner."
-      },
-      {
-        code: "RPP",
-        name: "Rastriya Prajatantra Party",
-        nepali: "राष्ट्रिय प्रजातन्त्र पार्टी",
-        seats: 0,
-        note1: "Conservative",
-        note2: "Monarchist",
-        color: "rgba(168,85,247,0.90)",
-        desc: "A right-leaning party known for monarchist/Hindu-state advocacy and conservative policy positions."
-      }
+      const topParties = [
+  {
+    code: "RSP",
+    name: "Rastriya Swatantra Party",
+    nepali: "राष्ट्रिय स्वतन्त्र पार्टी",
+    seats: 0,
+    note1: "Reform",
+    note2: "Youth/Urban",
+    color: "rgba(250,204,21,0.95)",
+    desc: "A newer, fast-rising party popular among youth and urban voters; known for anti-establishment and governance-reform appeal."
+  },
+  {
+    code: "NC",
+    name: "Nepali Congress",
+    nepali: "नेपाली कांग्रेस",
+    seats: 0,
+    note1: "Liberal democracy",
+    note2: "Mainstream",
+    color: "rgba(59,130,246,0.95)",
+    desc: "One of Nepal’s oldest and largest democratic parties; advocates liberal democracy, civil liberties, and economic development."
+  },
+  {
+    code: "UML",
+    name: "CPN (UML)",
+    nepali: "नेकपा (एमाले)",
+    seats: 0,
+    note1: "Left",
+    note2: "Top contender",
+    color: "rgba(34,197,94,0.95)",
+    desc: "A major communist party led by K.P. Sharma Oli; consistently among the top vote-getters and strong in many constituencies."
+  },
+  {
+    code: "MC",
+    name: "NCP (Maoist Centre)",
+    nepali: "नेकपा (माओवादी केन्द्र)",
+    seats: 0,
+    note1: "Maoist roots",
+    note2: "Coalition",
+    color: "rgba(239,68,68,0.90)",
+    desc: "Rooted in the Maoist movement; remains influential across seats and often plays a key role as a coalition partner."
+  },
+  {
+    code: "RPP",
+    name: "Rastriya Prajatantra Party",
+    nepali: "राष्ट्रिय प्रजातन्त्र पार्टी",
+    seats: 0,
+    note1: "Conservative",
+    note2: "Monarchist",
+    color: "rgba(168,85,247,0.90)",
+    desc: "A right-leaning party known for monarchist and Hindu-state advocacy."
+  },
+
+  /* ===== Madhes / Tarai Parties ===== */
+  {
+    code: "JSP",
+    name: "Janata Samajwadi Party",
+    nepali: "जनता समाजवादी पार्टी",
+    seats: 0,
+    note1: "Madhes",
+    note2: "Regional",
+    color: "rgba(251,146,60,0.9)",
+    desc: "A major Madhes-based party focusing on federalism, inclusion, and regional rights."
+  },
+  {
+    code: "LSP",
+    name: "Loktantrik Samajwadi Party",
+    nepali: "लोकतान्त्रिक समाजवादी पार्टी",
+    seats: 0,
+    note1: "Madhes",
+    note2: "Regional",
+    color: "rgba(236,72,153,0.9)",
+    desc: "A regional party with strong influence in Tarai–Madhes constituencies."
+  },
+  {
+    code: "NUP",
+    name: "Nagarik Unmukti Party",
+    nepali: "नागरिक उन्मुक्ति पार्टी",
+    seats: 0,
+    note1: "Tharuhat",
+    note2: "Regional",
+    color: "rgba(14,165,233,0.9)",
+    desc: "Represents Tharu community interests, mainly active in western Tarai."
+  },
+
+  /* ===== New / Alternative Parties ===== */
+  {
+    code: "SSP",
+    name: "Shram Sanskrit Party",
+    nepali: "श्रम संस्कृत पार्टी",
+    seats: 0,
+    note1: "Labor",
+    note2: "Alternative",
+    color: "rgba(234,179,8,0.9)",
+    desc: "Emphasizes labor dignity, work ethics, and social responsibility, appealing to working-class voters."
+  },
+  {
+    code: "UNP",
+    name: "Ujyaalo Nepal Party",
+    nepali: "उज्यालो नेपाल पार्टी",
+    seats: 0,
+    note1: "Reform",
+    note2: "New party",
+    color: "rgba(56,189,248,0.9)",
+    desc: "Promotes transparency, accountability, and a progressive vision for Nepal’s future."
+  }
     ];
 
     function renderParties() {
