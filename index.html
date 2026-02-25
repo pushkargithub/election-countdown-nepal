@@ -1,231 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Nepal Election Live 2026 – Countdown & Results</title>
-<meta name="description" content="Independent Nepal Election 2026 countdown, live results, top parties, and breaking political news.">
+  <title>Nepal Election Live 2026 – Countdown & Results</title>
+  <meta name="description" content="Independent Nepal Election 2026 countdown, live results, top parties, and breaking political news.">
+  <link rel="canonical" href="https://nepalelectionlive.live/">
 
-<link rel="canonical" href="https://nepalelectionlive.live/">
+  <meta property="og:title" content="Nepal Election Live 2026">
+  <meta property="og:description" content="Countdown, breaking news, and live election results dashboard for Nepal 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nepalelectionlive.live">
+  <meta property="og:image" content="https://nepalelectionlive.live/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-<meta property="og:title" content="Nepal Election Live 2026">
-<meta property="og:description" content="Countdown, breaking news, and live election results dashboard for Nepal 2026.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nepalelectionlive.live">
-<meta property="og:image" content="https://nepalelectionlive.live/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.65);
+      --line: rgba(255,255,255,0.12);
+      --accent: #facc15;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        linear-gradient(rgba(11,18,32,0.55), rgba(11,18,32,0.65)),
+        url("bg-election.jpg") center / cover no-repeat fixed;
+      color: var(--text);
+      min-height: 100vh;
+      padding: 28px 16px 60px;
+    }
+    .wrap{ max-width: 980px; margin: 0 auto; }
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap: 16px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+    }
+    .brand{ display:flex; align-items:center; gap: 12px; min-width: 0; }
+    .badge{
+      width: 44px; height: 44px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(250,204,21,0.95), rgba(250,204,21,0.35));
+      display:grid; place-items:center;
+      color: #0b1220; font-weight: 900; letter-spacing: 0.5px;
+      box-shadow: 0 10px 30px rgba(250,204,21,0.12);
+      flex: 0 0 auto;
+    }
+    h1{ margin:0; font-size: clamp(18px, 3vw, 26px); line-height: 1.15; white-space: nowrap; overflow:hidden; text-overflow: ellipsis; }
+    .sub{ margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    .pill{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
 
-<style>
-/* ===== GLOBAL ===== */
-:root{
-  --bg:#0b1220;
-  --text:rgba(255,255,255,.92);
-  --muted:rgba(255,255,255,.65);
-  --line:rgba(255,255,255,.12);
-  --accent:#facc15;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-  background:
-    linear-gradient(rgba(11,18,32,.6),rgba(11,18,32,.7)),
-    url("bg-election.jpg") center/cover no-repeat fixed;
-  color:var(--text);
-  padding:28px 16px 60px;
-}
-.wrap{max-width:980px;margin:auto}
+    main{ margin-top: 18px; display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; }
+    @media (max-width: 860px){
+      main{ grid-template-columns: 1fr; }
+      header{ flex-direction: column; align-items:flex-start; }
+    }
 
-/* ===== HEADER ===== */
-header{
-  display:flex;
-  justify-content:space-between;
-  gap:16px;
-  padding:18px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(255,255,255,.06);
-}
-.brand{display:flex;gap:12px}
-.badge{
-  width:44px;height:44px;border-radius:14px;
-  display:grid;place-items:center;
-  font-weight:900;color:#0b1220;
-  background:linear-gradient(135deg,#facc15,#facc1544);
-}
-.sub{font-size:13px;color:var(--muted)}
-.pill{
-  padding:10px 14px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  font-size:12px;
-}
+    .card{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: 18px;
+      padding: 18px;
+      backdrop-filter: blur(10px);
+    }
+    .card h2{ margin: 0 0 10px; font-size: 15px; color: rgba(255,255,255,0.88); font-weight: 800; letter-spacing: 0.2px; }
 
-/* ===== LAYOUT ===== */
-main{
-  margin-top:18px;
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:16px;
-}
-@media(max-width:860px){main{grid-template-columns:1fr}}
+    .countGrid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+    @media (max-width: 520px){ .countGrid{ grid-template-columns: repeat(2, 1fr); } }
 
-.card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:18px;
-  background:rgba(255,255,255,.05);
-}
+    .tile{
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align:center;
+    }
+    .num{ font-size: clamp(22px, 4vw, 36px); font-weight: 900; letter-spacing: 0.4px; }
+    .lbl{ margin-top: 6px; font-size: 12px; color: var(--muted); }
 
-/* ===== COUNTDOWN ===== */
-.countGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-.tile{
-  text-align:center;
-  padding:14px;
-  border-radius:16px;
-  border:1px solid var(--line);
-}
-.num{font-size:28px;font-weight:900}
-.lbl{font-size:12px;color:var(--muted)}
+    .bigLine{ margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .accent{ color: var(--accent); font-weight: 800; }
+    .mini{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .chip{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.78);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      text-decoration:none;
+    }
+    footer{ margin-top: 18px; color: rgba(255,255,255,0.45); font-size: 12px; text-align:center; }
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
 
-/* ===== PARTY CARDS ===== */
+    /* TOP 10 PARTY ROW */
 .partyRow{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:12px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
 }
-.partyCard{
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:14px;
-}
-.partyStripe{height:3px;border-radius:99px;margin-bottom:8px}
-.partyName{font-weight:900;font-size:13px}
-.partyNep{font-size:12px;color:var(--muted)}
-.seatNum{font-size:20px;font-weight:900}
 
-/* ===== BREAKING ===== */
-.breaking{
-  border:1px solid var(--line);
-  border-radius:14px;
+/* smaller desktop / laptop */
+@media (max-width: 1200px){
+  .partyRow{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-.breaking__bar{
-  display:flex;
-  gap:10px;
-  padding:12px;
-  border-bottom:1px solid var(--line);
-}
-.breaking__badge{
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#ff3c3c33;
-  border:1px solid #ff3c3c66;
-}
-.breaking__grid{
-  display:grid;
-  grid-template-columns:1.7fr .9fr;
-  gap:14px;
-  padding:14px;
-}
-@media(max-width:900px){.breaking__grid{grid-template-columns:1fr}}
 
-footer{
-  margin-top:20px;
-  font-size:12px;
-  color:var(--muted);
-  text-align:center;
+/* tablet */
+@media (max-width: 900px){
+  .partyRow{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-a{color:var(--accent);text-decoration:none}
-</style>
+
+/* mobile */
+@media (max-width: 520px){
+  .partyRow{ grid-template-columns: 1fr; }
+}
+
+    .partyCard{ border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.045); border-radius: 16px; padding: 14px 14px 12px; }
+    .partyStripe{ height: 3px; border-radius: 999px; margin-bottom: 10px; opacity: 0.95; }
+    .partyTop{ display:flex; align-items:flex-start; justify-content:space-between; gap: 10px; }
+    .partyName{ font-weight: 900; letter-spacing: 0.2px; font-size: 13.5px; line-height: 1.2; }
+    .partyNep{ margin-top: 4px; font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.2; }
+    .seatBox{ min-width: 60px; text-align: center; border-radius: 14px; padding: 8px 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.18); }
+    .seatNum{ font-size: 20px; font-weight: 900; line-height: 1; }
+    .seatLbl{ margin-top: 4px; font-size: 11px; color: rgba(255,255,255,0.6); }
+    .partyMeta{ display:flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .partyTag{ font-size: 11px; color: rgba(255,255,255,0.72); border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); padding: 6px 8px; border-radius: 999px; }
+
+    /* NEWS TICKER */
+    .tickerWrap{ border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); border-radius:14px; overflow:hidden; padding:10px 0; margin-top: 10px; }
+    #ticker{ white-space:nowrap; will-change:transform; padding-left: 12px; }
+    .tickerLink{ color: rgba(255,255,255,0.90); text-decoration:none; margin-right: 28px; font-size: 13px; }
+    .tickerLink:hover{ text-decoration: underline; }
+
+    /* BREAKING NEWS */
+    .section-title{ margin: 18px 0 10px; font-size: 18px; font-weight: 900; letter-spacing: .2px; }
+    .breaking{ margin: 0 0 18px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); border-radius: 14px; overflow: hidden; }
+    .breaking__bar{ display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom: 1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.18); }
+    .breaking__badge{ font-weight:900; letter-spacing:.08em; font-size:12px; padding:6px 10px; border-radius:999px; background: rgba(255,60,60,.20); border: 1px solid rgba(255,60,60,.40); }
+    .breaking__ticker{ flex:1; white-space:nowrap; overflow:hidden; position:relative; }
+    .breaking__ticker > div{ display:inline-block; padding-left: 100%; animation: ticker 22s linear infinite; }
+    @keyframes ticker{ 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+    .breaking__refresh{ border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); color: inherit; padding:8px 10px; border-radius:10px; cursor:pointer; }
+    .breaking__grid{ display:grid; grid-template-columns: 1.7fr .9fr; gap:14px; padding:14px; }
+    @media (max-width: 900px){ .breaking__grid{ grid-template-columns: 1fr; } }
+    .breaking__list{ display:flex; flex-direction:column; gap:10px; }
+    .breaking__item{ padding:10px 12px; border-radius:12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); }
+    .breaking__item a{ color: inherit; text-decoration: none; font-weight: 800; }
+    .breaking__item a:hover{ text-decoration: underline; }
+    .breaking__source{ margin-top:6px; font-size:12px; opacity:.75; display:flex; gap:10px; flex-wrap:wrap; }
+    .breaking__meta{ padding:10px 12px; border-radius:12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); font-size:13px; opacity:.9; }
+    .breaking__time{ margin-top:10px; font-size:12px; opacity:.75; }
+    .breaking__note{ margin-top:12px; font-size:12px; opacity:.8; line-height:1.35; }
+
+    .site-footer{ margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.10); padding-top: 14px; color: rgba(255,255,255,0.55); font-size: 12px; text-align:center; }
+
+    /* SIMPLE ELECTION EXPLAINER GRID (you referenced sysGrid/sysBox but CSS was missing) */
+    .sysGrid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; margin-top:10px; }
+    @media (max-width: 800px){ .sysGrid{ grid-template-columns: 1fr; } }
+    .sysBox{ border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); border-radius:14px; padding:14px; }
+    .sysBox h3{ margin:0 0 8px; font-size:15px; font-weight:900; }
+    .sysBox ul{ margin:0; padding-left:18px; }
+    .sysBox li{ margin:6px 0; font-size:13px; line-height:1.5; color: rgba(255,255,255,0.82); }
+    .example{ margin-top:10px; font-size:12px; color: rgba(255,255,255,0.72); border-top:1px solid rgba(255,255,255,0.10); padding-top:10px; }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="badge">NE</div>
+        <div style="min-width:0;">
+          <h1>Nepal Election Countdown</h1>
+          <p class="sub">Countdown + live results dashboard</p>
+        </div>
+      </div>
+      <div class="pill" id="statusPill">Status: Building…</div>
+    </header>
 
-<header>
-  <div class="brand">
-    <div class="badge">NE</div>
-    <div>
-      <h1>Nepal Election Countdown</h1>
-      <div class="sub">Countdown + live results dashboard</div>
-    </div>
+    <main>
+      <!-- Countdown Card -->
+      <section class="card">
+        <h2>Countdown to Election Day</h2>
+        <div class="countGrid" aria-label="countdown">
+          <div class="tile"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
+          <div class="tile"><div class="num" id="h">—</div><div class="lbl">Hours</div></div>
+          <div class="tile"><div class="num" id="m">—</div><div class="lbl">Minutes</div></div>
+          <div class="tile"><div class="num" id="s">—</div><div class="lbl">Seconds</div></div>
+        </div>
+
+        <div class="bigLine">
+          Target date: <span class="accent" id="targetLabel">—</span><br>
+          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
+        </div>
+
+        <div class="mini">
+          <div class="chip" id="localTime">Local time: —</div>
+          <div class="chip" id="lastUpdate">Updated: —</div>
+        </div>
+      </section>
+
+      <!-- News Card -->
+      <aside class="card">
+        <h2>Live • News24 Nepal Headlines</h2>
+        <div class="bigLine" style="margin-top:2px;">Live scrolling headlines sourced from News24 Nepal articles.</div>
+
+        <div class="tickerWrap" id="tickerWrap">
+          <div id="ticker">Loading headlines…</div>
+        </div>
+
+        <div class="mini" style="margin-top:12px;">
+          <a class="chip" href="https://www.election.gov.np" target="_blank" rel="noopener noreferrer">Election Commission of Nepal</a>
+          <a class="chip" href="https://kantipurdaily.com" target="_blank" rel="noopener noreferrer">Kantipur</a>
+          <a class="chip" href="https://kathmandupost.com" target="_blank" rel="noopener noreferrer">The Kathmandu Post</a>
+          <a class="chip" href="https://www.onlinekhabar.com" target="_blank" rel="noopener noreferrer">OnlineKhabar</a>
+          <a class="chip" href="https://setopati.com" target="_blank" rel="noopener noreferrer">Setopati</a>
+          <a class="chip" href="https://ratopati.com" target="_blank" rel="noopener noreferrer">Ratopati</a>
+          <a class="chip" href="https://ntv.org.np" target="_blank" rel="noopener noreferrer">Nepal Television</a>
+          <a class="chip" href="https://ap1tv.com" target="_blank" rel="noopener noreferrer">AP1 HD</a>
+        </div>
+
+        <div class="bigLine" style="margin-top:10px; font-size:12px;">
+          Source is aggregated via GDELT (domain filter) for static-site compatibility.
+        </div>
+      </aside>
+
+      <!-- Top 5 Parties Row -->
+      <section class="card" style="grid-column: 1 / -1;">
+        <h2>Top 5 Parties (Seats)</h2>
+        <div id="partyRow" class="partyRow"></div>
+        <div class="bigLine" style="margin-top:10px;">
+          सिट संख्या मतगणना सुरु भएपछि अपडेट हुनेछ। <br>
+          Seat numbers will be updated after counting begins.
+        </div>
+        <div class="bigLine" style="margin-top:8px; font-size:12px;">
+          Sources listed for reference only. This site is an independent informational platform and does not represent any political party, media house, or government authority.
+        </div>
+      </section>
+
+      <!-- Breaking News -->
+      <section style="grid-column: 1 / -1;">
+        <h2 class="section-title">Breaking News</h2>
+
+        <section class="breaking" aria-label="Breaking news">
+          <div class="breaking__bar">
+            <span class="breaking__badge">BREAKING</span>
+            <div class="breaking__ticker" id="breakingTicker">
+              <span class="breaking__loading">Loading headlines…</span>
+            </div>
+            <button class="breaking__refresh" id="breakingRefresh" type="button" title="Refresh">Refresh</button>
+          </div>
+
+          <div class="breaking__grid">
+            <div class="breaking__list" id="breakingList"></div>
+            <div class="breaking__meta">
+              <div class="breaking__hint">Source: GDELT (news monitoring)</div>
+              <div class="breaking__time" id="breakingUpdated"></div>
+              <div class="breaking__note">
+                Independent informational platform. For official election updates, visit the Election Commission of Nepal.
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Community Support -->
+      <section class="card" style="grid-column: 1 / -1;">
+        <h2>Community Support – Nepal</h2>
+        <p class="bigLine">This website is an <b>independent and neutral election information platform</b>. It does not collect donations or payments.</p>
+        <p class="bigLine">If you wish to help <span class="accent">homeless and vulnerable people in Nepal</span>, please consider supporting established and trusted organizations directly.</p>
+        <ul style="margin-top:10px; font-size:13px; line-height:1.7;">
+          <li><a href="https://www.sosnepal.org.np/" target="_blank" rel="noopener noreferrer">SOS Children’s Villages Nepal</a></li>
+          <li><a href="https://www.streetchildnepal.org/" target="_blank" rel="noopener noreferrer">Street Child Nepal</a></li>
+          <li><a href="https://www.kopilanepal.org/" target="_blank" rel="noopener noreferrer">Kopila Nepal</a></li>
+        </ul>
+        <p class="bigLine" style="font-size:12px;">This site does not handle funds and has no affiliation with the organizations listed above.</p>
+      </section>
+
+      <!-- Election System Explainer -->
+      <section class="card" style="grid-column: 1 / -1;">
+        <h2>प्रत्यक्ष (FPTP) र समानुपातिक (PR) प्रणाली – सरल बुझाइ <span style="font-weight:400; opacity:.75;">| Election System Explained</span></h2>
+
+        <div class="bigLine">
+          नेपालको प्रतिनिधि सभा चुनाव <span class="accent">दुई फरक प्रणाली</span> बाट हुन्छ। <br>
+          <span style="opacity:.8;">Nepal’s House of Representatives election is conducted using <b>two different systems</b>.</span>
+        </div>
+
+        <div class="sysGrid">
+          <div class="sysBox">
+            <h3>🗳️ प्रत्यक्ष प्रणाली (First Past The Post – FPTP)</h3>
+            <ul>
+              <li>देशलाई <b>१६५ निर्वाचन क्षेत्र</b> मा विभाजन गरिएको हुन्छ।</li>
+              <li>प्रत्येक क्षेत्रबाट <b>एक जना उम्मेदवार</b> विजेता हुन्छ।</li>
+              <li>सबैभन्दा धेरै मत पाउने उम्मेदवारले सिधै जित्छ।</li>
+            </ul>
+            <div class="example">
+              <b>उदाहरण / Example:</b><br>
+              A = 40% votes, B = 35%, C = 25%<br>
+              👉 A wins the seat
+            </div>
+          </div>
+
+          <div class="sysBox">
+            <h3>📊 समानुपातिक प्रणाली (Proportional Representation – PR)</h3>
+            <ul>
+              <li>देशभर पार्टीले पाएको <b>कुल मत प्रतिशत</b> अनुसार सिट बाँडिन्छ।</li>
+              <li>कुल <b>११० सिट</b> समानुपातिक प्रणालीबाट आउँछ।</li>
+              <li>मतदाता पार्टीलाई मत हाल्छ, व्यक्ति होइन।</li>
+            </ul>
+            <div class="example">
+              <b>उदाहरण / Example:</b><br>
+              30% votes ≈ 33 seats<br>
+              20% votes ≈ 22 seats
+            </div>
+          </div>
+        </div>
+
+        <div class="bigLine" style="margin-top:12px;">
+          👉 सरकार बनाउन <b>१३८ सिट</b> आवश्यक पर्छ (कुल २७५)। <br>
+          <span style="opacity:.8;">To form a government, a party or coalition must secure <b>138 out of 275 seats</b>.</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Built on GitHub Pages • Repo:
+      <a href="https://github.com/pushkargithub/election-countdown-nepal" target="_blank" rel="noreferrer">election-countdown-nepal</a>
+    </footer>
+
+    <footer class="site-footer">
+      <p>
+        This site is an independent informational platform. For official results, visit the
+        <a href="https://www.election.gov.np" target="_blank" rel="noopener noreferrer">Election Commission of Nepal</a>.
+      </p>
+    </footer>
   </div>
-  <div class="pill" id="statusPill">Status: Building…</div>
-</header>
 
-<main>
-<section class="card">
-  <h2>Countdown to Election Day</h2>
-  <div class="countGrid">
-    <div class="tile"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
-    <div class="tile"><div class="num" id="h">—</div><div class="lbl">Hours</div></div>
-    <div class="tile"><div class="num" id="m">—</div><div class="lbl">Minutes</div></div>
-    <div class="tile"><div class="num" id="s">—</div><div class="lbl">Seconds</div></div>
-  </div>
-</section>
+  <script>
+    // ================================
+    // 1) COUNTDOWN
+    // ================================
+    // Election date: Thursday, March 5, 2026 (Nepal Time +05:45)
+    const electionISO = "2026-03-05T07:00:00+05:45";
+    const electionDate = new Date(electionISO);
+    const pad2 = (n) => String(n).padStart(2, "0");
 
-<section class="card" style="grid-column:1/-1">
-  <h2>Top Parties (Seats)</h2>
-  <div id="partyRow" class="partyRow"></div>
-</section>
+    function tick(){
+      const now = new Date();
+      const diff = electionDate.getTime() - now.getTime();
 
-<section class="breaking" style="grid-column:1/-1">
-  <div class="breaking__bar">
-    <span class="breaking__badge">BREAKING</span>
-    <div id="breakingTicker">Loading headlines…</div>
-  </div>
-</section>
-</main>
+      document.getElementById("localTime").textContent = "Local time: " + now.toLocaleString();
+      document.getElementById("lastUpdate").textContent = "Updated: " + new Date().toLocaleTimeString();
+      document.getElementById("targetLabel").textContent = electionDate.toLocaleString();
 
-<footer>
-Independent informational platform.  
-For official results visit <a href="https://www.election.gov.np" target="_blank">Election Commission of Nepal</a>.
-</footer>
+      const status = document.getElementById("statusPill");
 
-</div>
+      if (isNaN(electionDate.getTime())){
+        status.textContent = "Status: Set election date";
+        return;
+      }
 
-<script>
-/* ===== COUNTDOWN ===== */
-const electionDate = new Date("2026-03-05T07:00:00+05:45");
-function tick(){
-  const diff = electionDate - new Date();
-  if(diff<=0) return;
-  document.getElementById("d").textContent=Math.floor(diff/86400000);
-  document.getElementById("h").textContent=Math.floor(diff/3600000)%24;
-  document.getElementById("m").textContent=Math.floor(diff/60000)%60;
-  document.getElementById("s").textContent=Math.floor(diff/1000)%60;
-}
-setInterval(tick,1000); tick();
+      if (diff <= 0){
+        document.getElementById("d").textContent = "0";
+        document.getElementById("h").textContent = "00";
+        document.getElementById("m").textContent = "00";
+        document.getElementById("s").textContent = "00";
+        status.textContent = "Status: Election Day";
+        return;
+      }
 
-/* ===== PARTIES ===== */
-const topParties = [
- {code:"RSP",name:"Rastriya Swatantra Party",nepali:"राष्ट्रिय स्वतन्त्र पार्टी",seats:0,color:"#facc15",desc:"Reform-oriented youth party"},
- {code:"NC",name:"Nepali Congress",nepali:"नेपाली कांग्रेस",seats:0,color:"#3b82f6",desc:"Liberal democratic party"},
- {code:"UML",name:"CPN (UML)",nepali:"नेकपा (एमाले)",seats:0,color:"#22c55e",desc:"Major communist party"},
- {code:"MC",name:"Maoist Centre",nepali:"माओवादी केन्द्र",seats:0,color:"#ef4444",desc:"Maoist roots"},
- {code:"RPP",name:"RPP",nepali:"राप्रपा",seats:0,color:"#a855f7",desc:"Conservative monarchist"}
-];
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const minutes = Math.floor((diff / (1000*60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
 
-document.getElementById("partyRow").innerHTML =
-topParties.map(p=>`
-<div class="partyCard">
-  <div class="partyStripe" style="background:${p.color}"></div>
-  <div class="partyName">${p.code} • ${p.name}</div>
-  <div class="partyNep">${p.nepali}</div>
-  <div class="seatNum">${p.seats}</div>
-</div>`).join("");
-</script>
+      document.getElementById("d").textContent = days;
+      document.getElementById("h").textContent = pad2(hours);
+      document.getElementById("m").textContent = pad2(minutes);
+      document.getElementById("s").textContent = pad2(seconds);
+      status.textContent = "Status: Live";
+    }
+    tick();
+    setInterval(tick, 1000);
 
+    // ================================
+    // 2) TOP 5 PARTIES ROW (ONLY 5)
+    // ================================
+    const topParties = [
+      { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
+      { code: "NC",  name: "Nepali Congress",         nepali: "नेपाली कांग्रेस",         seats: 0, note1: "Liberal democracy", note2: "Mainstream", color: "rgba(59,130,246,0.95)", desc: "One of Nepal’s oldest and largest parties; advocates liberal democracy and civil liberties." },
+      { code: "UML", name: "CPN (UML)",               nepali: "नेकपा (एमाले)",           seats: 0, note1: "Left", note2: "Top contender", color: "rgba(34,197,94,0.95)", desc: "A major communist party; consistently among top vote-getters across constituencies." },
+      { code: "MC",  name: "Maoist Centre",           nepali: "नेकपा (माओवादी केन्द्र)", seats: 0, note1: "Coalition", note2: "Maoist roots", color: "rgba(239,68,68,0.90)", desc: "Rooted in the Maoist movement; often plays a key role in coalition politics." },
+      { code: "RPP", name: "Rastriya Prajatantra Party", nepali: "राष्ट्रिय प्रजातन्त्र पार्टी", seats: 0, note1: "Conservative", note2: "Monarchist", color: "rgba(168,85,247,0.90)", desc: "A right-leaning party known for monarchist and Hindu-state advocacy." }
+    ];
+
+    function renderParties(){
+      const row = document.getElementById("partyRow");
+      if (!row) return;
+
+      row.innerHTML = topParties.map(p => `
+        <div class="partyCard">
+          <div class="partyStripe" style="background:${p.color};"></div>
+
+          <div class="partyTop">
+            <div style="min-width:0;">
+              <div class="partyName">${p.code} • ${p.name}</div>
+              <div class="partyNep">${p.nepali}</div>
+            </div>
+
+            <div class="seatBox" title="Seats">
+              <div class="seatNum">${p.seats}</div>
+              <div class="seatLbl">Seats</div>
+            </div>
+          </div>
+
+          <div class="partyMeta">
+            <span class="partyTag">${p.note1}</span>
+            <span class="partyTag">${p.note2}</span>
+          </div>
+
+          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
+            ${p.desc}
+          </div>
+        </div>
+      `).join("");
+    }
+    renderParties();
+
+    // ================================
+    // 3) NEWS24 HEADLINE TICKER (GDELT domain filter)
+    // ================================
+    let tickerAnim = null;
+
+    async function loadNews24Ticker(){
+      const ticker = document.getElementById("ticker");
+      const wrap = document.getElementById("tickerWrap");
+      if (!ticker || !wrap) return;
+
+      ticker.textContent = "Loading headlines…";
+
+      const url =
+        "https://api.gdeltproject.org/api/v2/doc/doc" +
+        "?format=json&mode=ArtList&maxrecords=12&sort=HybridRel" +
+        "&domain=news24nepal.com";
+
+      try{
+        const res = await fetch(url, { cache: "no-store" });
+        const data = await res.json();
+        const articles = data.articles || [];
+
+        if (!articles.length){
+          ticker.textContent = "No headlines found right now.";
+          return;
+        }
+
+        ticker.innerHTML = articles.map(a => {
+          const title = (a.title || "").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+          const link = a.url || "#";
+          return `<a class="tickerLink" href="${link}" target="_blank" rel="noreferrer">• ${title}</a>`;
+        }).join("");
+
+        startTickerAnimation();
+      }catch(e){
+        ticker.textContent = "Failed to load headlines.";
+      }
+    }
+
+    function startTickerAnimation(){
+      const wrap = document.getElementById("tickerWrap");
+      const ticker = document.getElementById("ticker");
+      if (!wrap || !ticker) return;
+
+      // stop old animation to avoid stacking animations
+      if (tickerAnim) tickerAnim.cancel();
+
+      const wrapWidth = wrap.clientWidth;
+      const tickerWidth = ticker.scrollWidth;
+
+      const speed = 70; // px/sec
+      const distance = wrapWidth + tickerWidth;
+      const duration = distance / speed;
+
+      tickerAnim = ticker.animate(
+        [
+          { transform: `translateX(${wrapWidth}px)` },
+          { transform: `translateX(-${tickerWidth}px)` }
+        ],
+        { duration: duration * 1000, iterations: Infinity }
+      );
+    }
+
+    loadNews24Ticker();
+    setInterval(loadNews24Ticker, 5 * 60 * 1000);
+    window.addEventListener("resize", () => startTickerAnimation());
+
+    // ================================
+    // 4) BREAKING NEWS (GDELT query)
+    // ================================
+    (function(){
+      const tickerEl  = document.getElementById("breakingTicker");
+      const listEl    = document.getElementById("breakingList");
+      const updatedEl = document.getElementById("breakingUpdated");
+      const refreshBtn= document.getElementById("breakingRefresh");
+
+      const QUERY = encodeURIComponent('(Nepal OR Kathmandu) AND (election OR parliament OR "Election Commission")');
+      const MAX   = 8;
+
+      const endpoint = () =>
+        `https://api.gdeltproject.org/api/v2/doc/doc?query=${QUERY}&mode=ArtList&format=json&maxrecords=${MAX}&sort=HybridRel`;
+
+      function safeText(s){ return (s || "").toString(); }
+
+      function render(data){
+        const articles = (data && data.articles) ? data.articles : [];
+
+        if(!articles.length){
+          tickerEl.innerHTML = '<span class="breaking__loading">No headlines found. Try refresh.</span>';
+          listEl.innerHTML = "";
+          updatedEl.textContent = "";
+          return;
+        }
+
+        const tickerTitles = articles.slice(0, 6)
+          .map(a => safeText(a.title).trim())
+          .filter(Boolean);
+
+        tickerEl.innerHTML = `<div>${tickerTitles.join(" • ")}</div>`;
+
+        listEl.innerHTML = articles.map(a => {
+          const title  = safeText(a.title).trim() || "Untitled";
+          const url    = safeText(a.url) || "#";
+          const domain = safeText(a.domain) || "News";
+          const when   = safeText(a.seendate) || "";
+
+          return `
+            <div class="breaking__item">
+              <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>
+              <div class="breaking__source">
+                <span>${domain}</span>
+                ${when ? `<span>• ${when}</span>` : ""}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        updatedEl.textContent = "Updated: " + new Date().toLocaleString();
+      }
+
+      async function load(){
+        tickerEl.innerHTML = '<span class="breaking__loading">Loading headlines…</span>';
+        try{
+          const res = await fetch(endpoint(), { cache: "no-store" });
+          if(!res.ok) throw new Error("HTTP " + res.status);
+          const json = await res.json();
+          render(json);
+        }catch(err){
+          tickerEl.innerHTML = '<span class="breaking__loading">Could not load headlines. Please refresh.</span>';
+          listEl.innerHTML = "";
+          updatedEl.textContent = "";
+          console.error(err);
+        }
+      }
+
+      if (refreshBtn) refreshBtn.addEventListener("click", load);
+      load();
+      setInterval(load, 5 * 60 * 1000);
+    })();
+  </script>
 </body>
 </html>
