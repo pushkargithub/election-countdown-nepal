@@ -407,48 +407,56 @@
     setInterval(tick, 1000);
 
     // ================================
-    // 2) TOP 5 PARTIES ROW (ONLY 5)
-    // ================================
-    const topParties = [
-      { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
-      { code: "NC",  name: "Nepali Congress",         nepali: "नेपाली कांग्रेस",         seats: 0, note1: "Liberal democracy", note2: "Mainstream", color: "rgba(59,130,246,0.95)", desc: "One of Nepal’s oldest and largest parties; advocates liberal democracy and civil liberties." },
-      { code: "UML", name: "CPN (UML)",               nepali: "नेकपा (एमाले)",           seats: 0, note1: "Left", note2: "Top contender", color: "rgba(34,197,94,0.95)", desc: "A major communist party; consistently among top vote-getters across constituencies." },
-      { code: "MC",  name: "Maoist Centre",           nepali: "नेकपा (माओवादी केन्द्र)", seats: 0, note1: "Coalition", note2: "Maoist roots", color: "rgba(239,68,68,0.90)", desc: "Rooted in the Maoist movement; often plays a key role in coalition politics." },
-      { code: "RPP", name: "Rastriya Prajatantra Party", nepali: "राष्ट्रिय प्रजातन्त्र पार्टी", seats: 0, note1: "Conservative", note2: "Monarchist", color: "rgba(168,85,247,0.90)", desc: "A right-leaning party known for monarchist and Hindu-state advocacy." }
-    ];
+// 2) TOP 10 PARTIES ROW
+// ================================
+const topParties = [
+  { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
+  { code: "NC",  name: "Nepali Congress", nepali: "नेपाली कांग्रेस", seats: 0, note1: "Liberal democracy", note2: "Mainstream", color: "rgba(59,130,246,0.95)", desc: "One of Nepal’s oldest and largest parties; advocates liberal democracy and civil liberties." },
+  { code: "UML", name: "CPN (UML)", nepali: "नेकपा (एमाले)", seats: 0, note1: "Left", note2: "Top contender", color: "rgba(34,197,94,0.95)", desc: "A major communist party; consistently among top vote-getters across constituencies." },
+  { code: "MC",  name: "Maoist Centre", nepali: "नेकपा (नेपाल कम्युनिष्ट पार्टी)", seats: 0, note1: "Coalition", note2: "Maoist roots", color: "rgba(239,68,68,0.90)", desc: "Rooted in the Maoist movement; often plays a key role in coalition politics." },
+  { code: "RPP", name: "Rastriya Prajatantra Party", nepali: "राष्ट्रिय प्रजातन्त्र पार्टी", seats: 0, note1: "Conservative", note2: "Monarchist", color: "rgba(168,85,247,0.90)", desc: "A right-leaning party known for monarchist and Hindu-state advocacy." },
 
-    function renderParties(){
-      const row = document.getElementById("partyRow");
-      if (!row) return;
+  // Extra 5 (to make Top 10)
+  { code: "JSP", name: "Janata Samajwadi Party", nepali: "जनता समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(251,146,60,0.90)", desc: "A Madhes-based party focusing on federalism, inclusion, and regional rights." },
+  { code: "LSP", name: "Loktantrik Samajwadi Party", nepali: "लोकतान्त्रिक समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(236,72,153,0.90)", desc: "A regional party with influence in Tarai–Madhes constituencies." },
+  { code: "NUP", name: "Nagarik Unmukti Party", nepali: "नागरिक उन्मुक्ति पार्टी", seats: 0, note1: "Regional", note2: "Tarai", color: "rgba(14,165,233,0.90)", desc: "Represents regional/community interests, mainly active in parts of the Tarai." },
+  { code: "RJPN", name: "Rastriya Janamorcha", nepali: "राष्ट्रिय जनमोर्चा", seats: 0, note1: "Left", note2: "Smaller party", color: "rgba(234,179,8,0.75)", desc: "A smaller left-oriented party with limited but notable presence." },
+  { code: "IND", name: "Independents", nepali: "स्वतन्त्र उम्मेदवार", seats: 0, note1: "Local", note2: "Constituency", color: "rgba(148,163,184,0.85)", desc: "Independent candidates can be competitive in specific constituencies." }
+];
 
-      row.innerHTML = topParties.map(p => `
-        <div class="partyCard">
-          <div class="partyStripe" style="background:${p.color};"></div>
+function renderParties(){
+  const row = document.getElementById("partyRow");
+  if (!row) return;
 
-          <div class="partyTop">
-            <div style="min-width:0;">
-              <div class="partyName">${p.code} • ${p.name}</div>
-              <div class="partyNep">${p.nepali}</div>
-            </div>
+  row.innerHTML = topParties.map(p => `
+    <div class="partyCard">
+      <div class="partyStripe" style="background:${p.color};"></div>
 
-            <div class="seatBox" title="Seats">
-              <div class="seatNum">${p.seats}</div>
-              <div class="seatLbl">Seats</div>
-            </div>
-          </div>
-
-          <div class="partyMeta">
-            <span class="partyTag">${p.note1}</span>
-            <span class="partyTag">${p.note2}</span>
-          </div>
-
-          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
-            ${p.desc}
-          </div>
+      <div class="partyTop">
+        <div style="min-width:0;">
+          <div class="partyName">${p.code} • ${p.name}</div>
+          <div class="partyNep">${p.nepali}</div>
         </div>
-      `).join("");
-    }
-    renderParties();
+
+        <div class="seatBox" title="Seats">
+          <div class="seatNum">${p.seats}</div>
+          <div class="seatLbl">Seats</div>
+        </div>
+      </div>
+
+      <div class="partyMeta">
+        <span class="partyTag">${p.note1}</span>
+        <span class="partyTag">${p.note2}</span>
+      </div>
+
+      <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
+        ${p.desc}
+      </div>
+    </div>
+  `).join("");
+}
+
+renderParties();
 
     // ================================
     // 3) NEWS24 HEADLINE TICKER (GDELT domain filter)
