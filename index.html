@@ -185,6 +185,45 @@
     .sysBox ul{ margin:0; padding-left:18px; }
     .sysBox li{ margin:6px 0; font-size:13px; line-height:1.5; color: rgba(255,255,255,0.82); }
     .example{ margin-top:10px; font-size:12px; color: rgba(255,255,255,0.72); border-top:1px solid rgba(255,255,255,0.10); padding-top:10px; }
+
+    /* ---- POLL ---- */
+.pollBox{
+  margin-top: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  border-radius: 14px;
+  padding: 12px;
+}
+.pollBottom{ margin-top: auto; }
+.pollTitle{ font-weight:900; font-size:13px; margin-bottom:6px; }
+.pollQ{ font-size:12.5px; opacity:.9; margin-bottom:10px; }
+.pollOpts{ display:grid; gap:8px; }
+.pollBtn{
+  text-align:left; border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.04);
+  color:rgba(255,255,255,0.92);
+  padding:10px; border-radius:10px;
+  cursor:pointer; font-size:12px; font-weight:800;
+}
+.pollBtn:hover{ background:rgba(255,255,255,0.06); }
+.pollBtn.active{
+  border-color:rgba(250,204,21,0.55);
+  background:rgba(250,204,21,0.10);
+}
+.pollResults{ margin-top:12px; }
+.pollRow{ margin-bottom:8px; }
+.pollLabel{ font-size:11.5px; display:flex; justify-content:space-between; }
+.pollBarBg{
+  height:8px; background:rgba(255,255,255,0.10);
+  border-radius:999px; overflow:hidden;
+}
+.pollBar{
+  height:100%;
+  background:linear-gradient(90deg,#facc15,#fde047);
+  transition:width .4s ease;
+}
+.pollMsg{ margin-top:8px; font-size:12px; opacity:.8; }
+.pollSmall{ margin-top:6px; font-size:11px; opacity:.6; }
   </style>
 </head>
 
@@ -279,12 +318,70 @@
             <div class="breaking__meta">
               <div class="breaking__hint">Source: GDELT (news monitoring)</div>
               <div class="breaking__time" id="breakingUpdated"></div>
+<!-- POLL START -->
+<div class="pollBox pollBottom" id="leadPoll">
+  <div class="pollTitle">Quick Poll</div>
+
+  <div class="pollQ">
+    तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?
+  </div>
+
+  <div class="pollOpts">
+    <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
+    <button class="pollBtn" data-v="UML">नेकपा (एमाले)</button>
+    <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
+    <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
+    <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
+    <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
+  </div>
+
+  <div class="pollResults" id="pollResults"></div>
+
+  <div class="pollMsg" id="leadPollMsg">
+    भोट तपाईंको ब्राउजरमा सेभ हुन्छ।
+  </div>
+
+  <div class="pollSmall">
+    यो scientific poll होइन — site visitor opinion मात्र हो।
+  </div>
+</div>
+<!-- POLL END -->
+              
               <div class="breaking__note">
                 Independent informational platform. For official election updates, visit the Election Commission of Nepal.
               </div>
             </div>
           </div>
         </section>
+      </section>
+      <section>
+        <div class="pollBox pollBottom" id="leadPoll">
+  <div class="pollTitle">Quick Poll</div>
+
+  <div class="pollQ">
+    तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?
+  </div>
+
+  <div class="pollOpts">
+    <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
+    <button class="pollBtn" data-v="UML">नेकपा (एमाले)</button>
+    <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
+    <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
+    <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
+    <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
+  </div>
+
+  <!-- RESULT BARS -->
+  <div class="pollResults" id="pollResults"></div>
+
+  <div class="pollMsg" id="leadPollMsg">
+    भोट तपाईंको ब्राउजरमा सेभ हुन्छ।
+  </div>
+
+  <div class="pollSmall">
+    यो scientific poll होइन — site visitor opinion मात्र हो।
+  </div>
+</div>
       </section>
 
       <!-- Community Support -->
@@ -606,6 +703,65 @@ renderParties();
       load();
       setInterval(load, 5 * 60 * 1000);
     })();
+// ---- Poll with result bars ----
+(function(){
+  const poll = document.getElementById("leadPoll");
+  if(!poll) return;
+
+  const buttons = poll.querySelectorAll(".pollBtn");
+  const resultsBox = document.getElementById("pollResults");
+  const msg = document.getElementById("leadPollMsg");
+
+  const KEY_VOTE = "nepal_poll_vote_v1";
+  const KEY_DATA = "nepal_poll_data_v1";
+
+  const labels = {
+    NC:"नेपाली कांग्रेस (NC)",
+    UML:"नेकपा (एमाले)",
+    RSP:"राष्ट्रिय स्वतन्त्र पार्टी (RSP)",
+    NCP:"नेपाल कम्युनिष्ट पार्टी",
+    COAL:"गठबन्धन सरकार",
+    UND:"भन्न गाह्रो छ / Undecided"
+  };
+
+  let data = JSON.parse(localStorage.getItem(KEY_DATA)) || {
+    NC:0,UML:0,RSP:0,NCP:0,COAL:0,UND:0
+  };
+
+  function render(){
+    const total = Object.values(data).reduce((a,b)=>a+b,0) || 1;
+    resultsBox.innerHTML = Object.keys(data).map(k=>{
+      const pct = Math.round((data[k]/total)*100);
+      return `
+        <div class="pollRow">
+          <div class="pollLabel"><span>${labels[k]}</span><span>${pct}%</span></div>
+          <div class="pollBarBg"><div class="pollBar" style="width:${pct}%"></div></div>
+        </div>`;
+    }).join("");
+  }
+
+  const voted = localStorage.getItem(KEY_VOTE);
+  if(voted){
+    buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===voted));
+    msg.textContent = "तपाईंको भोट: " + labels[voted];
+  }
+
+  render();
+
+  buttons.forEach(btn=>{
+    btn.onclick = ()=>{
+      if(localStorage.getItem(KEY_VOTE)) return;
+      const v = btn.dataset.v;
+      data[v]++;
+      localStorage.setItem(KEY_DATA, JSON.stringify(data));
+      localStorage.setItem(KEY_VOTE, v);
+      buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===v));
+      msg.textContent = "धन्यवाद! तपाईंको भोट: " + labels[v];
+      render();
+    };
+  });
+})();
+    
   </script>
 </body>
 </html>
