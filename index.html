@@ -116,27 +116,15 @@
     a:hover{ text-decoration: underline; }
 
     /* TOP 10 PARTY ROW */
-.partyRow{
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 10px;
-}
-
-/* smaller desktop / laptop */
-@media (max-width: 1200px){
-  .partyRow{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-
-/* tablet */
-@media (max-width: 900px){
-  .partyRow{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-/* mobile */
-@media (max-width: 520px){
-  .partyRow{ grid-template-columns: 1fr; }
-}
+    .partyRow{
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 1200px){ .partyRow{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 900px){ .partyRow{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 520px){ .partyRow{ grid-template-columns: 1fr; } }
 
     .partyCard{ border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.045); border-radius: 16px; padding: 14px 14px 12px; }
     .partyStripe{ height: 3px; border-radius: 999px; margin-bottom: 10px; opacity: 0.95; }
@@ -177,7 +165,7 @@
 
     .site-footer{ margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.10); padding-top: 14px; color: rgba(255,255,255,0.55); font-size: 12px; text-align:center; }
 
-    /* SIMPLE ELECTION EXPLAINER GRID (you referenced sysGrid/sysBox but CSS was missing) */
+    /* SIMPLE ELECTION EXPLAINER GRID */
     .sysGrid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; margin-top:10px; }
     @media (max-width: 800px){ .sysGrid{ grid-template-columns: 1fr; } }
     .sysBox{ border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); border-radius:14px; padding:14px; }
@@ -187,43 +175,43 @@
     .example{ margin-top:10px; font-size:12px; color: rgba(255,255,255,0.72); border-top:1px solid rgba(255,255,255,0.10); padding-top:10px; }
 
     /* ---- POLL ---- */
-.pollBox{
-  margin-top: 12px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.03);
-  border-radius: 14px;
-  padding: 12px;
-}
-.pollBottom{ margin-top: auto; }
-.pollTitle{ font-weight:900; font-size:13px; margin-bottom:6px; }
-.pollQ{ font-size:12.5px; opacity:.9; margin-bottom:10px; }
-.pollOpts{ display:grid; gap:8px; }
-.pollBtn{
-  text-align:left; border:1px solid rgba(255,255,255,0.12);
-  background:rgba(255,255,255,0.04);
-  color:rgba(255,255,255,0.92);
-  padding:10px; border-radius:10px;
-  cursor:pointer; font-size:12px; font-weight:800;
-}
-.pollBtn:hover{ background:rgba(255,255,255,0.06); }
-.pollBtn.active{
-  border-color:rgba(250,204,21,0.55);
-  background:rgba(250,204,21,0.10);
-}
-.pollResults{ margin-top:12px; }
-.pollRow{ margin-bottom:8px; }
-.pollLabel{ font-size:11.5px; display:flex; justify-content:space-between; }
-.pollBarBg{
-  height:8px; background:rgba(255,255,255,0.10);
-  border-radius:999px; overflow:hidden;
-}
-.pollBar{
-  height:100%;
-  background:linear-gradient(90deg,#facc15,#fde047);
-  transition:width .4s ease;
-}
-.pollMsg{ margin-top:8px; font-size:12px; opacity:.8; }
-.pollSmall{ margin-top:6px; font-size:11px; opacity:.6; }
+    .pollBox{
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .pollBottom{ margin-top: auto; }
+    .pollTitle{ font-weight:900; font-size:13px; margin-bottom:6px; }
+    .pollQ{ font-size:12.5px; opacity:.9; margin-bottom:10px; }
+    .pollOpts{ display:grid; gap:8px; }
+    .pollBtn{
+      text-align:left; border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.04);
+      color:rgba(255,255,255,0.92);
+      padding:10px; border-radius:10px;
+      cursor:pointer; font-size:12px; font-weight:800;
+    }
+    .pollBtn:hover{ background:rgba(255,255,255,0.06); }
+    .pollBtn.active{
+      border-color:rgba(250,204,21,0.55);
+      background:rgba(250,204,21,0.10);
+    }
+    .pollResults{ margin-top:12px; }
+    .pollRow{ margin-bottom:8px; }
+    .pollLabel{ font-size:11.5px; display:flex; justify-content:space-between; }
+    .pollBarBg{
+      height:8px; background:rgba(255,255,255,0.10);
+      border-radius:999px; overflow:hidden;
+    }
+    .pollBar{
+      height:100%;
+      background:linear-gradient(90deg,#facc15,#fde047);
+      transition:width .4s ease;
+    }
+    .pollMsg{ margin-top:8px; font-size:12px; opacity:.8; }
+    .pollSmall{ margin-top:6px; font-size:11px; opacity:.6; }
   </style>
 </head>
 
@@ -287,9 +275,9 @@
         </div>
       </aside>
 
-      <!-- Top 5 Parties Row -->
+      <!-- Top Parties Row -->
       <section class="card" style="grid-column: 1 / -1;">
-        <h2>Top 5 Parties (Seats)</h2>
+        <h2>Top 10 Parties (Seats)</h2>
         <div id="partyRow" class="partyRow"></div>
         <div class="bigLine" style="margin-top:10px;">
           सिट संख्या मतगणना सुरु भएपछि अपडेट हुनेछ। <br>
@@ -315,73 +303,40 @@
 
           <div class="breaking__grid">
             <div class="breaking__list" id="breakingList"></div>
+
             <div class="breaking__meta">
               <div class="breaking__hint">Source: GDELT (news monitoring)</div>
               <div class="breaking__time" id="breakingUpdated"></div>
-<!-- POLL START -->
-<div class="pollBox pollBottom" id="leadPoll">
-  <div class="pollTitle">Quick Poll</div>
 
-  <div class="pollQ">
-    तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?
-  </div>
+              <!-- POLL (ONLY ONCE) -->
+              <div class="pollBox pollBottom" id="leadPoll">
+                <div class="pollTitle">Quick Poll</div>
 
-  <div class="pollOpts">
-    <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
-    <button class="pollBtn" data-v="UML">नेकपा (एमाले)</button>
-    <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
-    <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
-    <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
-    <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
-  </div>
+                <div class="pollQ">
+                  तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?
+                </div>
 
-  <div class="pollResults" id="pollResults"></div>
+                <div class="pollOpts">
+                  <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
+                  <button class="pollBtn" data-v="UML">नेकपा (एमाले)</button>
+                  <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
+                  <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
+                  <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
+                  <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
+                </div>
 
-  <div class="pollMsg" id="leadPollMsg">
-    भोट तपाईंको ब्राउजरमा सेभ हुन्छ।
-  </div>
+                <div class="pollResults" id="pollResults"></div>
 
-  <div class="pollSmall">
-    यो scientific poll होइन — site visitor opinion मात्र हो।
-  </div>
-</div>
-<!-- POLL END -->
-              
+                <div class="pollMsg" id="leadPollMsg">भोट तपाईंको ब्राउजरमा सेभ हुन्छ।</div>
+                <div class="pollSmall">यो scientific poll होइन — site visitor opinion मात्र हो।</div>
+              </div>
+
               <div class="breaking__note">
                 Independent informational platform. For official election updates, visit the Election Commission of Nepal.
               </div>
             </div>
           </div>
         </section>
-      </section>
-      <section>
-        <div class="pollBox pollBottom" id="leadPoll">
-  <div class="pollTitle">Quick Poll</div>
-
-  <div class="pollQ">
-    तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?
-  </div>
-
-  <div class="pollOpts">
-    <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
-    <button class="pollBtn" data-v="UML">नेकपा (एमाले)</button>
-    <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
-    <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
-    <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
-    <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
-  </div>
-
-  <!-- RESULT BARS -->
-  <div class="pollResults" id="pollResults"></div>
-
-  <div class="pollMsg" id="leadPollMsg">
-    भोट तपाईंको ब्राउजरमा सेभ हुन्छ।
-  </div>
-
-  <div class="pollSmall">
-    यो scientific poll होइन — site visitor opinion मात्र हो।
-  </div>
-</div>
       </section>
 
       <!-- Community Support -->
@@ -460,7 +415,6 @@
     // ================================
     // 1) COUNTDOWN
     // ================================
-    // Election date: Thursday, March 5, 2026 (Nepal Time +05:45)
     const electionISO = "2026-03-05T07:00:00+05:45";
     const electionDate = new Date(electionISO);
     const pad2 = (n) => String(n).padStart(2, "0");
@@ -504,65 +458,49 @@
     setInterval(tick, 1000);
 
     // ================================
-// 2) TOP 10 PARTIES ROW
-// ================================
-const topParties = [
-  { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
+    // 2) TOP 10 PARTIES ROW
+    // ================================
+    const topParties = [
+      { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
+      { code: "NC",  name: "Nepali Congress", nepali: "नेपाली कांग्रेस", seats: 0, note1: "Liberal democracy", note2: "Mainstream", color: "rgba(59,130,246,0.95)", desc: "One of Nepal’s oldest and largest parties; advocates liberal democracy and civil liberties." },
+      { code: "UML", name: "CPN (UML)", nepali: "नेपाल कम्युनिष्ट पार्टी (एमाले)", seats: 0, note1: "Left", note2: "Top contender", color: "rgba(34,197,94,0.95)", desc: "A major communist party; consistently among top vote-getters across constituencies." },
+      { code: "MC",  name: "Maoist Centre", nepali: "नेपाल कम्युनिष्ट पार्टी (माओवादी केन्द्र)", seats: 0, note1: "Coalition", note2: "Maoist roots", color: "rgba(239,68,68,0.90)", desc: "Rooted in the Maoist movement; often plays a key role in coalition politics." },
+      { code: "RPP", name: "Rastriya Prajatantra Party", nepali: "राष्ट्रिय प्रजातन्त्र पार्टी", seats: 0, note1: "Conservative", note2: "Monarchist", color: "rgba(168,85,247,0.90)", desc: "A right-leaning party known for monarchist and Hindu-state advocacy." },
+      { code: "JSP", name: "Janata Samajwadi Party", nepali: "जनता समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(251,146,60,0.90)", desc: "A Madhes-based party focusing on federalism, inclusion, and regional rights." },
+      { code: "LSP", name: "Loktantrik Samajwadi Party", nepali: "लोकतान्त्रिक समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(236,72,153,0.90)", desc: "A regional party with influence in Tarai–Madhes constituencies." },
+      { code: "NUP", name: "Nagarik Unmukti Party", nepali: "नागरिक उन्मुक्ति पार्टी", seats: 0, note1: "Regional", note2: "Tarai", color: "rgba(14,165,233,0.90)", desc: "Represents regional/community interests, mainly active in parts of the Tarai." },
+      { code: "SSP", name: "Shram Sanskriti Party", nepali: "नेपाल श्रम संस्कृति पार्टी", seats: 0, note1: "Labor", note2: "Work culture", color: "rgba(234,179,8,0.90)", desc: "Focuses on labor dignity, work culture, and social responsibility; positioned as an alternative reform-oriented party." },
+      { code: "UNP", name: "Ujyaalo Nepal Party", nepali: "उज्यालो नेपाल पार्टी", seats: 0, note1: "Reform", note2: "New party", color: "rgba(56,189,248,0.90)", desc: "Promotes transparency, accountability, and a progressive vision aimed at institutional reform." }
+    ];
 
-  { code: "NC",  name: "Nepali Congress", nepali: "नेपाली कांग्रेस", seats: 0, note1: "Liberal democracy", note2: "Mainstream", color: "rgba(59,130,246,0.95)", desc: "One of Nepal’s oldest and largest parties; advocates liberal democracy and civil liberties." },
+    function renderParties(){
+      const row = document.getElementById("partyRow");
+      if (!row) return;
 
-  { code: "UML", name: "CPN (UML)", nepali: "नेपाल कम्युनिष्ट पार्टी (एमाले)", seats: 0, note1: "Left", note2: "Top contender", color: "rgba(34,197,94,0.95)", desc: "A major communist party; consistently among top vote-getters across constituencies." },
-
-  { code: "MC",  name: "Maoist Centre", nepali: "नेपाल कम्युनिष्ट पार्टी (माओवादी केन्द्र)", seats: 0, note1: "Coalition", note2: "Maoist roots", color: "rgba(239,68,68,0.90)", desc: "Rooted in the Maoist movement; often plays a key role in coalition politics." },
-
-  { code: "RPP", name: "Rastriya Prajatantra Party", nepali: "राष्ट्रिय प्रजातन्त्र पार्टी", seats: 0, note1: "Conservative", note2: "Monarchist", color: "rgba(168,85,247,0.90)", desc: "A right-leaning party known for monarchist and Hindu-state advocacy." },
-
-  // ---- Regional / Madhes ----
-  { code: "JSP", name: "Janata Samajwadi Party", nepali: "जनता समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(251,146,60,0.90)", desc: "A Madhes-based party focusing on federalism, inclusion, and regional rights." },
-
-  { code: "LSP", name: "Loktantrik Samajwadi Party", nepali: "लोकतान्त्रिक समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(236,72,153,0.90)", desc: "A regional party with influence in Tarai–Madhes constituencies." },
-
-  { code: "NUP", name: "Nagarik Unmukti Party", nepali: "नागरिक उन्मुक्ति पार्टी", seats: 0, note1: "Regional", note2: "Tarai", color: "rgba(14,165,233,0.90)", desc: "Represents regional/community interests, mainly active in parts of the Tarai." },
-
-  // ---- New / Alternative ----
-  { code: "SSP", name: "Shram Sanskriti Party", nepali: "नेपाल श्रम संस्कृति पार्टी", seats: 0, note1: "Labor", note2: "Work culture", color: "rgba(234,179,8,0.90)", desc: "Focuses on labor dignity, work culture, and social responsibility; positioned as an alternative reform-oriented party." },
-
-  { code: "UNP", name: "Ujyaalo Nepal Party", nepali: "उज्यालो नेपाल पार्टी", seats: 0, note1: "Reform", note2: "New party", color: "rgba(56,189,248,0.90)", desc: "Promotes transparency, accountability, and a progressive vision aimed at institutional reform." }
-];
-
-function renderParties(){
-  const row = document.getElementById("partyRow");
-  if (!row) return;
-
-  row.innerHTML = topParties.map(p => `
-    <div class="partyCard">
-      <div class="partyStripe" style="background:${p.color};"></div>
-
-      <div class="partyTop">
-        <div style="min-width:0;">
-          <div class="partyName">${p.code} • ${p.name}</div>
-          <div class="partyNep">${p.nepali}</div>
+      row.innerHTML = topParties.map(p => `
+        <div class="partyCard">
+          <div class="partyStripe" style="background:${p.color};"></div>
+          <div class="partyTop">
+            <div style="min-width:0;">
+              <div class="partyName">${p.code} • ${p.name}</div>
+              <div class="partyNep">${p.nepali}</div>
+            </div>
+            <div class="seatBox" title="Seats">
+              <div class="seatNum">${p.seats}</div>
+              <div class="seatLbl">Seats</div>
+            </div>
+          </div>
+          <div class="partyMeta">
+            <span class="partyTag">${p.note1}</span>
+            <span class="partyTag">${p.note2}</span>
+          </div>
+          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
+            ${p.desc}
+          </div>
         </div>
-
-        <div class="seatBox" title="Seats">
-          <div class="seatNum">${p.seats}</div>
-          <div class="seatLbl">Seats</div>
-        </div>
-      </div>
-
-      <div class="partyMeta">
-        <span class="partyTag">${p.note1}</span>
-        <span class="partyTag">${p.note2}</span>
-      </div>
-
-      <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
-        ${p.desc}
-      </div>
-    </div>
-  `).join("");
-}
-
-renderParties();
+      `).join("");
+    }
+    renderParties();
 
     // ================================
     // 3) NEWS24 HEADLINE TICKER (GDELT domain filter)
@@ -608,7 +546,6 @@ renderParties();
       const ticker = document.getElementById("ticker");
       if (!wrap || !ticker) return;
 
-      // stop old animation to avoid stacking animations
       if (tickerAnim) tickerAnim.cancel();
 
       const wrapWidth = wrap.clientWidth;
@@ -703,65 +640,67 @@ renderParties();
       load();
       setInterval(load, 5 * 60 * 1000);
     })();
-// ---- Poll with result bars ----
-(function(){
-  const poll = document.getElementById("leadPoll");
-  if(!poll) return;
 
-  const buttons = poll.querySelectorAll(".pollBtn");
-  const resultsBox = document.getElementById("pollResults");
-  const msg = document.getElementById("leadPollMsg");
+    // ================================
+    // 5) POLL WITH RESULT BARS (localStorage)
+    // ================================
+    (function(){
+      const poll = document.getElementById("leadPoll");
+      if(!poll) return;
 
-  const KEY_VOTE = "nepal_poll_vote_v1";
-  const KEY_DATA = "nepal_poll_data_v1";
+      const buttons = poll.querySelectorAll(".pollBtn");
+      const resultsBox = document.getElementById("pollResults");
+      const msg = document.getElementById("leadPollMsg");
 
-  const labels = {
-    NC:"नेपाली कांग्रेस (NC)",
-    UML:"नेकपा (एमाले)",
-    RSP:"राष्ट्रिय स्वतन्त्र पार्टी (RSP)",
-    NCP:"नेपाल कम्युनिष्ट पार्टी",
-    COAL:"गठबन्धन सरकार",
-    UND:"भन्न गाह्रो छ / Undecided"
-  };
+      const KEY_VOTE = "nepal_poll_vote_v1";
+      const KEY_DATA = "nepal_poll_data_v1";
 
-  let data = JSON.parse(localStorage.getItem(KEY_DATA)) || {
-    NC:0,UML:0,RSP:0,NCP:0,COAL:0,UND:0
-  };
+      const labels = {
+        NC:"नेपाली कांग्रेस (NC)",
+        UML:"नेकपा (एमाले)",
+        RSP:"राष्ट्रिय स्वतन्त्र पार्टी (RSP)",
+        NCP:"नेपाल कम्युनिष्ट पार्टी",
+        COAL:"गठबन्धन सरकार",
+        UND:"भन्न गाह्रो छ / Undecided"
+      };
 
-  function render(){
-    const total = Object.values(data).reduce((a,b)=>a+b,0) || 1;
-    resultsBox.innerHTML = Object.keys(data).map(k=>{
-      const pct = Math.round((data[k]/total)*100);
-      return `
-        <div class="pollRow">
-          <div class="pollLabel"><span>${labels[k]}</span><span>${pct}%</span></div>
-          <div class="pollBarBg"><div class="pollBar" style="width:${pct}%"></div></div>
-        </div>`;
-    }).join("");
-  }
+      let data = JSON.parse(localStorage.getItem(KEY_DATA)) || {
+        NC:0,UML:0,RSP:0,NCP:0,COAL:0,UND:0
+      };
 
-  const voted = localStorage.getItem(KEY_VOTE);
-  if(voted){
-    buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===voted));
-    msg.textContent = "तपाईंको भोट: " + labels[voted];
-  }
+      function render(){
+        const total = Object.values(data).reduce((a,b)=>a+b,0) || 1;
+        resultsBox.innerHTML = Object.keys(data).map(k=>{
+          const pct = Math.round((data[k]/total)*100);
+          return `
+            <div class="pollRow">
+              <div class="pollLabel"><span>${labels[k]}</span><span>${pct}%</span></div>
+              <div class="pollBarBg"><div class="pollBar" style="width:${pct}%"></div></div>
+            </div>`;
+        }).join("");
+      }
 
-  render();
+      const voted = localStorage.getItem(KEY_VOTE);
+      if(voted){
+        buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===voted));
+        msg.textContent = "तपाईंको भोट: " + labels[voted];
+      }
 
-  buttons.forEach(btn=>{
-    btn.onclick = ()=>{
-      if(localStorage.getItem(KEY_VOTE)) return;
-      const v = btn.dataset.v;
-      data[v]++;
-      localStorage.setItem(KEY_DATA, JSON.stringify(data));
-      localStorage.setItem(KEY_VOTE, v);
-      buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===v));
-      msg.textContent = "धन्यवाद! तपाईंको भोट: " + labels[v];
       render();
-    };
-  });
-})();
-    
+
+      buttons.forEach(btn=>{
+        btn.onclick = ()=>{
+          if(localStorage.getItem(KEY_VOTE)) return;
+          const v = btn.dataset.v;
+          data[v]++;
+          localStorage.setItem(KEY_DATA, JSON.stringify(data));
+          localStorage.setItem(KEY_VOTE, v);
+          buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===v));
+          msg.textContent = "धन्यवाद! तपाईंको भोट: " + labels[v];
+          render();
+        };
+      });
+    })();
   </script>
 </body>
 </html>
