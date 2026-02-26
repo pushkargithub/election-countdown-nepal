@@ -212,6 +212,15 @@
     }
     .pollMsg{ margin-top:8px; font-size:12px; opacity:.8; }
     .pollSmall{ margin-top:6px; font-size:11px; opacity:.6; }
+
+  .pollTotal{
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: .8;
+}
+.pollBar{
+  min-width: 2px;
+}
   </style>
 </head>
 
@@ -325,7 +334,8 @@
                   <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
                 </div>
 
-                <div class="pollResults" id="pollResults"></div>
+                <div class="pollTotal" id="pollTotal">Total votes: 0</div>
+<div class="pollResults" id="pollResults"></div>
 
                 <div class="pollMsg" id="leadPollMsg">भोट तपाईंको ब्राउजरमा सेभ हुन्छ।</div>
                 <div class="pollSmall">यो scientific poll होइन — site visitor opinion मात्र हो।</div>
@@ -669,38 +679,30 @@
       };
 
       function render(){
-        const total = Object.values(data).reduce((a,b)=>a+b,0) || 1;
-        resultsBox.innerHTML = Object.keys(data).map(k=>{
-          const pct = Math.round((data[k]/total)*100);
-          return `
-            <div class="pollRow">
-              <div class="pollLabel"><span>${labels[k]}</span><span>${pct}%</span></div>
-              <div class="pollBarBg"><div class="pollBar" style="width:${pct}%"></div></div>
-            </div>`;
-        }).join("");
-      }
+  const totalVotes = Object.values(data).reduce((a,b)=>a+b,0);
+  const denom = totalVotes || 1;
 
-      const voted = localStorage.getItem(KEY_VOTE);
-      if(voted){
-        buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===voted));
-        msg.textContent = "तपाईंको भोट: " + labels[voted];
-      }
+  // total votes text
+  const totalEl = document.getElementById("pollTotal");
+  if (totalEl) totalEl.textContent = "Total votes: " + totalVotes;
 
-      render();
+  resultsBox.innerHTML = Object.keys(data).map(k=>{
+    const votes = data[k] || 0;
+    const pct = Math.round((votes/denom)*100);
+    const barW = totalVotes ? pct : 0;
 
-      buttons.forEach(btn=>{
-        btn.onclick = ()=>{
-          if(localStorage.getItem(KEY_VOTE)) return;
-          const v = btn.dataset.v;
-          data[v]++;
-          localStorage.setItem(KEY_DATA, JSON.stringify(data));
-          localStorage.setItem(KEY_VOTE, v);
-          buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===v));
-          msg.textContent = "धन्यवाद! तपाईंको भोट: " + labels[v];
-          render();
-        };
-      });
-    })();
+    return `
+      <div class="pollRow">
+        <div class="pollLabel">
+          <span>${labels[k]}</span>
+          <span>${votes} (${pct}%)</span>
+        </div>
+        <div class="pollBarBg">
+          <div class="pollBar" style="width:${barW}%"></div>
+        </div>
+      </div>`;
+  }).join("");
+}
   </script>
 </body>
 </html>
