@@ -176,13 +176,12 @@
 
     /* ---- POLL ---- */
     .pollBox{
-      margin-top: 12px;
+      margin-top: 8px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.03);
       border-radius: 14px;
       padding: 12px;
     }
-    .pollBottom{ margin-top: auto; }
     .pollTitle{ font-weight:900; font-size:13px; margin-bottom:6px; }
     .pollQ{ font-size:12.5px; opacity:.9; margin-bottom:10px; }
     .pollOpts{ display:grid; gap:8px; }
@@ -198,12 +197,8 @@
       border-color:rgba(250,204,21,0.55);
       background:rgba(250,204,21,0.10);
     }
-    .pollTotal{
-      margin-top: 8px;
-      font-size: 12px;
-      opacity: .8;
-    }
-    .pollResults{ margin-top:12px; }
+    .pollTotal{ margin-top:10px; font-size: 12px; opacity: .85; }
+    .pollResults{ margin-top:10px; }
     .pollRow{ margin-bottom:8px; }
     .pollLabel{ font-size:11.5px; display:flex; justify-content:space-between; gap:10px; }
     .pollBarBg{
@@ -212,12 +207,12 @@
     }
     .pollBar{
       height:100%;
-      min-width: 2px; /* show thin line even at very low % */
       background:linear-gradient(90deg,#facc15,#fde047);
       transition:width .4s ease;
+      min-width: 2px;
     }
-    .pollMsg{ margin-top:8px; font-size:12px; opacity:.8; }
-    .pollSmall{ margin-top:6px; font-size:11px; opacity:.6; }
+    .pollMsg{ margin-top:8px; font-size:12px; opacity:.85; }
+    .pollSmall{ margin-top:6px; font-size:11px; opacity:.65; }
   </style>
 </head>
 
@@ -231,13 +226,38 @@
           <p class="sub">Countdown + live results dashboard</p>
         </div>
       </div>
-      <div class="pill" id="statusPill">Status: Loading…</div>
+      <div class="pill" id="statusPill">Status: Building…</div>
     </header>
+
+    <!-- ✅ POLL FIRST (ONLY ONCE) -->
+    <section class="card" style="margin-top:18px;">
+      <h2>Quick Poll</h2>
+
+      <div class="pollBox" id="leadPoll">
+        <div class="pollQ">तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?</div>
+
+        <div class="pollOpts">
+          <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
+          <button class="pollBtn" data-v="UML">नेपाल कम्युनिष्ट पार्टी (एमाले)</button>
+          <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
+          <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
+          <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
+          <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
+        </div>
+
+        <div class="pollTotal" id="pollTotal">Total votes: 0</div>
+        <div class="pollResults" id="pollResults"></div>
+
+        <div class="pollMsg" id="leadPollMsg">भोट तपाईंको ब्राउजरमा सेभ हुन्छ।</div>
+        <div class="pollSmall">यो scientific poll होइन — site visitor opinion मात्र हो।</div>
+      </div>
+    </section>
 
     <main>
       <!-- Countdown Card -->
       <section class="card">
         <h2>Countdown to Election Day</h2>
+
         <div class="countGrid" aria-label="countdown">
           <div class="tile"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
           <div class="tile"><div class="num" id="h">—</div><div class="lbl">Hours</div></div>
@@ -246,13 +266,14 @@
         </div>
 
         <div class="bigLine">
-          Target date (Nepal time): <span class="accent" id="targetLabel">—</span><br>
+          Target date: <span class="accent" id="targetLabel">—</span><br>
           Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
         </div>
 
         <div class="mini">
           <div class="chip" id="localTime">Local time: —</div>
           <div class="chip" id="lastUpdate">Updated: —</div>
+          <div class="chip" id="nepalTime">Nepal time: —</div>
         </div>
       </section>
 
@@ -309,35 +330,9 @@
 
           <div class="breaking__grid">
             <div class="breaking__list" id="breakingList"></div>
-
             <div class="breaking__meta">
               <div class="breaking__hint">Source: GDELT (news monitoring)</div>
               <div class="breaking__time" id="breakingUpdated"></div>
-
-              <!-- POLL (ONLY ONCE) -->
-              <div class="pollBox pollBottom" id="leadPoll">
-                <div class="pollTitle">Quick Poll</div>
-
-                <div class="pollQ">
-                  तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?
-                </div>
-
-                <div class="pollOpts">
-                  <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
-                  <button class="pollBtn" data-v="UML">नेपाल कम्युनिष्ट पार्टी (एमाले)</button>
-                  <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
-                  <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
-                  <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
-                  <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
-                </div>
-
-                <div class="pollTotal" id="pollTotal">Total votes: 0</div>
-                <div class="pollResults" id="pollResults"></div>
-
-                <div class="pollMsg" id="leadPollMsg">भोट तपाईंको ब्राउजरमा सेभ हुन्छ।</div>
-                <div class="pollSmall">यो scientific poll होइन — site visitor opinion मात्र हो।</div>
-              </div>
-
               <div class="breaking__note">
                 Independent informational platform. For official election updates, visit the Election Commission of Nepal.
               </div>
@@ -420,42 +415,34 @@
 
   <script>
     // ================================
-    // 1) COUNTDOWN (Robust)
+    // Helpers: Nepal time display
     // ================================
-    // Nepal Election target: 2026-03-05 07:00 Nepal Time (+05:45)
+    function formatNepalTime(date){
+      return date.toLocaleString("en-US", { timeZone: "Asia/Kathmandu" });
+    }
+
+    // ================================
+    // 1) COUNTDOWN (to Nepal-time election moment)
+    // ================================
+    // Election moment: 2026-03-05 07:00 Nepal time (+05:45)
     const electionISO = "2026-03-05T07:00:00+05:45";
     const electionDate = new Date(electionISO);
     const pad2 = (n) => String(n).padStart(2, "0");
-
-    function setText(id, txt){
-      const el = document.getElementById(id);
-      if (el) el.textContent = txt;
-    }
-
-    function formatNepalTime(date){
-      try{
-        return new Intl.DateTimeFormat("en-US", {
-          timeZone: "Asia/Kathmandu",
-          year: "numeric", month: "long", day: "2-digit",
-          hour: "2-digit", minute: "2-digit",
-          hour12: true
-        }).format(date);
-      }catch(e){
-        // fallback if Intl timezone not supported
-        return date.toLocaleString();
-      }
-    }
 
     function tick(){
       const now = new Date();
       const diff = electionDate.getTime() - now.getTime();
 
-      setText("localTime", "Local time: " + now.toLocaleString());
-      setText("lastUpdate", "Updated: " + new Date().toLocaleTimeString());
-      setText("targetLabel", formatNepalTime(electionDate));
-
+      const localTimeEl = document.getElementById("localTime");
+      const lastUpdateEl = document.getElementById("lastUpdate");
+      const targetLabelEl = document.getElementById("targetLabel");
+      const nepalTimeEl = document.getElementById("nepalTime");
       const status = document.getElementById("statusPill");
-      if (!status) return;
+
+      if (localTimeEl) localTimeEl.textContent = "Local time: " + now.toLocaleString();
+      if (nepalTimeEl) nepalTimeEl.textContent = "Nepal time: " + formatNepalTime(now);
+      if (lastUpdateEl) lastUpdateEl.textContent = "Updated: " + now.toLocaleTimeString();
+      if (targetLabelEl) targetLabelEl.textContent = electionDate.toLocaleString() + " (NPT +05:45)";
 
       if (isNaN(electionDate.getTime())){
         status.textContent = "Status: Set election date";
@@ -463,10 +450,10 @@
       }
 
       if (diff <= 0){
-        setText("d", "0");
-        setText("h", "00");
-        setText("m", "00");
-        setText("s", "00");
+        document.getElementById("d").textContent = "0";
+        document.getElementById("h").textContent = "00";
+        document.getElementById("m").textContent = "00";
+        document.getElementById("s").textContent = "00";
         status.textContent = "Status: Election Day";
         return;
       }
@@ -476,10 +463,10 @@
       const minutes = Math.floor((diff / (1000*60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      setText("d", String(days));
-      setText("h", pad2(hours));
-      setText("m", pad2(minutes));
-      setText("s", pad2(seconds));
+      document.getElementById("d").textContent = String(days);
+      document.getElementById("h").textContent = pad2(hours);
+      document.getElementById("m").textContent = pad2(minutes);
+      document.getElementById("s").textContent = pad2(seconds);
       status.textContent = "Status: Live";
     }
     tick();
@@ -508,20 +495,24 @@
       row.innerHTML = topParties.map(p => `
         <div class="partyCard">
           <div class="partyStripe" style="background:${p.color};"></div>
+
           <div class="partyTop">
             <div style="min-width:0;">
               <div class="partyName">${p.code} • ${p.name}</div>
               <div class="partyNep">${p.nepali}</div>
             </div>
+
             <div class="seatBox" title="Seats">
               <div class="seatNum">${p.seats}</div>
               <div class="seatLbl">Seats</div>
             </div>
           </div>
+
           <div class="partyMeta">
             <span class="partyTag">${p.note1}</span>
             <span class="partyTag">${p.note2}</span>
           </div>
+
           <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
             ${p.desc}
           </div>
@@ -605,8 +596,6 @@
       const updatedEl = document.getElementById("breakingUpdated");
       const refreshBtn= document.getElementById("breakingRefresh");
 
-      if(!tickerEl || !listEl || !updatedEl) return;
-
       const QUERY = encodeURIComponent('(Nepal OR Kathmandu) AND (election OR parliament OR "Election Commission")');
       const MAX   = 8;
 
@@ -680,10 +669,8 @@
 
       const buttons = poll.querySelectorAll(".pollBtn");
       const resultsBox = document.getElementById("pollResults");
-      const msg = document.getElementById("leadPollMsg");
       const totalEl = document.getElementById("pollTotal");
-
-      if(!resultsBox || !msg || !totalEl) return;
+      const msg = document.getElementById("leadPollMsg");
 
       const KEY_VOTE = "nepal_poll_vote_v1";
       const KEY_DATA = "nepal_poll_data_v1";
@@ -697,22 +684,26 @@
         UND:"भन्न गाह्रो छ / Undecided"
       };
 
+      const empty = { NC:0, UML:0, RSP:0, NCP:0, COAL:0, UND:0 };
+
       let data;
       try{
-        data = JSON.parse(localStorage.getItem(KEY_DATA)) || { NC:0,UML:0,RSP:0,NCP:0,COAL:0,UND:0 };
+        data = JSON.parse(localStorage.getItem(KEY_DATA)) || empty;
       }catch(e){
-        data = { NC:0,UML:0,RSP:0,NCP:0,COAL:0,UND:0 };
+        data = empty;
       }
+      // ensure keys exist
+      data = { ...empty, ...data };
 
       function render(){
-        const totalVotes = Object.values(data).reduce((a,b)=>a+b,0);
+        const totalVotes = Object.values(data).reduce((a,b)=>a+(Number(b)||0),0);
         const denom = totalVotes || 1;
 
-        totalEl.textContent = "Total votes: " + totalVotes;
+        if (totalEl) totalEl.textContent = "Total votes: " + totalVotes;
 
-        // show bars + counts + %
-        resultsBox.innerHTML = Object.keys(labels).map(k=>{
-          const votes = data[k] || 0;
+        if (!resultsBox) return;
+        resultsBox.innerHTML = Object.keys(empty).map(k=>{
+          const votes = Number(data[k]) || 0;
           const pct = Math.round((votes/denom)*100);
           const barW = totalVotes ? pct : 0;
 
@@ -730,34 +721,37 @@
         }).join("");
       }
 
-      // if already voted, mark + lock
       const voted = localStorage.getItem(KEY_VOTE);
       if(voted && labels[voted]){
-        buttons.forEach(b=>b.classList.toggle("active", b.dataset.v === voted));
-        msg.textContent = "तपाईंको भोट: " + labels[voted];
+        buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===voted));
+        if (msg) msg.textContent = "तपाईंको भोट: " + labels[voted];
       }else{
-        msg.textContent = "भोट तपाईंको ब्राउजरमा सेभ हुन्छ।";
+        if (msg) msg.textContent = "भोट तपाईंको ब्राउजरमा सेभ हुन्छ।";
       }
 
       render();
 
       buttons.forEach(btn=>{
         btn.addEventListener("click", ()=>{
-          if(localStorage.getItem(KEY_VOTE)) return; // lock after 1 vote
+          const already = localStorage.getItem(KEY_VOTE);
+          if(already) return;
+
           const v = btn.dataset.v;
           if(!labels[v]) return;
 
-          data[v] = (data[v] || 0) + 1;
-
+          data[v] = (Number(data[v]) || 0) + 1;
           localStorage.setItem(KEY_DATA, JSON.stringify(data));
           localStorage.setItem(KEY_VOTE, v);
 
-          buttons.forEach(b=>b.classList.toggle("active", b.dataset.v === v));
-          msg.textContent = "धन्यवाद! तपाईंको भोट: " + labels[v];
+          buttons.forEach(b=>b.classList.toggle("active", b.dataset.v===v));
+          if (msg) msg.textContent = "धन्यवाद! तपाईंको भोट: " + labels[v];
 
           render();
         });
       });
+
+      // Optional: allow reset by dev (uncomment if needed)
+      // window.resetPoll = () => { localStorage.removeItem(KEY_VOTE); localStorage.removeItem(KEY_DATA); location.reload(); };
     })();
   </script>
 </body>
