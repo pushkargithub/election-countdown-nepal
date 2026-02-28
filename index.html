@@ -247,10 +247,10 @@
 
         <div class="pollTotal" id="pollTotal">Total votes: 0</div>
 
-<button class="pollBtn" id="pollReset" type="button" style="opacity:.85;">Reset my vote</button>
-<div class="pollSmall" id="pollActivity">Last activity: —</div>
+        <button class="pollBtn" id="pollReset" type="button" style="opacity:.85;">Reset my vote</button>
+        <div class="pollSmall" id="pollActivity">Last activity: —</div>
 
-<div class="pollResults" id="pollResults"></div>
+        <div class="pollResults" id="pollResults"></div>
 
         <div class="pollMsg" id="leadPollMsg">भोट तपाईंको ब्राउजरमा सेभ हुन्छ।</div>
         <div class="pollSmall">यो scientific poll होइन — site visitor opinion मात्र हो।</div>
@@ -417,6 +417,7 @@
     </footer>
   </div>
 
+  <!-- ✅ ONLY ONE SCRIPT TAG -->
   <script>
     // ================================
     // Helpers: Nepal time display
@@ -426,9 +427,8 @@
     }
 
     // ================================
-    // 1) COUNTDOWN (to Nepal-time election moment)
+    // 1) COUNTDOWN (Nepal-time election moment)
     // ================================
-    // Election moment: 2026-03-05 07:00 Nepal time (+05:45)
     const electionISO = "2026-03-05T07:00:00+05:45";
     const electionDate = new Date(electionISO);
     const pad2 = (n) => String(n).padStart(2, "0");
@@ -437,16 +437,18 @@
       const now = new Date();
       const diff = electionDate.getTime() - now.getTime();
 
-      const localTimeEl = document.getElementById("localTime");
+      const localTimeEl  = document.getElementById("localTime");
       const lastUpdateEl = document.getElementById("lastUpdate");
-      const targetLabelEl = document.getElementById("targetLabel");
-      const nepalTimeEl = document.getElementById("nepalTime");
-      const status = document.getElementById("statusPill");
+      const targetLabelEl= document.getElementById("targetLabel");
+      const nepalTimeEl  = document.getElementById("nepalTime");
+      const status       = document.getElementById("statusPill");
 
-      if (localTimeEl) localTimeEl.textContent = "Local time: " + now.toLocaleString();
-      if (nepalTimeEl) nepalTimeEl.textContent = "Nepal time: " + formatNepalTime(now);
+      if (localTimeEl)  localTimeEl.textContent  = "Local time: " + now.toLocaleString();
+      if (nepalTimeEl)  nepalTimeEl.textContent  = "Nepal time: " + formatNepalTime(now);
       if (lastUpdateEl) lastUpdateEl.textContent = "Updated: " + now.toLocaleTimeString();
       if (targetLabelEl) targetLabelEl.textContent = electionDate.toLocaleString() + " (NPT +05:45)";
+
+      if (!status) return;
 
       if (isNaN(electionDate.getTime())){
         status.textContent = "Status: Set election date";
@@ -454,10 +456,14 @@
       }
 
       if (diff <= 0){
-        document.getElementById("d").textContent = "0";
-        document.getElementById("h").textContent = "00";
-        document.getElementById("m").textContent = "00";
-        document.getElementById("s").textContent = "00";
+        const dEl = document.getElementById("d");
+        const hEl = document.getElementById("h");
+        const mEl = document.getElementById("m");
+        const sEl = document.getElementById("s");
+        if (dEl) dEl.textContent = "0";
+        if (hEl) hEl.textContent = "00";
+        if (mEl) mEl.textContent = "00";
+        if (sEl) sEl.textContent = "00";
         status.textContent = "Status: Election Day";
         return;
       }
@@ -467,10 +473,15 @@
       const minutes = Math.floor((diff / (1000*60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("d").textContent = String(days);
-      document.getElementById("h").textContent = pad2(hours);
-      document.getElementById("m").textContent = pad2(minutes);
-      document.getElementById("s").textContent = pad2(seconds);
+      const dEl = document.getElementById("d");
+      const hEl = document.getElementById("h");
+      const mEl = document.getElementById("m");
+      const sEl = document.getElementById("s");
+      if (dEl) dEl.textContent = String(days);
+      if (hEl) hEl.textContent = pad2(hours);
+      if (mEl) mEl.textContent = pad2(minutes);
+      if (sEl) sEl.textContent = pad2(seconds);
+
       status.textContent = "Status: Live";
     }
     tick();
@@ -499,24 +510,20 @@
       row.innerHTML = topParties.map(p => `
         <div class="partyCard">
           <div class="partyStripe" style="background:${p.color};"></div>
-
           <div class="partyTop">
             <div style="min-width:0;">
               <div class="partyName">${p.code} • ${p.name}</div>
               <div class="partyNep">${p.nepali}</div>
             </div>
-
             <div class="seatBox" title="Seats">
               <div class="seatNum">${p.seats}</div>
               <div class="seatLbl">Seats</div>
             </div>
           </div>
-
           <div class="partyMeta">
             <span class="partyTag">${p.note1}</span>
             <span class="partyTag">${p.note2}</span>
           </div>
-
           <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
             ${p.desc}
           </div>
@@ -665,159 +672,151 @@
     })();
 
     // ================================
-    // 5) POLL WITH RESULT BARS (localStorage)
+    // 5) POLL WITH RESULT BARS (localStorage) ✅ FIXED
     // ================================
-    <script>
-  // ================================
-  // 5) POLL WITH RESULT BARS (localStorage)
-  // ================================
-  (function(){
-    const poll = document.getElementById("leadPoll");
-    if(!poll) return;
+    (function(){
+      const poll = document.getElementById("leadPoll");
+      if(!poll) return;
 
-    const buttons   = Array.from(poll.querySelectorAll(".pollBtn[data-v]"));
-    const resultsBox= document.getElementById("pollResults");
-    const totalEl   = document.getElementById("pollTotal");
-    const msgEl     = document.getElementById("leadPollMsg");
-    const activityEl= document.getElementById("pollActivity");
-    const resetBtn  = document.getElementById("pollReset");
+      const buttons    = Array.from(poll.querySelectorAll(".pollBtn[data-v]")); // only option buttons
+      const resultsBox = document.getElementById("pollResults");
+      const totalEl    = document.getElementById("pollTotal");
+      const msgEl      = document.getElementById("leadPollMsg");
+      const activityEl = document.getElementById("pollActivity");
+      const resetBtn   = document.getElementById("pollReset");
 
-    const KEY_VOTE = "nepal_poll_vote_v2";
-    const KEY_DATA = "nepal_poll_data_v2"; // totals on THIS device only
-    const KEY_LAST = "nepal_poll_last_v2"; // last activity timestamp (device)
+      const KEY_VOTE = "nepal_poll_vote_v2";
+      const KEY_DATA = "nepal_poll_data_v2";
+      const KEY_LAST = "nepal_poll_last_v2";
 
-    const labels = {
-      NC:"नेपाली कांग्रेस (NC)",
-      UML:"नेपाल कम्युनिष्ट पार्टी (एमाले)",
-      RSP:"राष्ट्रिय स्वतन्त्र पार्टी (RSP)",
-      NCP:"नेपाल कम्युनिष्ट पार्टी",
-      COAL:"गठबन्धन सरकार",
-      UND:"भन्न गाह्रो छ / Undecided"
-    };
+      const labels = {
+        NC:"नेपाली कांग्रेस (NC)",
+        UML:"नेपाल कम्युनिष्ट पार्टी (एमाले)",
+        RSP:"राष्ट्रिय स्वतन्त्र पार्टी (RSP)",
+        NCP:"नेपाल कम्युनिष्ट पार्टी",
+        COAL:"गठबन्धन सरकार",
+        UND:"भन्न गाह्रो छ / Undecided"
+      };
 
-    const empty = { NC:0, UML:0, RSP:0, NCP:0, COAL:0, UND:0 };
+      const empty = { NC:0, UML:0, RSP:0, NCP:0, COAL:0, UND:0 };
 
-    function lsGet(key){
-      try{ return localStorage.getItem(key); }catch(e){ return null; }
-    }
-    function lsSet(key,val){
-      try{ localStorage.setItem(key,val); return true; }catch(e){ return false; }
-    }
-    function lsRemove(key){
-      try{ localStorage.removeItem(key); }catch(e){}
-    }
-
-    let data = empty;
-    try{
-      const raw = lsGet(KEY_DATA);
-      data = raw ? JSON.parse(raw) : empty;
-    }catch(e){
-      data = empty;
-    }
-    data = { ...empty, ...data };
-
-    function formatWhen(ms){
-      if(!ms) return "—";
-      const d = new Date(Number(ms));
-      if (isNaN(d.getTime())) return "—";
-      return d.toLocaleString();
-    }
-
-    function render(){
-      const totalVotes = Object.values(data).reduce((a,b)=>a+(Number(b)||0),0);
-      const denom = totalVotes || 1;
-
-      if (totalEl) totalEl.textContent = "Total votes (this device): " + totalVotes;
-
-      const last = lsGet(KEY_LAST);
-      if (activityEl) activityEl.textContent = "Last activity: " + formatWhen(last);
-
-      const voted = lsGet(KEY_VOTE);
-      if (voted && labels[voted]){
-        if (msgEl) msgEl.textContent = "✅ तपाईंको भोट: " + labels[voted] + " (Tap another option to change)";
-      } else {
-        if (msgEl) msgEl.textContent = "भोट तपाईंको ब्राउजरमा सेभ हुन्छ। (This device only)";
+      function lsGet(key){
+        try{ return localStorage.getItem(key); }catch(e){ return null; }
+      }
+      function lsSet(key,val){
+        try{ localStorage.setItem(key,val); return true; }catch(e){ return false; }
+      }
+      function lsRemove(key){
+        try{ localStorage.removeItem(key); }catch(e){}
       }
 
-      if (!resultsBox) return;
-      resultsBox.innerHTML = Object.keys(empty).map(k=>{
-        const votes = Number(data[k]) || 0;
-        const pct = Math.round((votes/denom)*100);
-        const barW = totalVotes ? pct : 0;
-        return `
-          <div class="pollRow">
-            <div class="pollLabel">
-              <span>${labels[k]}</span>
-              <span>${votes} (${pct}%)</span>
-            </div>
-            <div class="pollBarBg">
-              <div class="pollBar" style="width:${barW}%"></div>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      // highlight selected
-      buttons.forEach(b=>{
-        const v = b.dataset.v;
-        b.classList.toggle("active", voted === v);
-      });
-    }
-
-    function setActivityNow(){
-      lsSet(KEY_LAST, String(Date.now()));
-    }
-
-    function saveData(){
-      const ok = lsSet(KEY_DATA, JSON.stringify(data));
-      if(!ok && msgEl){
-        msgEl.textContent = "⚠️ Browser blocked storage (private mode). Vote cannot be saved.";
+      let data = empty;
+      try{
+        const raw = lsGet(KEY_DATA);
+        data = raw ? JSON.parse(raw) : empty;
+      }catch(e){
+        data = empty;
       }
-      return ok;
-    }
+      data = { ...empty, ...data };
 
-    // click handlers: allow change vote
-    buttons.forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const v = btn.dataset.v;
-        if(!labels[v]) return;
+      function formatWhen(ms){
+        if(!ms) return "—";
+        const d = new Date(Number(ms));
+        if (isNaN(d.getTime())) return "—";
+        return d.toLocaleString();
+      }
 
-        const prev = lsGet(KEY_VOTE);
+      function setActivityNow(){
+        lsSet(KEY_LAST, String(Date.now()));
+      }
 
-        // If changing vote, subtract previous
-        if(prev && labels[prev] && prev !== v){
-          data[prev] = Math.max(0, (Number(data[prev])||0) - 1);
+      function saveData(){
+        const ok = lsSet(KEY_DATA, JSON.stringify(data));
+        if(!ok && msgEl){
+          msgEl.textContent = "⚠️ Browser blocked storage (private mode). Vote cannot be saved.";
+        }
+        return ok;
+      }
+
+      function render(){
+        const totalVotes = Object.values(data).reduce((a,b)=>a+(Number(b)||0),0);
+        const denom = totalVotes || 1;
+
+        if (totalEl) totalEl.textContent = "Total votes (this device): " + totalVotes;
+
+        const last = lsGet(KEY_LAST);
+        if (activityEl) activityEl.textContent = "Last activity: " + formatWhen(last);
+
+        const voted = lsGet(KEY_VOTE);
+        if(voted && labels[voted]){
+          if(msgEl) msgEl.textContent = "✅ तपाईंको भोट: " + labels[voted] + " (Tap another option to change)";
+        } else {
+          if(msgEl) msgEl.textContent = "भोट तपाईंको ब्राउजरमा सेभ हुन्छ। (This device only)";
         }
 
-        // Add to new vote (or keep same)
-        if(prev !== v){
-          data[v] = (Number(data[v])||0) + 1;
-          lsSet(KEY_VOTE, v);
-        }
+        if (!resultsBox) return;
+        resultsBox.innerHTML = Object.keys(empty).map(k=>{
+          const votes = Number(data[k]) || 0;
+          const pct = Math.round((votes/denom)*100);
+          const barW = totalVotes ? pct : 0;
+          return `
+            <div class="pollRow">
+              <div class="pollLabel">
+                <span>${labels[k]}</span>
+                <span>${votes} (${pct}%)</span>
+              </div>
+              <div class="pollBarBg">
+                <div class="pollBar" style="width:${barW}%"></div>
+              </div>
+            </div>
+          `;
+        }).join("");
 
-        setActivityNow();
-        saveData();
-        render();
+        buttons.forEach(b=>{
+          const v = b.dataset.v;
+          b.classList.toggle("active", (lsGet(KEY_VOTE) === v));
+        });
+      }
+
+      // vote click (allow change vote)
+      buttons.forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const v = btn.dataset.v;
+          if(!labels[v]) return;
+
+          const prev = lsGet(KEY_VOTE);
+
+          if(prev && labels[prev] && prev !== v){
+            data[prev] = Math.max(0, (Number(data[prev])||0) - 1);
+          }
+
+          if(prev !== v){
+            data[v] = (Number(data[v])||0) + 1;
+            lsSet(KEY_VOTE, v);
+          }
+
+          setActivityNow();
+          saveData();
+          render();
+        });
       });
-    });
 
-    // reset button
-    if(resetBtn){
-      resetBtn.addEventListener("click", ()=>{
-        const prev = lsGet(KEY_VOTE);
-        if(prev && labels[prev]){
-          data[prev] = Math.max(0, (Number(data[prev])||0) - 1);
-        }
-        lsRemove(KEY_VOTE);
-        setActivityNow();
-        saveData();
-        render();
-      });
-    }
+      // reset vote
+      if(resetBtn){
+        resetBtn.addEventListener("click", ()=>{
+          const prev = lsGet(KEY_VOTE);
+          if(prev && labels[prev]){
+            data[prev] = Math.max(0, (Number(data[prev])||0) - 1);
+          }
+          lsRemove(KEY_VOTE);
+          setActivityNow();
+          saveData();
+          render();
+        });
+      }
 
-    // initial render
-    render();
-  })();
-</script>
+      render();
+    })();
+  </script>
 </body>
 </html>
