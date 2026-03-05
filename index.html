@@ -1,1189 +1,501 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Nepal Election Live 2026 – Countdown & Results</title>
-  <meta name="description" content="Independent Nepal Election 2026 countdown, live results, top parties, and breaking political news.">
-  <link rel="canonical" href="https://nepalelectionlive.live/">
-
-  <meta property="og:title" content="Nepal Election Live 2026">
-  <meta property="og:description" content="Countdown, breaking news, and live election results dashboard for Nepal 2026.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nepalelectionlive.live">
-  <meta property="og:image" content="https://nepalelectionlive.live/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JHAPA-5 LIVE – Oli vs Balen</title>
+  <meta name="description" content="Jhapa-5 live vote counting – Oli vs Balen (TV screen)." />
 
   <style>
     :root{
-      --bg: #0b1220;
+      --bg:#05070d;
       --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(255,255,255,0.10);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.65);
       --line: rgba(255,255,255,0.12);
-      --accent: #facc15;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.62);
+
+      --live:#ff3b3b;
+      --oli:#38bdf8;     /* cyan */
+      --balen:#facc15;   /* yellow */
+      --shadow: 0 20px 90px rgba(0,0,0,0.60);
     }
+
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        linear-gradient(rgba(11,18,32,0.55), rgba(11,18,32,0.65)),
-        url("bg-election.jpg") center / cover no-repeat fixed;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(1200px 520px at 10% -10%, rgba(250,204,21,0.12), transparent 62%),
+        radial-gradient(900px 520px at 100% 0%, rgba(56,189,248,0.12), transparent 60%),
+        linear-gradient(180deg, #060a12, #03050a);
       min-height: 100vh;
-      padding: 28px 16px 60px;
+      padding: 18px 10px 40px;
     }
-    .wrap{ max-width: 980px; margin: 0 auto; }
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap: 16px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-      border-radius: 18px;
-      backdrop-filter: blur(10px);
+
+    .wrap{ max-width: 1100px; margin: 0 auto; }
+    .tv{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
-    .brand{ display:flex; align-items:center; gap: 12px; min-width: 0; }
-    .badge{
-      width: 44px; height: 44px; border-radius: 14px;
-      background: linear-gradient(135deg, rgba(250,204,21,0.95), rgba(250,204,21,0.35));
+
+    /* TOP BAR */
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.20);
+    }
+    .left{ display:flex; align-items:center; gap:12px; min-width:0; }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
       display:grid; place-items:center;
-      color: #0b1220; font-weight: 900; letter-spacing: 0.5px;
-      box-shadow: 0 10px 30px rgba(250,204,21,0.12);
-      flex: 0 0 auto;
+      background: linear-gradient(135deg, rgba(250,204,21,0.95), rgba(250,204,21,0.35));
+      color:#0b1220; font-weight: 950;
+      letter-spacing: .5px;
+      flex:0 0 auto;
     }
-    h1{ margin:0; font-size: clamp(18px, 3vw, 26px); line-height: 1.15; white-space: nowrap; overflow:hidden; text-overflow: ellipsis; }
-    .sub{ margin: 4px 0 0; color: var(--muted); font-size: 13px; }
-    .pill{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
+    .titleBox{ min-width:0; }
+    .h1{
+      margin:0;
+      font-weight: 950;
+      font-size: clamp(18px, 2.4vw, 28px);
+      line-height:1.1;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .sub{
+      margin-top: 4px;
+      font-size: 13px;
       color: var(--muted);
-      padding: 10px 12px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    .right{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
       border-radius: 999px;
+      padding: 9px 12px;
       font-size: 12px;
+      color: rgba(255,255,255,0.82);
       white-space: nowrap;
     }
-
-    main{ margin-top: 18px; display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; }
-    @media (max-width: 860px){
-      main{ grid-template-columns: 1fr; }
-      header{ flex-direction: column; align-items:flex-start; }
-    }
-
-    .card{
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border-radius: 18px;
-      padding: 18px;
-      backdrop-filter: blur(10px);
-    }
-    .card h2{ margin: 0 0 10px; font-size: 15px; color: rgba(255,255,255,0.88); font-weight: 800; letter-spacing: 0.2px; }
-
-    .countGrid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
-    @media (max-width: 520px){ .countGrid{ grid-template-columns: repeat(2, 1fr); } }
-
-    .tile{
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 16px;
-      padding: 14px 12px;
-      text-align:center;
-    }
-    .num{ font-size: clamp(22px, 4vw, 36px); font-weight: 900; letter-spacing: 0.4px; }
-    .lbl{ margin-top: 6px; font-size: 12px; color: var(--muted); }
-
-    .bigLine{ margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .accent{ color: var(--accent); font-weight: 800; }
-    .mini{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    .chip{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.78);
-      padding: 8px 10px;
-      border-radius: 999px;
+    .btn{
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.92);
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-weight: 900;
       font-size: 12px;
-      text-decoration:none;
-    }
-    footer{ margin-top: 18px; color: rgba(255,255,255,0.45); font-size: 12px; text-align:center; }
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-
-    /* TOP 10 PARTY ROW */
-    .partyRow{
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 10px;
-    }
-    @media (max-width: 1200px){ .partyRow{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    @media (max-width: 900px){ .partyRow{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 520px){ .partyRow{ grid-template-columns: 1fr; } }
-
-    .partyCard{ border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.045); border-radius: 16px; padding: 14px 14px 12px; }
-    .partyStripe{ height: 3px; border-radius: 999px; margin-bottom: 10px; opacity: 0.95; }
-    .partyTop{ display:flex; align-items:flex-start; justify-content:space-between; gap: 10px; }
-    .partyName{ font-weight: 900; letter-spacing: 0.2px; font-size: 13.5px; line-height: 1.2; }
-    .partyNep{ margin-top: 4px; font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.2; }
-    .seatBox{ min-width: 60px; text-align: center; border-radius: 14px; padding: 8px 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.18); }
-    .seatNum{ font-size: 20px; font-weight: 900; line-height: 1; }
-    .seatLbl{ margin-top: 4px; font-size: 11px; color: rgba(255,255,255,0.6); }
-    .partyMeta{ display:flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .partyTag{ font-size: 11px; color: rgba(255,255,255,0.72); border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); padding: 6px 8px; border-radius: 999px; }
-
-    /* NEWS TICKER */
-    .tickerWrap{ border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); border-radius:14px; overflow:hidden; padding:10px 0; margin-top: 10px; }
-    #ticker{ white-space:nowrap; will-change:transform; padding-left: 12px; }
-    .tickerLink{ color: rgba(255,255,255,0.90); text-decoration:none; margin-right: 28px; font-size: 13px; }
-    .tickerLink:hover{ text-decoration: underline; }
-
-    /* BREAKING NEWS */
-    .section-title{ margin: 18px 0 10px; font-size: 18px; font-weight: 900; letter-spacing: .2px; }
-    .breaking{ margin: 0 0 18px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); border-radius: 14px; overflow: hidden; }
-    .breaking__bar{ display:flex; align-items:center; gap:12px; padding:12px 14px; border-bottom: 1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.18); }
-    .breaking__badge{ font-weight:900; letter-spacing:.08em; font-size:12px; padding:6px 10px; border-radius:999px; background: rgba(255,60,60,.20); border: 1px solid rgba(255,60,60,.40); }
-    .breaking__ticker{ flex:1; white-space:nowrap; overflow:hidden; position:relative; }
-    .breaking__ticker > div{ display:inline-block; padding-left: 100%; animation: ticker 22s linear infinite; }
-    @keyframes ticker{ 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-    .breaking__refresh{ border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); color: inherit; padding:8px 10px; border-radius:10px; cursor:pointer; }
-    .breaking__grid{ display:grid; grid-template-columns: 1.7fr .9fr; gap:14px; padding:14px; }
-    @media (max-width: 900px){ .breaking__grid{ grid-template-columns: 1fr; } }
-    .breaking__list{ display:flex; flex-direction:column; gap:10px; }
-    .breaking__item{ padding:10px 12px; border-radius:12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); }
-    .breaking__item a{ color: inherit; text-decoration: none; font-weight: 800; }
-    .breaking__item a:hover{ text-decoration: underline; }
-    .breaking__source{ margin-top:6px; font-size:12px; opacity:.75; display:flex; gap:10px; flex-wrap:wrap; }
-    .breaking__meta{ padding:10px 12px; border-radius:12px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.04); font-size:13px; opacity:.9; }
-    .breaking__time{ margin-top:10px; font-size:12px; opacity:.75; }
-    .breaking__note{ margin-top:12px; font-size:12px; opacity:.8; line-height:1.35; }
-
-    .site-footer{ margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.10); padding-top: 14px; color: rgba(255,255,255,0.55); font-size: 12px; text-align:center; }
-
-    /* SIMPLE ELECTION EXPLAINER GRID */
-    .sysGrid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; margin-top:10px; }
-    @media (max-width: 800px){ .sysGrid{ grid-template-columns: 1fr; } }
-    .sysBox{ border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); border-radius:14px; padding:14px; }
-    .sysBox h3{ margin:0 0 8px; font-size:15px; font-weight:900; }
-    .sysBox ul{ margin:0; padding-left:18px; }
-    .sysBox li{ margin:6px 0; font-size:13px; line-height:1.5; color: rgba(255,255,255,0.82); }
-    .example{ margin-top:10px; font-size:12px; color: rgba(255,255,255,0.72); border-top:1px solid rgba(255,255,255,0.10); padding-top:10px; }
-
-    /* ---- POLL ---- */
-    .pollBox{
-      margin-top: 8px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
-      border-radius: 14px;
-      padding: 12px;
-    }
-    .pollQ{ font-size:12.5px; opacity:.9; margin-bottom:10px; }
-    .pollOpts{ display:grid; gap:8px; }
-    .pollBtn{
-      text-align:left; border:1px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.04);
-      color:rgba(255,255,255,0.92);
-      padding:10px; border-radius:10px;
-      cursor:pointer; font-size:12px; font-weight:800;
-    }
-    .pollBtn:hover{ background:rgba(255,255,255,0.06); }
-    .pollBtn.active{
-      border-color:rgba(250,204,21,0.55);
-      background:rgba(250,204,21,0.10);
-    }
-    .pollTotal{ margin-top:10px; font-size: 12px; opacity: .85; }
-    .pollResults{ margin-top:10px; }
-    .pollRow{ margin-bottom:8px; }
-    .pollLabel{ font-size:11.5px; display:flex; justify-content:space-between; gap:10px; }
-    .pollBarBg{
-      height:8px; background:rgba(255,255,255,0.10);
-      border-radius:999px; overflow:hidden;
-    }
-    .pollBar{
-      height:100%;
-      background:linear-gradient(90deg,#facc15,#fde047);
-      transition:width .4s ease;
-      min-width: 2px;
-    }
-    .pollMsg{ margin-top:8px; font-size:12px; opacity:.85; }
-    .pollSmall{ margin-top:6px; font-size:11px; opacity:.65; }
-
-    /* ---- LIVE RESULTS ---- */
-    .resultsHead{
-      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .resultsStatus{
-      font-size: 12px;
-      color: rgba(255,255,255,0.78);
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.16);
-      padding: 8px 10px;
-      border-radius: 999px;
-    }
-    .btnSmall{
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.06);
-      color:rgba(255,255,255,0.92);
-      padding:8px 10px;
-      border-radius:12px;
       cursor:pointer;
-      font-weight:800;
-      font-size:12px;
     }
-    .btnSmall:hover{ background:rgba(255,255,255,0.08); }
-    .kpiGrid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
-    @media (max-width: 860px){ .kpiGrid{ grid-template-columns: repeat(2, 1fr); } }
+    .btn:hover{ background: rgba(255,255,255,0.09); }
+
+    .liveBug{
+      display:flex; align-items:center; gap:8px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.20);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .08em;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--live);
+      box-shadow: 0 0 0 6px rgba(255,59,59,0.14);
+      animation: pulse 1.1s infinite;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(1); opacity: 1; }
+      50%{ transform: scale(1.15); opacity: .85; }
+      100%{ transform: scale(1); opacity: 1; }
+    }
+
+    /* BODY */
+    .body{
+      padding: 14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .score{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 720px){ .kpis{ grid-template-columns: repeat(2, 1fr); } }
+
     .kpi{
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       border-radius: 16px;
       padding: 12px;
     }
-    .kpiVal{ font-size: 22px; font-weight: 900; line-height: 1.1; }
-    .kpiLbl{ margin-top:6px; font-size: 12px; color: rgba(255,255,255,0.65); }
-    .table{
-      margin-top: 12px;
+    .kLbl{ font-size: 12px; color: rgba(255,255,255,0.62); }
+    .kVal{
+      margin-top: 6px;
+      font-size: clamp(20px, 3.2vw, 36px);
+      font-weight: 950;
+      letter-spacing: .2px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.05;
+    }
+
+    .candWrap{
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 14px;
-      overflow: hidden;
+      background: rgba(0,0,0,0.14);
+      border-radius: 18px;
+      overflow:hidden;
     }
-    .tr{
+
+    .cand{
       display:grid;
-      grid-template-columns: 1.6fr 0.6fr 1.6fr;
+      grid-template-columns: 1.6fr 5fr 1.1fr;
       gap: 10px;
-      padding: 10px 12px;
-      border-top: 1px solid rgba(255,255,255,0.08);
       align-items:center;
-      background: rgba(255,255,255,0.03);
+      padding: 14px 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
-    .tr.head{
-      background: rgba(0,0,0,0.18);
-      border-top: none;
-      font-weight: 900;
+    .cand:first-child{ border-top: none; }
+
+    .who{ min-width:0; }
+    .name{
+      font-weight: 950;
+      font-size: 18px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .party{
+      margin-top: 4px;
       font-size: 12px;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.62);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
-    .partyCell{ min-width:0; }
-    .pName{ font-weight: 900; font-size: 13px; line-height: 1.2; }
-    .pNep{ margin-top:4px; font-size: 12px; color: rgba(255,255,255,0.62); }
-    .seatCell{
-      text-align:right;
-      font-weight: 900;
-      font-size: 14px;
-    }
+
     .barBg{
-      height: 10px;
+      height: 18px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
       overflow:hidden;
-      border: 1px solid rgba(255,255,255,0.10);
+      position:relative;
     }
     .bar{
-      height:100%;
-      width:0%;
-      background: linear-gradient(90deg, rgba(250,204,21,0.95), rgba(253,224,71,0.65));
-      transition: width .35s ease;
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 900ms cubic-bezier(.2,.9,.2,1);
+      will-change: width;
     }
-    .noteTiny{
-      margin-top: 10px;
+    .bar.oli{ background: linear-gradient(90deg, rgba(56,189,248,0.95), rgba(56,189,248,0.35)); }
+    .bar.balen{ background: linear-gradient(90deg, rgba(250,204,21,0.95), rgba(250,204,21,0.40)); }
+
+    .nums{
+      text-align:right;
+      font-variant-numeric: tabular-nums;
+    }
+    .votes{
+      font-weight: 950;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+    .pct{
+      margin-top: 5px;
       font-size: 12px;
-      color: rgba(255,255,255,0.60);
-      line-height: 1.5;
+      font-weight: 900;
+      color: rgba(255,255,255,0.70);
+    }
+
+    .error{
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,59,59,0.10);
+    }
+
+    footer{
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      text-align:center;
+      background: rgba(0,0,0,0.16);
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="badge">NE</div>
-        <div style="min-width:0;">
-          <h1>Nepal Election Countdown</h1>
-          <p class="sub">Countdown + live results dashboard</p>
+    <div class="tv">
+      <div class="top">
+        <div class="left">
+          <div class="logo">NE</div>
+          <div class="titleBox">
+            <div class="h1">JHAPA–5 LIVE COUNTING</div>
+            <div class="sub">OLI vs BALEN • TV result screen • data/jhapa5.json</div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="liveBug"><span class="dot"></span>LIVE</div>
+          <div class="pill" id="statusPill">Status: Waiting…</div>
+          <div class="pill" id="lastUpdated">Last updated: —</div>
+          <button class="btn" id="btnRefresh" type="button">Refresh</button>
         </div>
       </div>
-      <div class="pill" id="statusPill">Status: Building…</div>
-    </header>
 
-    <!-- ✅ POLL FIRST (ONLY ONCE) -->
-    <section class="card" style="margin-top:18px;">
-      <h2>Quick Poll</h2>
-
-      <div class="pollBox" id="leadPoll">
-        <div class="pollQ">तपाईंको विचारमा सरकार गठन गर्ने दौडमा को अगाडि देखिन्छ?</div>
-
-        <div class="pollOpts">
-          <button class="pollBtn" data-v="NC">नेपाली कांग्रेस (NC)</button>
-          <button class="pollBtn" data-v="UML">नेपाल कम्युनिष्ट पार्टी (एमाले)</button>
-          <button class="pollBtn" data-v="RSP">राष्ट्रिय स्वतन्त्र पार्टी (RSP)</button>
-          <button class="pollBtn" data-v="NCP">नेपाल कम्युनिष्ट पार्टी</button>
-          <button class="pollBtn" data-v="COAL">गठबन्धन सरकार</button>
-          <button class="pollBtn" data-v="UND">भन्न गाह्रो छ / Undecided</button>
-        </div>
-
-        <div class="pollTotal" id="pollTotal">Total votes: 0</div>
-
-        <button class="pollBtn" id="pollReset" type="button" style="opacity:.85;">Reset my vote</button>
-        <div class="pollSmall" id="pollActivity">Last activity: —</div>
-
-        <div class="pollResults" id="pollResults"></div>
-
-        <div class="pollMsg" id="leadPollMsg">भोट तपाईंको ब्राउजरमा सेभ हुन्छ।</div>
-        <div class="pollSmall">यो scientific poll होइन — site visitor opinion मात्र हो।</div>
-      </div>
-    </section>
-
-    <main>
-      <!-- Countdown Card -->
-      <section class="card">
-        <h2>Countdown to Election Day</h2>
-
-        <div class="countGrid" aria-label="countdown">
-          <div class="tile"><div class="num" id="d">—</div><div class="lbl">Days</div></div>
-          <div class="tile"><div class="num" id="h">—</div><div class="lbl">Hours</div></div>
-          <div class="tile"><div class="num" id="m">—</div><div class="lbl">Minutes</div></div>
-          <div class="tile"><div class="num" id="s">—</div><div class="lbl">Seconds</div></div>
-        </div>
-
-        <div class="bigLine">
-          Target date: <span class="accent" id="targetLabel">—</span><br>
-          Tip: later we’ll add <span class="accent">party cards</span>, <span class="accent">JSON updates</span>, and <span class="accent">Nepali language</span>.
-        </div>
-
-        <div class="mini">
-          <div class="chip" id="localTime">Local time: —</div>
-          <div class="chip" id="lastUpdate">Updated: —</div>
-          <div class="chip" id="nepalTime">Nepal time: —</div>
-        </div>
-      </section>
-
-      <!-- News Card -->
-      <aside class="card">
-        <h2>Live • News24 Nepal Headlines</h2>
-        <div class="bigLine" style="margin-top:2px;">Live scrolling headlines sourced from News24 Nepal articles.</div>
-
-        <div class="tickerWrap" id="tickerWrap">
-          <div id="ticker">Loading headlines…</div>
-        </div>
-
-        <div class="mini" style="margin-top:12px;">
-          <a class="chip" href="https://www.election.gov.np" target="_blank" rel="noopener noreferrer">Election Commission of Nepal</a>
-          <a class="chip" href="https://kantipurdaily.com" target="_blank" rel="noopener noreferrer">Kantipur</a>
-          <a class="chip" href="https://kathmandupost.com" target="_blank" rel="noopener noreferrer">The Kathmandu Post</a>
-          <a class="chip" href="https://www.onlinekhabar.com" target="_blank" rel="noopener noreferrer">OnlineKhabar</a>
-          <a class="chip" href="https://setopati.com" target="_blank" rel="noopener noreferrer">Setopati</a>
-          <a class="chip" href="https://ratopati.com" target="_blank" rel="noopener noreferrer">Ratopati</a>
-          <a class="chip" href="https://ntv.org.np" target="_blank" rel="noopener noreferrer">Nepal Television</a>
-          <a class="chip" href="https://ap1tv.com" target="_blank" rel="noopener noreferrer">AP1 HD</a>
-        </div>
-
-        <div class="bigLine" style="margin-top:10px; font-size:12px;">
-          Source is aggregated via GDELT (domain filter) for static-site compatibility.
-        </div>
-      </aside>
-
-      <!-- ✅ LIVE RESULTS COUNTING -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <div class="resultsHead">
-          <h2 style="margin:0;">Live Result Counting (Seats)</h2>
-          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-            <div class="resultsStatus" id="resultsStatus">Status: Waiting for results feed…</div>
-            <button class="btnSmall" id="resultsRefresh" type="button">Refresh</button>
-          </div>
-        </div>
-
-        <div class="kpiGrid" aria-label="results kpis">
-          <div class="kpi">
-            <div class="kpiVal" id="kpiTotalSeats">275</div>
-            <div class="kpiLbl">Total seats</div>
-          </div>
-          <div class="kpi">
-            <div class="kpiVal" id="kpiMajority">138</div>
-            <div class="kpiLbl">Majority needed</div>
-          </div>
-          <div class="kpi">
-            <div class="kpiVal" id="kpiCounted">0</div>
-            <div class="kpiLbl">Counted / Declared</div>
-          </div>
-          <div class="kpi">
-            <div class="kpiVal" id="kpiLeader">—</div>
-            <div class="kpiLbl">Leading party</div>
-          </div>
-        </div>
-
-        <div class="mini" style="margin-top:12px;">
-          <div class="chip" id="resultsLastUpdated">Last updated: —</div>
-          <div class="chip" id="resultsSource">Source: local JSON feed</div>
-        </div>
-
-        <div class="table" id="resultsTable" aria-label="party results table">
-          <div class="tr head">
-            <div>Party</div>
-            <div style="text-align:right;">Seats</div>
-            <div>Progress</div>
-          </div>
-          <div class="tr">
-            <div class="partyCell">
-              <div class="pName">Waiting for data…</div>
-              <div class="pNep">JSON feed not loaded yet</div>
+      <div class="body">
+        <section class="score" aria-label="Jhapa-5 live scoreboard">
+          <div class="kpis">
+            <div class="kpi">
+              <div class="kLbl">Total votes counted</div>
+              <div class="kVal" id="kTotal">0</div>
             </div>
-            <div class="seatCell">—</div>
-            <div class="barBg"><div class="bar" style="width:0%"></div></div>
-          </div>
-        </div>
-
-        <div class="noteTiny">
-          If you see “awaiting first update”, it means counting started but your JSON has not been updated yet (or fetch path is wrong).<br>
-          Fix: create <b>/data/results.json</b> in your repo and update it during counting.
-        </div>
-      </section>
-
-      <!-- Top Parties Row -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <h2>Top 10 Parties (Seats)</h2>
-        <div id="partyRow" class="partyRow"></div>
-        <div class="bigLine" style="margin-top:10px;">
-          सिट संख्या मतगणना सुरु भएपछि अपडेट हुनेछ। <br>
-          Seat numbers will be updated after counting begins.
-        </div>
-        <div class="bigLine" style="margin-top:8px; font-size:12px;">
-          Sources listed for reference only. This site is an independent informational platform and does not represent any political party, media house, or government authority.
-        </div>
-      </section>
-
-      <!-- Breaking News -->
-      <section style="grid-column: 1 / -1;">
-        <h2 class="section-title">Breaking News</h2>
-
-        <section class="breaking" aria-label="Breaking news">
-          <div class="breaking__bar">
-            <span class="breaking__badge">BREAKING</span>
-            <div class="breaking__ticker" id="breakingTicker">
-              <span class="breaking__loading">Loading headlines…</span>
+            <div class="kpi">
+              <div class="kLbl">Reporting</div>
+              <div class="kVal" id="kReporting">0.0%</div>
             </div>
-            <button class="breaking__refresh" id="breakingRefresh" type="button" title="Refresh">Refresh</button>
+            <div class="kpi">
+              <div class="kLbl">Leader</div>
+              <div class="kVal" id="kLeader">—</div>
+            </div>
+            <div class="kpi">
+              <div class="kLbl">Lead</div>
+              <div class="kVal" id="kLead">—</div>
+            </div>
           </div>
 
-          <div class="breaking__grid">
-            <div class="breaking__list" id="breakingList"></div>
-            <div class="breaking__meta">
-              <div class="breaking__hint">Source: GDELT (news monitoring)</div>
-              <div class="breaking__time" id="breakingUpdated"></div>
-              <div class="breaking__note">
-                Independent informational platform. For official election updates, visit the Election Commission of Nepal.
+          <div class="candWrap" id="candWrap">
+            <!-- OLI -->
+            <div class="cand">
+              <div class="who">
+                <div class="name" id="oliName">OLI</div>
+                <div class="party" id="oliParty">—</div>
+              </div>
+              <div class="barBg">
+                <div class="bar oli" id="oliBar"></div>
+              </div>
+              <div class="nums">
+                <div class="votes" id="oliVotes">0</div>
+                <div class="pct" id="oliPct">0.0%</div>
+              </div>
+            </div>
+
+            <!-- BALEN -->
+            <div class="cand">
+              <div class="who">
+                <div class="name" id="balenName">BALEN</div>
+                <div class="party" id="balenParty">—</div>
+              </div>
+              <div class="barBg">
+                <div class="bar balen" id="balenBar"></div>
+              </div>
+              <div class="nums">
+                <div class="votes" id="balenVotes">0</div>
+                <div class="pct" id="balenPct">0.0%</div>
               </div>
             </div>
           </div>
         </section>
-      </section>
+      </div>
 
-      <!-- Community Support -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <h2>Community Support – Nepal</h2>
-        <p class="bigLine">This website is an <b>independent and neutral election information platform</b>. It does not collect donations or payments.</p>
-        <p class="bigLine">If you wish to help <span class="accent">homeless and vulnerable people in Nepal</span>, please consider supporting established and trusted organizations directly.</p>
-        <ul style="margin-top:10px; font-size:13px; line-height:1.7;">
-          <li><a href="https://www.sosnepal.org.np/" target="_blank" rel="noopener noreferrer">SOS Children’s Villages Nepal</a></li>
-          <li><a href="https://www.streetchildnepal.org/" target="_blank" rel="noopener noreferrer">Street Child Nepal</a></li>
-          <li><a href="https://www.kopilanepal.org/" target="_blank" rel="noopener noreferrer">Kopila Nepal</a></li>
-        </ul>
-        <p class="bigLine" style="font-size:12px;">This site does not handle funds and has no affiliation with the organizations listed above.</p>
-      </section>
-
-      <!-- Election System Explainer -->
-      <section class="card" style="grid-column: 1 / -1;">
-        <h2>प्रत्यक्ष (FPTP) र समानुपातिक (PR) प्रणाली – सरल बुझाइ <span style="font-weight:400; opacity:.75;">| Election System Explained</span></h2>
-
-        <div class="bigLine">
-          नेपालको प्रतिनिधि सभा चुनाव <span class="accent">दुई फरक प्रणाली</span> बाट हुन्छ। <br>
-          <span style="opacity:.8;">Nepal’s House of Representatives election is conducted using <b>two different systems</b>.</span>
-        </div>
-
-        <div class="sysGrid">
-          <div class="sysBox">
-            <h3>🗳️ प्रत्यक्ष प्रणाली (First Past The Post – FPTP)</h3>
-            <ul>
-              <li>देशलाई <b>१६५ निर्वाचन क्षेत्र</b> मा विभाजन गरिएको हुन्छ।</li>
-              <li>प्रत्येक क्षेत्रबाट <b>एक जना उम्मेदवार</b> विजेता हुन्छ।</li>
-              <li>सबैभन्दा धेरै मत पाउने उम्मेदवारले सिधै जित्छ।</li>
-            </ul>
-            <div class="example">
-              <b>उदाहरण / Example:</b><br>
-              A = 40% votes, B = 35%, C = 25%<br>
-              👉 A wins the seat
-            </div>
-          </div>
-
-          <div class="sysBox">
-            <h3>📊 समानुपातिक प्रणाली (Proportional Representation – PR)</h3>
-            <ul>
-              <li>देशभर पार्टीले पाएको <b>कुल मत प्रतिशत</b> अनुसार सिट बाँडिन्छ।</li>
-              <li>कुल <b>११० सिट</b> समानुपातिक प्रणालीबाट आउँछ।</li>
-              <li>मतदाता पार्टीलाई मत हाल्छ, व्यक्ति होइन।</li>
-            </ul>
-            <div class="example">
-              <b>उदाहरण / Example:</b><br>
-              30% votes ≈ 33 seats<br>
-              20% votes ≈ 22 seats
-            </div>
-          </div>
-        </div>
-
-        <div class="bigLine" style="margin-top:12px;">
-          👉 सरकार बनाउन <b>१३८ सिट</b> आवश्यक पर्छ (कुल २७५)। <br>
-          <span style="opacity:.8;">To form a government, a party or coalition must secure <b>138 out of 275 seats</b>.</span>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      Built on GitHub Pages • Repo:
-      <a href="https://github.com/pushkargithub/election-countdown-nepal" target="_blank" rel="noreferrer">election-countdown-nepal</a>
-    </footer>
-
-    <footer class="site-footer">
-      <p>
-        This site is an independent informational platform. For official results, visit the
-        <a href="https://www.election.gov.np" target="_blank" rel="noopener noreferrer">Election Commission of Nepal</a>.
-      </p>
-    </footer>
+      <footer>
+        Independent informational display • Official results: Election Commission of Nepal
+      </footer>
+    </div>
   </div>
 
-  <!-- ✅ ONLY ONE SCRIPT TAG -->
   <script>
-    // ================================
-    // Helpers: Nepal time display
-    // ================================
-    function formatNepalTime(date){
-      return date.toLocaleString("en-US", { timeZone: "Asia/Kathmandu" });
-    }
-    const pad2 = (n) => String(n).padStart(2, "0");
-
-    // ================================
-    // 1) COUNTDOWN (Nepal-time election moment)
-    // ================================
-    const electionISO = "2026-03-05T07:00:00+05:45";
-    const electionDate = new Date(electionISO);
-
-    function tick(){
-      const now = new Date();
-      const diff = electionDate.getTime() - now.getTime();
-
-      const localTimeEl  = document.getElementById("localTime");
-      const lastUpdateEl = document.getElementById("lastUpdate");
-      const targetLabelEl= document.getElementById("targetLabel");
-      const nepalTimeEl  = document.getElementById("nepalTime");
-      const status       = document.getElementById("statusPill");
-
-      if (localTimeEl)  localTimeEl.textContent  = "Local time: " + now.toLocaleString();
-      if (nepalTimeEl)  nepalTimeEl.textContent  = "Nepal time: " + formatNepalTime(now);
-      if (lastUpdateEl) lastUpdateEl.textContent = "Updated: " + now.toLocaleTimeString();
-      if (targetLabelEl) targetLabelEl.textContent = electionDate.toLocaleString() + " (NPT +05:45)";
-
-      if (!status) return;
-
-      if (isNaN(electionDate.getTime())){
-        status.textContent = "Status: Set election date";
-        return;
-      }
-
-      if (diff <= 0){
-        const dEl = document.getElementById("d");
-        const hEl = document.getElementById("h");
-        const mEl = document.getElementById("m");
-        const sEl = document.getElementById("s");
-        if (dEl) dEl.textContent = "0";
-        if (hEl) hEl.textContent = "00";
-        if (mEl) mEl.textContent = "00";
-        if (sEl) sEl.textContent = "00";
-        status.textContent = "Status: Counting / Results";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff / (1000*60*60)) % 24);
-      const minutes = Math.floor((diff / (1000*60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      const dEl = document.getElementById("d");
-      const hEl = document.getElementById("h");
-      const mEl = document.getElementById("m");
-      const sEl = document.getElementById("s");
-      if (dEl) dEl.textContent = String(days);
-      if (hEl) hEl.textContent = pad2(hours);
-      if (mEl) mEl.textContent = pad2(minutes);
-      if (sEl) sEl.textContent = pad2(seconds);
-
-      status.textContent = "Status: Live";
-    }
-    tick();
-    setInterval(tick, 1000);
-
-    // ================================
-    // 2) TOP 10 PARTIES ROW (initial; will be overwritten by live results)
-    // ================================
-    const topParties = [
-      { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
-      { code: "NC",  name: "Nepali Congress", nepali: "नेपाली कांग्रेस", seats: 0, note1: "Liberal democracy", note2: "Mainstream", color: "rgba(59,130,246,0.95)", desc: "One of Nepal’s oldest and largest parties; advocates liberal democracy and civil liberties." },
-      { code: "UML", name: "CPN (UML)", nepali: "नेपाल कम्युनिष्ट पार्टी (एमाले)", seats: 0, note1: "Left", note2: "Top contender", color: "rgba(34,197,94,0.95)", desc: "A major communist party; consistently among top vote-getters across constituencies." },
-      { code: "MC",  name: "Maoist Centre", nepali: "नेपाल कम्युनिष्ट पार्टी (माओवादी केन्द्र)", seats: 0, note1: "Coalition", note2: "Maoist roots", color: "rgba(239,68,68,0.90)", desc: "Rooted in the Maoist movement; often plays a key role in coalition politics." },
-      { code: "RPP", name: "Rastriya Prajatantra Party", nepali: "राष्ट्रिय प्रजातन्त्र पार्टी", seats: 0, note1: "Conservative", note2: "Monarchist", color: "rgba(168,85,247,0.90)", desc: "A right-leaning party known for monarchist and Hindu-state advocacy." },
-      { code: "JSP", name: "Janata Samajwadi Party", nepali: "जनता समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(251,146,60,0.90)", desc: "A Madhes-based party focusing on federalism, inclusion, and regional rights." },
-      { code: "LSP", name: "Loktantrik Samajwadi Party", nepali: "लोकतान्त्रिक समाजवादी पार्टी", seats: 0, note1: "Madhes", note2: "Regional", color: "rgba(236,72,153,0.90)", desc: "A regional party with influence in Tarai–Madhes constituencies." },
-      { code: "NUP", name: "Nagarik Unmukti Party", nepali: "नागरिक उन्मुक्ति पार्टी", seats: 0, note1: "Regional", note2: "Tarai", color: "rgba(14,165,233,0.90)", desc: "Represents regional/community interests, mainly active in parts of the Tarai." },
-      { code: "SSP", name: "Shram Sanskriti Party", nepali: "नेपाल श्रम संस्कृति पार्टी", seats: 0, note1: "Labor", note2: "Work culture", color: "rgba(234,179,8,0.90)", desc: "Focuses on labor dignity, work culture, and social responsibility; positioned as an alternative reform-oriented party." },
-      { code: "UNP", name: "Ujyaalo Nepal Party", nepali: "उज्यालो नेपाल पार्टी", seats: 0, note1: "Reform", note2: "New party", color: "rgba(56,189,248,0.90)", desc: "Promotes transparency, accountability, and a progressive vision aimed at institutional reform." }
-    ];
-
-    function renderParties(){
-      const row = document.getElementById("partyRow");
-      if (!row) return;
-
-      row.innerHTML = topParties.map(p => `
-        <div class="partyCard">
-          <div class="partyStripe" style="background:${p.color};"></div>
-          <div class="partyTop">
-            <div style="min-width:0;">
-              <div class="partyName">${p.code} • ${p.name}</div>
-              <div class="partyNep">${p.nepali}</div>
-            </div>
-            <div class="seatBox" title="Seats">
-              <div class="seatNum">${Number(p.seats)||0}</div>
-              <div class="seatLbl">Seats</div>
-            </div>
-          </div>
-          <div class="partyMeta">
-            <span class="partyTag">${p.note1}</span>
-            <span class="partyTag">${p.note2}</span>
-          </div>
-          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.4;">
-            ${p.desc}
-          </div>
-        </div>
-      `).join("");
-    }
-    renderParties();
-
-    // ================================
-    // 3) LIVE RESULTS (local JSON feed)
-    // ================================
-    const RESULTS = {
-      url: "./data/results.json",
-      pollMs: 15000,
-      totalSeatsDefault: 275,
-      majorityDefault: 138
+    // ==========================
+    // CONFIG
+    // ==========================
+    const CONFIG = {
+      url: "./data/jhapa5.json",
+      pollMs: 5000
     };
 
-    function num(x){
-      const n = Number(x);
-      return Number.isFinite(n) ? n : 0;
+    // ==========================
+    // Utils
+    // ==========================
+    const $ = (id) => document.getElementById(id);
+    const num = (x) => (Number.isFinite(Number(x)) ? Number(x) : 0);
+    const s = (x) => (x === null || x === undefined) ? "" : String(x);
+
+    function fmtInt(n){
+      n = Math.round(num(n));
+      return n.toLocaleString("en-US");
     }
 
-    function safeStr(x){
-      return (x === null || x === undefined) ? "" : String(x);
+    function fmtPct(x){
+      const v = Math.round(num(x) * 10) / 10;
+      return v.toFixed(1) + "%";
     }
 
-    // Accept multiple JSON shapes and normalize into:
-    // { totalSeats, countedSeats, lastUpdated, parties:[{code,name,nepali,seats}] }
-    function normalizeResults(raw){
-      const out = {
-        totalSeats: RESULTS.totalSeatsDefault,
-        countedSeats: 0,
+    // TV number count-up/down
+    function animateNumber(el, from, to, ms=700){
+      if(!el) return;
+      from = num(from); to = num(to);
+      const start = performance.now();
+      const diff = to - from;
+
+      function step(t){
+        const p = Math.min(1, (t - start) / ms);
+        const e = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        const val = Math.round(from + diff * e);
+        el.textContent = fmtInt(val);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ==========================
+    // State for animations
+    // ==========================
+    const prev = {
+      oli: 0,
+      balen: 0,
+      total: 0
+    };
+
+    // ==========================
+    // Expected JSON format:
+    // {
+    //   "lastUpdated": "2026-03-05 20:22 NPT",
+    //   "reportingPct": 34.5,
+    //   "oli":   { "name":"KP Oli", "party":"UML", "votes":12345 },
+    //   "balen": { "name":"Balen Shah", "party":"Independent", "votes":11200 }
+    // }
+    // ==========================
+    function normalize(raw){
+      const model = {
         lastUpdated: null,
-        parties: []
+        reportingPct: 0,
+        oli: { name:"OLI", party:"—", votes:0 },
+        balen:{ name:"BALEN", party:"—", votes:0 }
+      };
+      if(!raw || typeof raw !== "object") return model;
+
+      model.lastUpdated = raw.lastUpdated || raw.updated || raw.timestamp || null;
+      model.reportingPct = num(raw.reportingPct || raw.reporting || raw.progress || 0);
+
+      const o = raw.oli || (raw.candidates && (raw.candidates.oli || raw.candidates.Oli)) || {};
+      const b = raw.balen || (raw.candidates && (raw.candidates.balen || raw.candidates.Balen)) || {};
+
+      model.oli = {
+        name: (s(o.name).trim() || "OLI"),
+        party: (s(o.party).trim() || "—"),
+        votes: num(o.votes || o.count || o.total || 0)
+      };
+      model.balen = {
+        name: (s(b.name).trim() || "BALEN"),
+        party: (s(b.party).trim() || "—"),
+        votes: num(b.votes || b.count || b.total || 0)
       };
 
-      if (!raw || typeof raw !== "object") return out;
+      return model;
+    }
 
-      // total seats / last updated
-      out.totalSeats = num(raw.totalSeats) || num(raw.total) || RESULTS.totalSeatsDefault;
-      out.lastUpdated = raw.lastUpdated || raw.updated || raw.timestamp || raw.last_update || null;
+    function render(model){
+      // Labels
+      $("oliName").textContent = model.oli.name.toUpperCase();
+      $("oliParty").textContent = model.oli.party;
+      $("balenName").textContent = model.balen.name.toUpperCase();
+      $("balenParty").textContent = model.balen.party;
 
-      // counted seats (try several fields)
-      out.countedSeats =
-        num(raw.countedSeats) ||
-        num(raw.declaredSeats) ||
-        num(raw.counted) ||
-        num(raw.declared) ||
-        num(raw.counted_total) ||
-        0;
+      // Totals
+      const oliVotes = num(model.oli.votes);
+      const balenVotes = num(model.balen.votes);
+      const total = oliVotes + balenVotes;
+      const denom = total || 1;
 
-      // Parties formats:
-      // A) raw.parties = [{code, seats/totalSeats/seatsTotal, name, nepali}]
-      // B) raw.results = { "NC": 10, "UML": 12, ... }
-      // C) raw.seats = [{code, seats}] or {code: seats}
-      let partyArr = [];
+      const oliPct = (oliVotes / denom) * 100;
+      const balenPct = (balenVotes / denom) * 100;
 
-      if (Array.isArray(raw.parties)) {
-        partyArr = raw.parties.slice();
-      } else if (raw.results && typeof raw.results === "object" && !Array.isArray(raw.results)) {
-        partyArr = Object.keys(raw.results).map(code => ({ code, seats: raw.results[code] }));
-      } else if (Array.isArray(raw.seats)) {
-        partyArr = raw.seats.slice();
-      } else if (raw.seats && typeof raw.seats === "object" && !Array.isArray(raw.seats)) {
-        partyArr = Object.keys(raw.seats).map(code => ({ code, seats: raw.seats[code] }));
+      // Animate numbers
+      animateNumber($("oliVotes"), prev.oli, oliVotes, 750);
+      animateNumber($("balenVotes"), prev.balen, balenVotes, 750);
+      animateNumber($("kTotal"), prev.total, total, 750);
+
+      prev.oli = oliVotes;
+      prev.balen = balenVotes;
+      prev.total = total;
+
+      // Pcts
+      $("oliPct").textContent = fmtPct(oliPct);
+      $("balenPct").textContent = fmtPct(balenPct);
+
+      // Bars
+      $("oliBar").style.width = Math.max(0, Math.min(100, oliPct)) + "%";
+      $("balenBar").style.width = Math.max(0, Math.min(100, balenPct)) + "%";
+
+      // Reporting
+      const rp = Math.max(0, Math.min(100, num(model.reportingPct)));
+      $("kReporting").textContent = fmtPct(rp);
+
+      // Leader + lead margin
+      let leader = "—";
+      let lead = "—";
+      const diff = oliVotes - balenVotes;
+      if (total > 0){
+        if (diff > 0){
+          leader = model.oli.name.toUpperCase();
+          lead = "+" + fmtInt(diff);
+        } else if (diff < 0){
+          leader = model.balen.name.toUpperCase();
+          lead = "+" + fmtInt(Math.abs(diff));
+        } else {
+          leader = "TIED";
+          lead = "0";
+        }
       }
+      $("kLeader").textContent = leader;
+      $("kLead").textContent = lead;
 
-      // Normalize each
-      out.parties = partyArr
-        .map(p => {
-          const code = safeStr(p.code || p.party || p.id).trim();
-          const seats =
-            num(p.seats) ||
-            num(p.totalSeats) ||
-            num(p.seatsTotal) ||
-            num(p.total) ||
-            num(p.value) ||
-            0;
+      // Last updated
+      const last = model.lastUpdated ? s(model.lastUpdated) : new Date().toLocaleString();
+      $("lastUpdated").textContent = "Last updated: " + last;
 
-          const name = safeStr(p.name).trim();
-          const nepali = safeStr(p.nepali).trim();
-          return { code, name, nepali, seats };
-        })
-        .filter(p => p.code || p.name) // keep usable
-        .map(p => {
-          // If code missing but name exists, attempt to derive from known topParties
-          if (!p.code && p.name) {
-            const hit = topParties.find(tp => tp.name.toLowerCase() === p.name.toLowerCase());
-            if (hit) p.code = hit.code;
-          }
-          return p;
-        });
+      // Status
+      $("statusPill").textContent = total > 0 ? "Status: LIVE updating" : "Status: Awaiting first update";
 
-      // If countedSeats missing, infer from sum (optional)
-      if (!out.countedSeats && out.parties.length) {
-        out.countedSeats = out.parties.reduce((a,b)=>a+num(b.seats),0);
-      }
-
-      // Ensure numeric + sort
-      out.parties = out.parties
-        .map(p => ({ ...p, seats: num(p.seats) }))
-        .sort((a,b) => b.seats - a.seats);
-
-      return out;
+      // Clear error styling
+      $("candWrap").classList.remove("error");
     }
 
-    function setText(id, txt){
-      const el = document.getElementById(id);
-      if (el) el.textContent = txt;
+    function renderError(){
+      $("statusPill").textContent = "Status: Feed error";
+      $("candWrap").classList.add("error");
     }
 
-    function renderResultsTable(model){
-      const table = document.getElementById("resultsTable");
-      if (!table) return;
-
-      const total = num(model.totalSeats) || RESULTS.totalSeatsDefault;
-
-      // If empty
-      if (!model.parties.length) {
-        table.innerHTML = `
-          <div class="tr head">
-            <div>Party</div>
-            <div style="text-align:right;">Seats</div>
-            <div>Progress</div>
-          </div>
-          <div class="tr">
-            <div class="partyCell">
-              <div class="pName">Counting started — awaiting first update</div>
-              <div class="pNep">Update /data/results.json to show initial seats</div>
-            </div>
-            <div class="seatCell">0</div>
-            <div class="barBg"><div class="bar" style="width:0%"></div></div>
-          </div>
-        `;
-        return;
-      }
-
-      const rows = model.parties.map(p => {
-        const code = safeStr(p.code || "").trim() || "—";
-        const name = safeStr(p.name).trim() || (topParties.find(tp=>tp.code===code)?.name || "Party");
-        const nep  = safeStr(p.nepali).trim() || (topParties.find(tp=>tp.code===code)?.nepali || "");
-        const seats = num(p.seats);
-        const pct = total ? Math.max(0, Math.min(100, (seats / total) * 100)) : 0;
-
-        return `
-          <div class="tr">
-            <div class="partyCell">
-              <div class="pName">${code} • ${name}</div>
-              <div class="pNep">${nep || ""}</div>
-            </div>
-            <div class="seatCell">${seats}</div>
-            <div class="barBg"><div class="bar" style="width:${pct.toFixed(2)}%"></div></div>
-          </div>
-        `;
-      }).join("");
-
-      table.innerHTML = `
-        <div class="tr head">
-          <div>Party</div>
-          <div style="text-align:right;">Seats</div>
-          <div>Progress</div>
-        </div>
-        ${rows}
-      `;
-    }
-
-    function syncTop10(model){
-      // Update your topParties seats from live results by code match
-      if (!model || !Array.isArray(model.parties)) return;
-      const map = new Map(model.parties.map(p => [String(p.code||"").trim(), num(p.seats)]));
-      topParties.forEach(tp => {
-        const v = map.get(tp.code);
-        if (Number.isFinite(v)) tp.seats = v;
-      });
-      // Re-sort topParties by seats DESC but keep only top 10 shown (already 10)
-      topParties.sort((a,b)=>num(b.seats)-num(a.seats));
-      renderParties();
-    }
-
-    async function loadResultsOnce(){
-      const statusEl = document.getElementById("resultsStatus");
-
+    async function loadOnce(){
       try{
-        if (statusEl) statusEl.textContent = "Status: Loading results…";
-
-        const url = `${RESULTS.url}?v=${Date.now()}`;
-        const res = await fetch(url, { cache: "no-store" });
-
-        if (!res.ok) throw new Error("HTTP " + res.status);
-
+        $("statusPill").textContent = "Status: Loading…";
+        const res = await fetch(`${CONFIG.url}?v=${Date.now()}`, { cache: "no-store" });
+        if(!res.ok) throw new Error("HTTP " + res.status);
         const raw = await res.json();
-        const model = normalizeResults(raw);
-
-        // KPIs
-        const totalSeats = num(model.totalSeats) || RESULTS.totalSeatsDefault;
-        const majority = RESULTS.majorityDefault;
-
-        setText("kpiTotalSeats", String(totalSeats));
-        setText("kpiMajority", String(majority));
-        setText("kpiCounted", String(num(model.countedSeats)));
-
-        const leader = model.parties[0];
-        setText("kpiLeader", leader ? `${(leader.code||"—")} (${num(leader.seats)})` : "—");
-
-        // Last updated
-        const last = model.lastUpdated ? safeStr(model.lastUpdated) : new Date().toLocaleString();
-        setText("resultsLastUpdated", "Last updated: " + last);
-
-        // Status message
-        if (!model.parties.length) {
-          if (statusEl) statusEl.textContent = "Status: Counting started — awaiting first update";
-        } else {
-          if (statusEl) statusEl.textContent = "Status: Live seats updating";
-        }
-
-        // Render
-        renderResultsTable(model);
-        syncTop10(model);
-
-      } catch(err){
-        console.error(err);
-        if (statusEl) statusEl.textContent = "Status: Results feed error (check /data/results.json path)";
-        setText("resultsLastUpdated", "Last updated: —");
-        // Keep whatever old UI is showing.
-      }
-    }
-
-    // Manual refresh
-    const resultsRefresh = document.getElementById("resultsRefresh");
-    if (resultsRefresh) resultsRefresh.addEventListener("click", loadResultsOnce);
-
-    // Auto poll
-    loadResultsOnce();
-    setInterval(loadResultsOnce, RESULTS.pollMs);
-
-    // ================================
-    // 4) NEWS24 HEADLINE TICKER (GDELT domain filter)
-    // ================================
-    let tickerAnim = null;
-
-    async function loadNews24Ticker(){
-      const ticker = document.getElementById("ticker");
-      const wrap = document.getElementById("tickerWrap");
-      if (!ticker || !wrap) return;
-
-      ticker.textContent = "Loading headlines…";
-
-      const url =
-        "https://api.gdeltproject.org/api/v2/doc/doc" +
-        "?format=json&mode=ArtList&maxrecords=12&sort=HybridRel" +
-        "&domain=news24nepal.com";
-
-      try{
-        const res = await fetch(url, { cache: "no-store" });
-        const data = await res.json();
-        const articles = data.articles || [];
-
-        if (!articles.length){
-          ticker.textContent = "No headlines found right now.";
-          return;
-        }
-
-        ticker.innerHTML = articles.map(a => {
-          const title = (a.title || "").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-          const link = a.url || "#";
-          return `<a class="tickerLink" href="${link}" target="_blank" rel="noreferrer">• ${title}</a>`;
-        }).join("");
-
-        startTickerAnimation();
+        render(normalize(raw));
       }catch(e){
-        ticker.textContent = "Failed to load headlines.";
+        console.error(e);
+        renderError();
       }
     }
 
-    function startTickerAnimation(){
-      const wrap = document.getElementById("tickerWrap");
-      const ticker = document.getElementById("ticker");
-      if (!wrap || !ticker) return;
+    $("btnRefresh").addEventListener("click", loadOnce);
 
-      if (tickerAnim) tickerAnim.cancel();
-
-      const wrapWidth = wrap.clientWidth;
-      const tickerWidth = ticker.scrollWidth;
-
-      const speed = 70; // px/sec
-      const distance = wrapWidth + tickerWidth;
-      const duration = distance / speed;
-
-      tickerAnim = ticker.animate(
-        [
-          { transform: `translateX(${wrapWidth}px)` },
-          { transform: `translateX(-${tickerWidth}px)` }
-        ],
-        { duration: duration * 1000, iterations: Infinity }
-      );
-    }
-
-    loadNews24Ticker();
-    setInterval(loadNews24Ticker, 5 * 60 * 1000);
-    window.addEventListener("resize", () => startTickerAnimation());
-
-    // ================================
-    // 5) BREAKING NEWS (GDELT query)
-    // ================================
-    (function(){
-      const tickerEl  = document.getElementById("breakingTicker");
-      const listEl    = document.getElementById("breakingList");
-      const updatedEl = document.getElementById("breakingUpdated");
-      const refreshBtn= document.getElementById("breakingRefresh");
-
-      const QUERY = encodeURIComponent('(Nepal OR Kathmandu) AND (election OR parliament OR "Election Commission")');
-      const MAX   = 8;
-
-      const endpoint = () =>
-        `https://api.gdeltproject.org/api/v2/doc/doc?query=${QUERY}&mode=ArtList&format=json&maxrecords=${MAX}&sort=HybridRel`;
-
-      function safeText(s){ return (s || "").toString(); }
-
-      function render(data){
-        const articles = (data && data.articles) ? data.articles : [];
-
-        if(!articles.length){
-          tickerEl.innerHTML = '<span class="breaking__loading">No headlines found. Try refresh.</span>';
-          listEl.innerHTML = "";
-          updatedEl.textContent = "";
-          return;
-        }
-
-        const tickerTitles = articles.slice(0, 6)
-          .map(a => safeText(a.title).trim())
-          .filter(Boolean);
-
-        tickerEl.innerHTML = `<div>${tickerTitles.join(" • ")}</div>`;
-
-        listEl.innerHTML = articles.map(a => {
-          const title  = safeText(a.title).trim() || "Untitled";
-          const url    = safeText(a.url) || "#";
-          const domain = safeText(a.domain) || "News";
-          const when   = safeText(a.seendate) || "";
-
-          return `
-            <div class="breaking__item">
-              <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>
-              <div class="breaking__source">
-                <span>${domain}</span>
-                ${when ? `<span>• ${when}</span>` : ""}
-              </div>
-            </div>
-          `;
-        }).join("");
-
-        updatedEl.textContent = "Updated: " + new Date().toLocaleString();
-      }
-
-      async function load(){
-        tickerEl.innerHTML = '<span class="breaking__loading">Loading headlines…</span>';
-        try{
-          const res = await fetch(endpoint(), { cache: "no-store" });
-          if(!res.ok) throw new Error("HTTP " + res.status);
-          const json = await res.json();
-          render(json);
-        }catch(err){
-          tickerEl.innerHTML = '<span class="breaking__loading">Could not load headlines. Please refresh.</span>';
-          listEl.innerHTML = "";
-          updatedEl.textContent = "";
-          console.error(err);
-        }
-      }
-
-      if (refreshBtn) refreshBtn.addEventListener("click", load);
-      load();
-      setInterval(load, 5 * 60 * 1000);
-    })();
-
-    // ================================
-    // 6) POLL WITH RESULT BARS (localStorage)
-    // ================================
-    (function(){
-      const poll = document.getElementById("leadPoll");
-      if(!poll) return;
-
-      const buttons    = Array.from(poll.querySelectorAll(".pollBtn[data-v]")); // only option buttons
-      const resultsBox = document.getElementById("pollResults");
-      const totalEl    = document.getElementById("pollTotal");
-      const msgEl      = document.getElementById("leadPollMsg");
-      const activityEl = document.getElementById("pollActivity");
-      const resetBtn   = document.getElementById("pollReset");
-
-      const KEY_VOTE = "nepal_poll_vote_v2";
-      const KEY_DATA = "nepal_poll_data_v2";
-      const KEY_LAST = "nepal_poll_last_v2";
-
-      const labels = {
-        NC:"नेपाली कांग्रेस (NC)",
-        UML:"नेपाल कम्युनिष्ट पार्टी (एमाले)",
-        RSP:"राष्ट्रिय स्वतन्त्र पार्टी (RSP)",
-        NCP:"नेपाल कम्युनिष्ट पार्टी",
-        COAL:"गठबन्धन सरकार",
-        UND:"भन्न गाह्रो छ / Undecided"
-      };
-
-      const empty = { NC:0, UML:0, RSP:0, NCP:0, COAL:0, UND:0 };
-
-      function lsGet(key){
-        try{ return localStorage.getItem(key); }catch(e){ return null; }
-      }
-      function lsSet(key,val){
-        try{ localStorage.setItem(key,val); return true; }catch(e){ return false; }
-      }
-      function lsRemove(key){
-        try{ localStorage.removeItem(key); }catch(e){}
-      }
-
-      let data = empty;
-      try{
-        const raw = lsGet(KEY_DATA);
-        data = raw ? JSON.parse(raw) : empty;
-      }catch(e){
-        data = empty;
-      }
-      data = { ...empty, ...data };
-
-      function formatWhen(ms){
-        if(!ms) return "—";
-        const d = new Date(Number(ms));
-        if (isNaN(d.getTime())) return "—";
-        return d.toLocaleString();
-      }
-
-      function setActivityNow(){
-        lsSet(KEY_LAST, String(Date.now()));
-      }
-
-      function saveData(){
-        const ok = lsSet(KEY_DATA, JSON.stringify(data));
-        if(!ok && msgEl){
-          msgEl.textContent = "⚠️ Browser blocked storage (private mode). Vote cannot be saved.";
-        }
-        return ok;
-      }
-
-      function render(){
-        const totalVotes = Object.values(data).reduce((a,b)=>a+(Number(b)||0),0);
-        const denom = totalVotes || 1;
-
-        if (totalEl) totalEl.textContent = "Total votes (this device): " + totalVotes;
-
-        const last = lsGet(KEY_LAST);
-        if (activityEl) activityEl.textContent = "Last activity: " + formatWhen(last);
-
-        const voted = lsGet(KEY_VOTE);
-        if(voted && labels[voted]){
-          if(msgEl) msgEl.textContent = "✅ तपाईंको भोट: " + labels[voted] + " (Tap another option to change)";
-        } else {
-          if(msgEl) msgEl.textContent = "भोट तपाईंको ब्राउजरमा सेभ हुन्छ। (This device only)";
-        }
-
-        if (!resultsBox) return;
-        resultsBox.innerHTML = Object.keys(empty).map(k=>{
-          const votes = Number(data[k]) || 0;
-          const pct = Math.round((votes/denom)*100);
-          const barW = totalVotes ? pct : 0;
-          return `
-            <div class="pollRow">
-              <div class="pollLabel">
-                <span>${labels[k]}</span>
-                <span>${votes} (${pct}%)</span>
-              </div>
-              <div class="pollBarBg">
-                <div class="pollBar" style="width:${barW}%"></div>
-              </div>
-            </div>
-          `;
-        }).join("");
-
-        buttons.forEach(b=>{
-          const v = b.dataset.v;
-          b.classList.toggle("active", (lsGet(KEY_VOTE) === v));
-        });
-      }
-
-      // vote click (allow change vote)
-      buttons.forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          const v = btn.dataset.v;
-          if(!labels[v]) return;
-
-          const prev = lsGet(KEY_VOTE);
-
-          if(prev && labels[prev] && prev !== v){
-            data[prev] = Math.max(0, (Number(data[prev])||0) - 1);
-          }
-
-          if(prev !== v){
-            data[v] = (Number(data[v])||0) + 1;
-            lsSet(KEY_VOTE, v);
-          }
-
-          setActivityNow();
-          saveData();
-          render();
-        });
-      });
-
-      // reset vote
-      if(resetBtn){
-        resetBtn.addEventListener("click", ()=>{
-          const prev = lsGet(KEY_VOTE);
-          if(prev && labels[prev]){
-            data[prev] = Math.max(0, (Number(data[prev])||0) - 1);
-          }
-          lsRemove(KEY_VOTE);
-          setActivityNow();
-          saveData();
-          render();
-        });
-      }
-
-      render();
-    })();
+    loadOnce();
+    setInterval(loadOnce, CONFIG.pollMs);
   </script>
 </body>
 </html>
