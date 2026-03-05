@@ -182,7 +182,6 @@
       border-radius: 14px;
       padding: 12px;
     }
-    .pollTitle{ font-weight:900; font-size:13px; margin-bottom:6px; }
     .pollQ{ font-size:12.5px; opacity:.9; margin-bottom:10px; }
     .pollOpts{ display:grid; gap:8px; }
     .pollBtn{
@@ -213,6 +212,90 @@
     }
     .pollMsg{ margin-top:8px; font-size:12px; opacity:.85; }
     .pollSmall{ margin-top:6px; font-size:11px; opacity:.65; }
+
+    /* ---- LIVE RESULTS ---- */
+    .resultsHead{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .resultsStatus{
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.16);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+    .btnSmall{
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+      color:rgba(255,255,255,0.92);
+      padding:8px 10px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:12px;
+    }
+    .btnSmall:hover{ background:rgba(255,255,255,0.08); }
+    .kpiGrid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+    @media (max-width: 860px){ .kpiGrid{ grid-template-columns: repeat(2, 1fr); } }
+    .kpi{
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .kpiVal{ font-size: 22px; font-weight: 900; line-height: 1.1; }
+    .kpiLbl{ margin-top:6px; font-size: 12px; color: rgba(255,255,255,0.65); }
+    .table{
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .tr{
+      display:grid;
+      grid-template-columns: 1.6fr 0.6fr 1.6fr;
+      gap: 10px;
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      align-items:center;
+      background: rgba(255,255,255,0.03);
+    }
+    .tr.head{
+      background: rgba(0,0,0,0.18);
+      border-top: none;
+      font-weight: 900;
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+    }
+    .partyCell{ min-width:0; }
+    .pName{ font-weight: 900; font-size: 13px; line-height: 1.2; }
+    .pNep{ margin-top:4px; font-size: 12px; color: rgba(255,255,255,0.62); }
+    .seatCell{
+      text-align:right;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .barBg{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(250,204,21,0.95), rgba(253,224,71,0.65));
+      transition: width .35s ease;
+    }
+    .noteTiny{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.60);
+      line-height: 1.5;
+    }
   </style>
 </head>
 
@@ -305,6 +388,62 @@
           Source is aggregated via GDELT (domain filter) for static-site compatibility.
         </div>
       </aside>
+
+      <!-- ✅ LIVE RESULTS COUNTING -->
+      <section class="card" style="grid-column: 1 / -1;">
+        <div class="resultsHead">
+          <h2 style="margin:0;">Live Result Counting (Seats)</h2>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <div class="resultsStatus" id="resultsStatus">Status: Waiting for results feed…</div>
+            <button class="btnSmall" id="resultsRefresh" type="button">Refresh</button>
+          </div>
+        </div>
+
+        <div class="kpiGrid" aria-label="results kpis">
+          <div class="kpi">
+            <div class="kpiVal" id="kpiTotalSeats">275</div>
+            <div class="kpiLbl">Total seats</div>
+          </div>
+          <div class="kpi">
+            <div class="kpiVal" id="kpiMajority">138</div>
+            <div class="kpiLbl">Majority needed</div>
+          </div>
+          <div class="kpi">
+            <div class="kpiVal" id="kpiCounted">0</div>
+            <div class="kpiLbl">Counted / Declared</div>
+          </div>
+          <div class="kpi">
+            <div class="kpiVal" id="kpiLeader">—</div>
+            <div class="kpiLbl">Leading party</div>
+          </div>
+        </div>
+
+        <div class="mini" style="margin-top:12px;">
+          <div class="chip" id="resultsLastUpdated">Last updated: —</div>
+          <div class="chip" id="resultsSource">Source: local JSON feed</div>
+        </div>
+
+        <div class="table" id="resultsTable" aria-label="party results table">
+          <div class="tr head">
+            <div>Party</div>
+            <div style="text-align:right;">Seats</div>
+            <div>Progress</div>
+          </div>
+          <div class="tr">
+            <div class="partyCell">
+              <div class="pName">Waiting for data…</div>
+              <div class="pNep">JSON feed not loaded yet</div>
+            </div>
+            <div class="seatCell">—</div>
+            <div class="barBg"><div class="bar" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <div class="noteTiny">
+          If you see “awaiting first update”, it means counting started but your JSON has not been updated yet (or fetch path is wrong).<br>
+          Fix: create <b>/data/results.json</b> in your repo and update it during counting.
+        </div>
+      </section>
 
       <!-- Top Parties Row -->
       <section class="card" style="grid-column: 1 / -1;">
@@ -425,13 +564,13 @@
     function formatNepalTime(date){
       return date.toLocaleString("en-US", { timeZone: "Asia/Kathmandu" });
     }
+    const pad2 = (n) => String(n).padStart(2, "0");
 
     // ================================
     // 1) COUNTDOWN (Nepal-time election moment)
     // ================================
     const electionISO = "2026-03-05T07:00:00+05:45";
     const electionDate = new Date(electionISO);
-    const pad2 = (n) => String(n).padStart(2, "0");
 
     function tick(){
       const now = new Date();
@@ -464,7 +603,7 @@
         if (hEl) hEl.textContent = "00";
         if (mEl) mEl.textContent = "00";
         if (sEl) sEl.textContent = "00";
-        status.textContent = "Status: Election Day";
+        status.textContent = "Status: Counting / Results";
         return;
       }
 
@@ -488,7 +627,7 @@
     setInterval(tick, 1000);
 
     // ================================
-    // 2) TOP 10 PARTIES ROW
+    // 2) TOP 10 PARTIES ROW (initial; will be overwritten by live results)
     // ================================
     const topParties = [
       { code: "RSP", name: "Rastriya Swatantra Party", nepali: "राष्ट्रिय स्वतन्त्र पार्टी", seats: 0, note1: "Reform", note2: "Youth/Urban", color: "rgba(250,204,21,0.95)", desc: "A newer, fast-rising party popular among youth and urban voters; known for governance-reform appeal." },
@@ -516,7 +655,7 @@
               <div class="partyNep">${p.nepali}</div>
             </div>
             <div class="seatBox" title="Seats">
-              <div class="seatNum">${p.seats}</div>
+              <div class="seatNum">${Number(p.seats)||0}</div>
               <div class="seatLbl">Seats</div>
             </div>
           </div>
@@ -533,7 +672,235 @@
     renderParties();
 
     // ================================
-    // 3) NEWS24 HEADLINE TICKER (GDELT domain filter)
+    // 3) LIVE RESULTS (local JSON feed)
+    // ================================
+    const RESULTS = {
+      url: "./data/results.json",
+      pollMs: 15000,
+      totalSeatsDefault: 275,
+      majorityDefault: 138
+    };
+
+    function num(x){
+      const n = Number(x);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function safeStr(x){
+      return (x === null || x === undefined) ? "" : String(x);
+    }
+
+    // Accept multiple JSON shapes and normalize into:
+    // { totalSeats, countedSeats, lastUpdated, parties:[{code,name,nepali,seats}] }
+    function normalizeResults(raw){
+      const out = {
+        totalSeats: RESULTS.totalSeatsDefault,
+        countedSeats: 0,
+        lastUpdated: null,
+        parties: []
+      };
+
+      if (!raw || typeof raw !== "object") return out;
+
+      // total seats / last updated
+      out.totalSeats = num(raw.totalSeats) || num(raw.total) || RESULTS.totalSeatsDefault;
+      out.lastUpdated = raw.lastUpdated || raw.updated || raw.timestamp || raw.last_update || null;
+
+      // counted seats (try several fields)
+      out.countedSeats =
+        num(raw.countedSeats) ||
+        num(raw.declaredSeats) ||
+        num(raw.counted) ||
+        num(raw.declared) ||
+        num(raw.counted_total) ||
+        0;
+
+      // Parties formats:
+      // A) raw.parties = [{code, seats/totalSeats/seatsTotal, name, nepali}]
+      // B) raw.results = { "NC": 10, "UML": 12, ... }
+      // C) raw.seats = [{code, seats}] or {code: seats}
+      let partyArr = [];
+
+      if (Array.isArray(raw.parties)) {
+        partyArr = raw.parties.slice();
+      } else if (raw.results && typeof raw.results === "object" && !Array.isArray(raw.results)) {
+        partyArr = Object.keys(raw.results).map(code => ({ code, seats: raw.results[code] }));
+      } else if (Array.isArray(raw.seats)) {
+        partyArr = raw.seats.slice();
+      } else if (raw.seats && typeof raw.seats === "object" && !Array.isArray(raw.seats)) {
+        partyArr = Object.keys(raw.seats).map(code => ({ code, seats: raw.seats[code] }));
+      }
+
+      // Normalize each
+      out.parties = partyArr
+        .map(p => {
+          const code = safeStr(p.code || p.party || p.id).trim();
+          const seats =
+            num(p.seats) ||
+            num(p.totalSeats) ||
+            num(p.seatsTotal) ||
+            num(p.total) ||
+            num(p.value) ||
+            0;
+
+          const name = safeStr(p.name).trim();
+          const nepali = safeStr(p.nepali).trim();
+          return { code, name, nepali, seats };
+        })
+        .filter(p => p.code || p.name) // keep usable
+        .map(p => {
+          // If code missing but name exists, attempt to derive from known topParties
+          if (!p.code && p.name) {
+            const hit = topParties.find(tp => tp.name.toLowerCase() === p.name.toLowerCase());
+            if (hit) p.code = hit.code;
+          }
+          return p;
+        });
+
+      // If countedSeats missing, infer from sum (optional)
+      if (!out.countedSeats && out.parties.length) {
+        out.countedSeats = out.parties.reduce((a,b)=>a+num(b.seats),0);
+      }
+
+      // Ensure numeric + sort
+      out.parties = out.parties
+        .map(p => ({ ...p, seats: num(p.seats) }))
+        .sort((a,b) => b.seats - a.seats);
+
+      return out;
+    }
+
+    function setText(id, txt){
+      const el = document.getElementById(id);
+      if (el) el.textContent = txt;
+    }
+
+    function renderResultsTable(model){
+      const table = document.getElementById("resultsTable");
+      if (!table) return;
+
+      const total = num(model.totalSeats) || RESULTS.totalSeatsDefault;
+
+      // If empty
+      if (!model.parties.length) {
+        table.innerHTML = `
+          <div class="tr head">
+            <div>Party</div>
+            <div style="text-align:right;">Seats</div>
+            <div>Progress</div>
+          </div>
+          <div class="tr">
+            <div class="partyCell">
+              <div class="pName">Counting started — awaiting first update</div>
+              <div class="pNep">Update /data/results.json to show initial seats</div>
+            </div>
+            <div class="seatCell">0</div>
+            <div class="barBg"><div class="bar" style="width:0%"></div></div>
+          </div>
+        `;
+        return;
+      }
+
+      const rows = model.parties.map(p => {
+        const code = safeStr(p.code || "").trim() || "—";
+        const name = safeStr(p.name).trim() || (topParties.find(tp=>tp.code===code)?.name || "Party");
+        const nep  = safeStr(p.nepali).trim() || (topParties.find(tp=>tp.code===code)?.nepali || "");
+        const seats = num(p.seats);
+        const pct = total ? Math.max(0, Math.min(100, (seats / total) * 100)) : 0;
+
+        return `
+          <div class="tr">
+            <div class="partyCell">
+              <div class="pName">${code} • ${name}</div>
+              <div class="pNep">${nep || ""}</div>
+            </div>
+            <div class="seatCell">${seats}</div>
+            <div class="barBg"><div class="bar" style="width:${pct.toFixed(2)}%"></div></div>
+          </div>
+        `;
+      }).join("");
+
+      table.innerHTML = `
+        <div class="tr head">
+          <div>Party</div>
+          <div style="text-align:right;">Seats</div>
+          <div>Progress</div>
+        </div>
+        ${rows}
+      `;
+    }
+
+    function syncTop10(model){
+      // Update your topParties seats from live results by code match
+      if (!model || !Array.isArray(model.parties)) return;
+      const map = new Map(model.parties.map(p => [String(p.code||"").trim(), num(p.seats)]));
+      topParties.forEach(tp => {
+        const v = map.get(tp.code);
+        if (Number.isFinite(v)) tp.seats = v;
+      });
+      // Re-sort topParties by seats DESC but keep only top 10 shown (already 10)
+      topParties.sort((a,b)=>num(b.seats)-num(a.seats));
+      renderParties();
+    }
+
+    async function loadResultsOnce(){
+      const statusEl = document.getElementById("resultsStatus");
+
+      try{
+        if (statusEl) statusEl.textContent = "Status: Loading results…";
+
+        const url = `${RESULTS.url}?v=${Date.now()}`;
+        const res = await fetch(url, { cache: "no-store" });
+
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const raw = await res.json();
+        const model = normalizeResults(raw);
+
+        // KPIs
+        const totalSeats = num(model.totalSeats) || RESULTS.totalSeatsDefault;
+        const majority = RESULTS.majorityDefault;
+
+        setText("kpiTotalSeats", String(totalSeats));
+        setText("kpiMajority", String(majority));
+        setText("kpiCounted", String(num(model.countedSeats)));
+
+        const leader = model.parties[0];
+        setText("kpiLeader", leader ? `${(leader.code||"—")} (${num(leader.seats)})` : "—");
+
+        // Last updated
+        const last = model.lastUpdated ? safeStr(model.lastUpdated) : new Date().toLocaleString();
+        setText("resultsLastUpdated", "Last updated: " + last);
+
+        // Status message
+        if (!model.parties.length) {
+          if (statusEl) statusEl.textContent = "Status: Counting started — awaiting first update";
+        } else {
+          if (statusEl) statusEl.textContent = "Status: Live seats updating";
+        }
+
+        // Render
+        renderResultsTable(model);
+        syncTop10(model);
+
+      } catch(err){
+        console.error(err);
+        if (statusEl) statusEl.textContent = "Status: Results feed error (check /data/results.json path)";
+        setText("resultsLastUpdated", "Last updated: —");
+        // Keep whatever old UI is showing.
+      }
+    }
+
+    // Manual refresh
+    const resultsRefresh = document.getElementById("resultsRefresh");
+    if (resultsRefresh) resultsRefresh.addEventListener("click", loadResultsOnce);
+
+    // Auto poll
+    loadResultsOnce();
+    setInterval(loadResultsOnce, RESULTS.pollMs);
+
+    // ================================
+    // 4) NEWS24 HEADLINE TICKER (GDELT domain filter)
     // ================================
     let tickerAnim = null;
 
@@ -599,7 +966,7 @@
     window.addEventListener("resize", () => startTickerAnimation());
 
     // ================================
-    // 4) BREAKING NEWS (GDELT query)
+    // 5) BREAKING NEWS (GDELT query)
     // ================================
     (function(){
       const tickerEl  = document.getElementById("breakingTicker");
@@ -672,7 +1039,7 @@
     })();
 
     // ================================
-    // 5) POLL WITH RESULT BARS (localStorage) ✅ FIXED
+    // 6) POLL WITH RESULT BARS (localStorage)
     // ================================
     (function(){
       const poll = document.getElementById("leadPoll");
